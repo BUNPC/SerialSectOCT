@@ -10,8 +10,40 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="Software" Type="Folder" URL="..">
-			<Property Name="NI.DISK" Type="Bool">true</Property>
+		<Item Name="Software" Type="Folder">
+			<Item Name="From Lars" Type="Folder">
+				<Item Name="MPM_labview_v5" Type="Folder">
+					<Item Name="comments.txt" Type="Document" URL="../From Lars/MPM_labview_v5/comments.txt"/>
+					<Item Name="Detector_setup.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Detector_setup.vi"/>
+					<Item Name="Galvo_track.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Galvo_track.vi"/>
+					<Item Name="Galvotrack.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Galvotrack.vi"/>
+					<Item Name="Gen_2D_pattern.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_2D_pattern.vi"/>
+					<Item Name="Gen_2D_Raster.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_2D_Raster.vi"/>
+					<Item Name="Gen_3D_pattern.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_3D_pattern.vi"/>
+					<Item Name="image_avg.vi" Type="VI" URL="../From Lars/MPM_labview_v5/image_avg.vi"/>
+					<Item Name="image_avg_no_reshape.vi" Type="VI" URL="../From Lars/MPM_labview_v5/image_avg_no_reshape.vi"/>
+					<Item Name="Linecut.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Linecut.vi"/>
+					<Item Name="MPM_imaging -v5.vi" Type="VI" URL="../From Lars/MPM_labview_v5/MPM_imaging -v5.vi"/>
+					<Item Name="Save_data.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Save_data.vi"/>
+					<Item Name="Scan_setup.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Scan_setup.vi"/>
+					<Item Name="summation.m" Type="Document" URL="../From Lars/MPM_labview_v5/summation.m"/>
+					<Item Name="test.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test.vi"/>
+					<Item Name="test_image_avg.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test_image_avg.vi"/>
+					<Item Name="test_image_avg_no_reshape.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test_image_avg_no_reshape.vi"/>
+				</Item>
+			</Item>
+			<Item Name="General" Type="Folder" URL="../General">
+				<Property Name="NI.DISK" Type="Bool">true</Property>
+			</Item>
+			<Item Name="Hardware" Type="Folder" URL="../Hardware">
+				<Property Name="NI.DISK" Type="Bool">true</Property>
+			</Item>
+			<Item Name="Test Image" Type="Folder">
+				<Item Name="Lenna.png" Type="Document" URL="../Test Image/Lenna.png"/>
+				<Item Name="Load Test Image.vi" Type="VI" URL="../Test Image/Load Test Image.vi"/>
+			</Item>
+			<Item Name="MainGUI.vi" Type="VI" URL="../MainGUI.vi"/>
+			<Item Name="SettingsGUI.vi" Type="VI" URL="../SettingsGUI.vi"/>
 		</Item>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
@@ -214,13 +246,10 @@
 				<Item Name="Details Display Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Details Display Dialog.vi"/>
 				<Item Name="DialogType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogType.ctl"/>
 				<Item Name="DialogTypeEnum.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogTypeEnum.ctl"/>
-				<Item Name="Draw Arc.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Arc.vi"/>
-				<Item Name="Draw Circle by Radius.vi" Type="VI" URL="/&lt;vilib&gt;/picture/pictutil.llb/Draw Circle by Radius.vi"/>
 				<Item Name="DTbl Digital Size.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Digital Size.vi"/>
 				<Item Name="DTbl Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Uncompress Digital.vi"/>
 				<Item Name="DWDT Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Uncompress Digital.vi"/>
 				<Item Name="Dynamic To Waveform Array.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/transition.llb/Dynamic To Waveform Array.vi"/>
-				<Item Name="Empty Picture" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Empty Picture"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
 				<Item Name="Error Code Database.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Code Database.vi"/>
 				<Item Name="ErrWarn.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/ErrWarn.ctl"/>
@@ -242,7 +271,6 @@
 				<Item Name="IMAQ ReadFile" Type="VI" URL="/&lt;vilib&gt;/vision/Files.llb/IMAQ ReadFile"/>
 				<Item Name="Longest Line Length in Pixels.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Longest Line Length in Pixels.vi"/>
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
-				<Item Name="LVMouseTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVMouseTypeDef.ctl"/>
 				<Item Name="LVRectTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVRectTypeDef.ctl"/>
 				<Item Name="NI_AALBase.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALBase.lvlib"/>
 				<Item Name="NI_AALPro.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALPro.lvlib"/>
@@ -253,7 +281,6 @@
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
 				<Item Name="Set Bold Text.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set Bold Text.vi"/>
-				<Item Name="Set Pen State.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Set Pen State.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 				<Item Name="subBuildXYGraph.vi" Type="VI" URL="/&lt;vilib&gt;/express/express controls/BuildXYGraphBlock.llb/subBuildXYGraph.vi"/>
@@ -290,6 +317,9 @@
 			<Item Name="nivissvc.dll" Type="Document" URL="nivissvc.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Thorlabs.MotionControl.Controls.dll" Type="Document" URL="../Thorlabs.MotionControl.Controls.dll"/>
+			<Item Name="Thorlabs.MotionControl.GenericMotorCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.GenericMotorCLI.dll"/>
+			<Item Name="Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build"/>
 	</Item>
