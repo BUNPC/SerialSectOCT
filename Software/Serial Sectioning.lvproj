@@ -38,6 +38,9 @@
 			<Item Name="Hardware" Type="Folder" URL="../Hardware">
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Test Code" Type="Folder" URL="../Test Code">
+				<Property Name="NI.DISK" Type="Bool">true</Property>
+			</Item>
 			<Item Name="Test Image" Type="Folder">
 				<Item Name="Lenna.png" Type="Document" URL="../Test Image/Lenna.png"/>
 				<Item Name="Load Test Image.vi" Type="VI" URL="../Test Image/Load Test Image.vi"/>
@@ -45,9 +48,6 @@
 			<Item Name="MainGUI.vi" Type="VI" URL="../MainGUI.vi"/>
 			<Item Name="SettingsGUI.vi" Type="VI" URL="../SettingsGUI.vi"/>
 		</Item>
-		<Item Name="Read Config from File.vi" Type="VI" URL="../Test Code/Read Config from File.vi"/>
-		<Item Name="VibratomeGUI.vi" Type="VI" URL="../Test Code/VibratomeGUI.vi"/>
-		<Item Name="Write Config to File.vi" Type="VI" URL="../Test Code/Write Config to File.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="8.6CompatibleGlobalVar.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/config.llb/8.6CompatibleGlobalVar.vi"/>
