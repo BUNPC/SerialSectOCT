@@ -50,13 +50,28 @@
 		</Item>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
+				<Item Name="3D Plot Datatype.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/3D Plot Datatype/3D Plot Datatype.lvclass"/>
+				<Item Name="3D Plot.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/3D Plot/3D Plot.lvclass"/>
+				<Item Name="3D Surface Datatype.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Surface/3D Surface Datatype/3D Surface Datatype.lvclass"/>
+				<Item Name="3D Surface.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Surface/3D Surface/3D Surface.lvclass"/>
+				<Item Name="3D Surface.xctl" Type="XControl" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Surface/3D Surface XCtrl/3D Surface.xctl"/>
+				<Item Name="3DMathPlot Action String.ctl" Type="VI" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/Action String/3DMathPlot Action String.ctl"/>
+				<Item Name="3DMathPlot Action String.vi" Type="VI" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/Action String/3DMathPlot Action String.vi"/>
+				<Item Name="3DMathPlot Ctrl Act Cluster.ctl" Type="VI" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/Action String/3DMathPlot Ctrl Act Cluster.ctl"/>
+				<Item Name="3DMathPlot Ctrl Act Queue.ctl" Type="VI" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/Action String/3DMathPlot Ctrl Act Queue.ctl"/>
+				<Item Name="3DMathPlot State Class.ctl" Type="VI" URL="/&lt;vilib&gt;/Math Plots/3D Math Plots/3D Plot/Action String/3DMathPlot State Class.ctl"/>
 				<Item Name="8.6CompatibleGlobalVar.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/config.llb/8.6CompatibleGlobalVar.vi"/>
+				<Item Name="Acquire Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Acquire Semaphore.vi"/>
+				<Item Name="AddNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/AddNamedSemaphorePrefix.vi"/>
 				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
 				<Item Name="Check if File or Folder Exists.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Check if File or Folder Exists.vi"/>
 				<Item Name="Check Special Tags.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Check Special Tags.vi"/>
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
+				<Item Name="Color (U64)" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Color (U64)"/>
+				<Item Name="Color to RGB.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/colorconv.llb/Color to RGB.vi"/>
 				<Item Name="Convert property node font to graphics font.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Convert property node font to graphics font.vi"/>
+				<Item Name="Create Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Create Semaphore.vi"/>
 				<Item Name="DAQmx Clear Task.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Clear Task.vi"/>
 				<Item Name="DAQmx Create AI Channel (sub).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create AI Channel (sub).vi"/>
 				<Item Name="DAQmx Create AI Channel TEDS(sub).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create AI Channel TEDS(sub).vi"/>
@@ -247,9 +262,11 @@
 				<Item Name="DAQmx Write (Raw 1D U16).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D U16).vi"/>
 				<Item Name="DAQmx Write (Raw 1D U32).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D U32).vi"/>
 				<Item Name="DAQmx Write.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write.vi"/>
+				<Item Name="Destroy Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Destroy Semaphore.vi"/>
 				<Item Name="Details Display Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Details Display Dialog.vi"/>
 				<Item Name="DialogType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogType.ctl"/>
 				<Item Name="DialogTypeEnum.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogTypeEnum.ctl"/>
+				<Item Name="Draw Flattened Pixmap.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Flattened Pixmap.vi"/>
 				<Item Name="DTbl Digital Size.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Digital Size.vi"/>
 				<Item Name="DTbl Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Uncompress Digital.vi"/>
 				<Item Name="DWDT Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Uncompress Digital.vi"/>
@@ -260,50 +277,98 @@
 				<Item Name="eventvkey.ctl" Type="VI" URL="/&lt;vilib&gt;/event_ctls.llb/eventvkey.ctl"/>
 				<Item Name="ex_CorrectErrorChain.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/ex_CorrectErrorChain.vi"/>
 				<Item Name="Find Tag.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find Tag.vi"/>
+				<Item Name="FixBadRect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/pictutil.llb/FixBadRect.vi"/>
 				<Item Name="Format Message String.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Format Message String.vi"/>
 				<Item Name="General Error Handler Core CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/General Error Handler Core CORE.vi"/>
 				<Item Name="General Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/General Error Handler.vi"/>
+				<Item Name="Get Semaphore Status.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Get Semaphore Status.vi"/>
 				<Item Name="Get String Text Bounds.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Get String Text Bounds.vi"/>
 				<Item Name="Get Text Rect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Get Text Rect.vi"/>
 				<Item Name="GetHelpDir.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetHelpDir.vi"/>
+				<Item Name="GetNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/GetNamedSemaphorePrefix.vi"/>
 				<Item Name="GetRTHostConnectedProp.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetRTHostConnectedProp.vi"/>
 				<Item Name="Image Type" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Image Type"/>
+				<Item Name="imagedata.ctl" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/imagedata.ctl"/>
+				<Item Name="IMAQ ColorImageToArray" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ ColorImageToArray"/>
 				<Item Name="IMAQ Copy" Type="VI" URL="/&lt;vilib&gt;/vision/Management.llb/IMAQ Copy"/>
 				<Item Name="IMAQ Create" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Create"/>
 				<Item Name="IMAQ Dispose" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Dispose"/>
+				<Item Name="IMAQ GetImagePixelPtr" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ GetImagePixelPtr"/>
 				<Item Name="IMAQ Image.ctl" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/IMAQ Image.ctl"/>
 				<Item Name="IMAQ ReadFile" Type="VI" URL="/&lt;vilib&gt;/vision/Files.llb/IMAQ ReadFile"/>
+				<Item Name="IMAQ SetImageSize" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ SetImageSize"/>
 				<Item Name="Longest Line Length in Pixels.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Longest Line Length in Pixels.vi"/>
+				<Item Name="LV3DPointTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LV3DPointTypeDef.ctl"/>
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
 				<Item Name="LVPointTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVPointTypeDef.ctl"/>
 				<Item Name="LVRectTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVRectTypeDef.ctl"/>
+				<Item Name="NI_3D Picture Control.lvlib" Type="Library" URL="/&lt;vilib&gt;/picture/3D Picture Control/NI_3D Picture Control.lvlib"/>
 				<Item Name="NI_AALBase.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALBase.lvlib"/>
 				<Item Name="NI_AALPro.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALPro.lvlib"/>
 				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
 				<Item Name="NI_Gmath.lvlib" Type="Library" URL="/&lt;vilib&gt;/gmath/NI_Gmath.lvlib"/>
 				<Item Name="NI_LVConfig.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/config.llb/NI_LVConfig.lvlib"/>
 				<Item Name="NI_MABase.lvlib" Type="Library" URL="/&lt;vilib&gt;/measure/NI_MABase.lvlib"/>
+				<Item Name="NI_Math Plot Private Lib.lvlib" Type="Library" URL="/&lt;vilib&gt;/Math Plots/Plot Private Lib/NI_Math Plot Private Lib.lvlib"/>
 				<Item Name="NI_PackedLibraryUtility.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/LVLibp/NI_PackedLibraryUtility.lvlib"/>
+				<Item Name="NI_PtbyPt.lvlib" Type="Library" URL="/&lt;vilib&gt;/ptbypt/NI_PtbyPt.lvlib"/>
+				<Item Name="Not A Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Not A Semaphore.vi"/>
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
+				<Item Name="Obtain Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Obtain Semaphore Reference.vi"/>
+				<Item Name="Release Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Release Semaphore Reference.vi"/>
+				<Item Name="RemoveNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/RemoveNamedSemaphorePrefix.vi"/>
+				<Item Name="RGB to Color.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/colorconv.llb/RGB to Color.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
+				<Item Name="Semaphore Name &amp; Ref DB Action.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore Name &amp; Ref DB Action.ctl"/>
+				<Item Name="Semaphore Name &amp; Ref DB.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore Name &amp; Ref DB.vi"/>
+				<Item Name="Semaphore RefNum" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore RefNum"/>
+				<Item Name="Semaphore Refnum Core.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore Refnum Core.ctl"/>
 				<Item Name="Set Bold Text.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set Bold Text.vi"/>
+				<Item Name="Set Busy.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Busy.vi"/>
+				<Item Name="Set Cursor (Cursor ID).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor (Cursor ID).vi"/>
+				<Item Name="Set Cursor (Icon Pict).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor (Icon Pict).vi"/>
+				<Item Name="Set Cursor.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 				<Item Name="Space Constant.vi" Type="VI" URL="/&lt;vilib&gt;/dlg_ctls.llb/Space Constant.vi"/>
 				<Item Name="subBuildXYGraph.vi" Type="VI" URL="/&lt;vilib&gt;/express/express controls/BuildXYGraphBlock.llb/subBuildXYGraph.vi"/>
+				<Item Name="subFile Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/express/express input/FileDialogBlock.llb/subFile Dialog.vi"/>
 				<Item Name="subTimeDelay.vi" Type="VI" URL="/&lt;vilib&gt;/express/express execution control/TimeDelayBlock.llb/subTimeDelay.vi"/>
 				<Item Name="TagReturnType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/TagReturnType.ctl"/>
 				<Item Name="Three Button Dialog CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog CORE.vi"/>
 				<Item Name="Three Button Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog.vi"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
+				<Item Name="Unset Busy.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Unset Busy.vi"/>
+				<Item Name="Validate Semaphore Size.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Validate Semaphore Size.vi"/>
+				<Item Name="Version To Dotted String.vi" Type="VI" URL="/&lt;vilib&gt;/_xctls/Version To Dotted String.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 				<Item Name="Write Spreadsheet String.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Spreadsheet String.vi"/>
 				<Item Name="Write To Spreadsheet File (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (DBL).vi"/>
 				<Item Name="Write To Spreadsheet File (I64).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (I64).vi"/>
 				<Item Name="Write To Spreadsheet File (string).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (string).vi"/>
 				<Item Name="Write To Spreadsheet File.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File.vi"/>
+				<Item Name="XControlSupport.lvlib" Type="Library" URL="/&lt;vilib&gt;/_xctls/XControlSupport.lvlib"/>
 			</Item>
 			<Item Name="_Close Communications.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/_Close Communications.vi"/>
+			<Item Name="abs Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/abs Complex Data.vi"/>
+			<Item Name="append Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/append Data.vi"/>
+			<Item Name="Benchmark.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Benchmark.vi"/>
+			<Item Name="Calibration Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Calibration Selection.ctl"/>
+			<Item Name="clear Colored Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Colored Data.vi"/>
+			<Item Name="clear Coloring.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Coloring.vi"/>
+			<Item Name="clear Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Complex Data.vi"/>
+			<Item Name="clear Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Data.vi"/>
+			<Item Name="clear Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Processing.vi"/>
+			<Item Name="clear Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Raw Data.vi"/>
+			<Item Name="clear Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Scan Pattern.vi"/>
+			<Item Name="close Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Device.vi"/>
+			<Item Name="close Probe.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Probe.vi"/>
+			<Item Name="Color Enhancement Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Color Enhancement Selection.ctl"/>
+			<Item Name="Colored Data Export Format Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Colored Data Export Format Selection.ctl"/>
+			<Item Name="Coloring Byteorder.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Coloring Byteorder.ctl"/>
+			<Item Name="colorize Doppler Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/colorize Doppler Data.vi"/>
+			<Item Name="Colorscheme Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Colorscheme Selection.ctl"/>
+			<Item Name="compute Linear K Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/compute Linear K Raw Data.vi"/>
 			<Item Name="CONEX-CC Absolute Move v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Absolute Move v2.vi"/>
 			<Item Name="CONEX-CC Get Current Position v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Current Position v2.vi"/>
 			<Item Name="CONEX-CC Get Negative Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Negative Software Limit v2.vi"/>
@@ -314,7 +379,46 @@
 			<Item Name="CONEX-CC Set Positive Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Set Positive Software Limit v2.vi"/>
 			<Item Name="CONEX-CC Stop Motion v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Stop Motion v2.vi"/>
 			<Item Name="Connect Newport Instrument_edit.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/Connect Newport Instrument_edit.vi"/>
+			<Item Name="create B-Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Pattern.vi"/>
+			<Item Name="create B-Scan Stack Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Stack Pattern.vi"/>
+			<Item Name="create Bilateral B-Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Bilateral B-Scan Pattern.vi"/>
+			<Item Name="create Colored Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Colored Data.vi"/>
+			<Item Name="create Coloring.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Coloring.vi"/>
+			<Item Name="create Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Complex Data.vi"/>
+			<Item Name="create Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Data.vi"/>
+			<Item Name="create Doppler Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Doppler Processing.vi"/>
+			<Item Name="create Fragmented Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Fragmented Scan Pattern.vi"/>
+			<Item Name="create No Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create No Scan Pattern.vi"/>
+			<Item Name="create Processing for Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Processing for Device.vi"/>
+			<Item Name="create Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Raw Data.vi"/>
+			<Item Name="create Volume Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Volume Pattern.vi"/>
+			<Item Name="Data 2D Export Format Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data 2D Export Format Selection.ctl"/>
+			<Item Name="Data Analyzation Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data Analyzation Selection.ctl"/>
+			<Item Name="Data.lvclass" Type="LVClass" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data.lvclass"/>
+			<Item Name="determine Dynamic Range.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/determine Dynamic Range.vi"/>
+			<Item Name="Device Camera Preset Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Device Camera Preset Selection.ctl"/>
+			<Item Name="display Data 1D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 1D.vi"/>
+			<Item Name="display Data 2D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 2D.vi"/>
+			<Item Name="display Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data.vi"/>
+			<Item Name="Doppler Property Int.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Doppler Property Int.ctl"/>
+			<Item Name="equalize Histogram.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/equalize Histogram.vi"/>
+			<Item Name="execute Complex Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Complex Processing.vi"/>
+			<Item Name="execute Doppler Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Doppler Processing.vi"/>
+			<Item Name="execute Full Range.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Full Range.vi"/>
+			<Item Name="execute Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Processing.vi"/>
+			<Item Name="export Colored Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Colored Data.vi"/>
+			<Item Name="export Data 2D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Data 2D.vi"/>
+			<Item Name="export Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Raw Data.vi"/>
+			<Item Name="get Data Slice Analyzed.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Analyzed.vi"/>
+			<Item Name="get Data Slice Index.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Index.vi"/>
+			<Item Name="get Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Raw Data.vi"/>
+			<Item Name="init Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Device.vi"/>
+			<Item Name="init Full Range.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Full Range.vi"/>
+			<Item Name="init Probe.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Probe.vi"/>
+			<Item Name="load Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/load Calibration.vi"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
+			<Item Name="measure Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Calibration.vi"/>
+			<Item Name="measure Spectra.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Spectra.vi"/>
 			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -324,9 +428,46 @@
 			<Item Name="nivissvc.dll" Type="Document" URL="nivissvc.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Normal Direction Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Normal Direction Selection.ctl"/>
+			<Item Name="OCTNumerics.dll" Type="Document" URL="OCTNumerics.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="Probe Parameter Int Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Probe Parameter Int Selection.ctl"/>
+			<Item Name="Processing Flag Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Flag Selection.ctl"/>
+			<Item Name="Processing Parameter Int Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Parameter Int Selection.ctl"/>
+			<Item Name="Raw Data Export Format Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Raw Data Export Format Selection.ctl"/>
+			<Item Name="set Apodized Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Apodized Spectrum Output.vi"/>
+			<Item Name="set Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Calibration.vi"/>
+			<Item Name="set Coloring Boundaries.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Coloring Boundaries.vi"/>
+			<Item Name="set Coloring Enhancement.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Coloring Enhancement.vi"/>
+			<Item Name="set Complex Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Complex Scan Output.vi"/>
+			<Item Name="set Device Preset.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Device Preset.vi"/>
+			<Item Name="set Doppler Amplitude Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Doppler Amplitude Output.vi"/>
+			<Item Name="set Doppler Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Doppler Output.vi"/>
+			<Item Name="set Doppler Phase Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Doppler Phase Output.vi"/>
+			<Item Name="set Doppler Property Int.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Doppler Property Int.vi"/>
+			<Item Name="set Full Range Sensitivity.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Full Range Sensitivity.vi"/>
+			<Item Name="set Hor Mirrored Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Hor Mirrored Scan Output.vi"/>
+			<Item Name="set Offset Corrected Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Offset Corrected Spectrum Output.vi"/>
+			<Item Name="set Output Value by Name.vi" Type="VI" URL="../Hardware/Thorlabs OCT/user.lib/SpectralRadar.llb/set Output Value by Name.vi"/>
+			<Item Name="set Probe Parameter Int.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Probe Parameter Int.vi"/>
+			<Item Name="set Processing Flag.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Flag.vi"/>
+			<Item Name="set Processing Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Output.vi"/>
+			<Item Name="set Processing Parameter Int.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Parameter Int.vi"/>
+			<Item Name="set Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Scan Output.vi"/>
+			<Item Name="set Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Spectrum Output.vi"/>
+			<Item Name="set Transposed Colored Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Transposed Colored Scan Output.vi"/>
+			<Item Name="shift Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/shift Scan Pattern.vi"/>
+			<Item Name="SpectralRadar.dll" Type="Document" URL="SpectralRadar.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="SpectralRadar.dll" Type="Document" URL="../../../../../Program Files/Thorlabs/SpectralRadar/DLL/SpectralRadar.dll"/>
+			<Item Name="start Measurement.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/start Measurement.vi"/>
+			<Item Name="stop Measurement.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/stop Measurement.vi"/>
 			<Item Name="Thorlabs.MotionControl.Controls.dll" Type="Document" URL="../Thorlabs.MotionControl.Controls.dll"/>
 			<Item Name="Thorlabs.MotionControl.GenericMotorCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.GenericMotorCLI.dll"/>
 			<Item Name="Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll"/>
+			<Item Name="update Colored Data IMAQ Image.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/update Colored Data IMAQ Image.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build"/>
 	</Item>
