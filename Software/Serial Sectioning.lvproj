@@ -35,7 +35,7 @@
 			<Item Name="General" Type="Folder" URL="../General">
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Hardware" Type="Folder" URL="../Hardware">
+			<Item Name="Hardware Mfg" Type="Folder" URL="../Hardware Mfg">
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Test Code" Type="Folder" URL="../Test Code">
@@ -373,19 +373,17 @@
 				<Item Name="XControlSupport.lvlib" Type="Library" URL="/&lt;vilib&gt;/_xctls/XControlSupport.lvlib"/>
 			</Item>
 			<Item Name="_Close Communications.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/_Close Communications.vi"/>
-			<Item Name="abs Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/abs Complex Data.vi"/>
-			<Item Name="append Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/append Data.vi"/>
-			<Item Name="AxsunOCTControl.dll" Type="Document" URL="../../../../../Project/SerialSectOCT/Software/Axsun/AxsunOCTControlExampleSourceCode_LabVIEW/AxsunOCTControl.dll"/>
-			<Item Name="AxsunOCTControl.dll" Type="Document" URL="../../../../../Users/nkemp/Documents/Visual Studio 2015/Projects/AxsunProjects_LV2015/Axsun OCT Demo/source/hardware control/AxsunOCTControl.dll"/>
-			<Item Name="Calibration Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Calibration Selection.ctl"/>
-			<Item Name="clear Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Complex Data.vi"/>
-			<Item Name="clear Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Data.vi"/>
-			<Item Name="clear Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Processing.vi"/>
-			<Item Name="clear Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Raw Data.vi"/>
-			<Item Name="clear Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Scan Pattern.vi"/>
-			<Item Name="close Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Device.vi"/>
-			<Item Name="close Probe.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Probe.vi"/>
-			<Item Name="compute Linear K Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/compute Linear K Raw Data.vi"/>
+			<Item Name="abs Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/abs Complex Data.vi"/>
+			<Item Name="append Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/append Data.vi"/>
+			<Item Name="Calibration Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Calibration Selection.ctl"/>
+			<Item Name="clear Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Complex Data.vi"/>
+			<Item Name="clear Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Data.vi"/>
+			<Item Name="clear Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Processing.vi"/>
+			<Item Name="clear Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Raw Data.vi"/>
+			<Item Name="clear Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Scan Pattern.vi"/>
+			<Item Name="close Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Device.vi"/>
+			<Item Name="close Probe.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Probe.vi"/>
+			<Item Name="compute Linear K Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/compute Linear K Raw Data.vi"/>
 			<Item Name="CONEX-CC Absolute Move v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Absolute Move v2.vi"/>
 			<Item Name="CONEX-CC Get Current Position v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Current Position v2.vi"/>
 			<Item Name="CONEX-CC Get Negative Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Negative Software Limit v2.vi"/>
@@ -396,36 +394,36 @@
 			<Item Name="CONEX-CC Set Positive Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Set Positive Software Limit v2.vi"/>
 			<Item Name="CONEX-CC Stop Motion v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Stop Motion v2.vi"/>
 			<Item Name="Connect Newport Instrument_edit.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/Connect Newport Instrument_edit.vi"/>
-			<Item Name="create B-Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Pattern.vi"/>
-			<Item Name="create B-Scan Stack Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Stack Pattern.vi"/>
-			<Item Name="create Complex Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Complex Data.vi"/>
-			<Item Name="create Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Data.vi"/>
-			<Item Name="create Fragmented Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Fragmented Scan Pattern.vi"/>
-			<Item Name="create No Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create No Scan Pattern.vi"/>
-			<Item Name="create Processing for Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Processing for Device.vi"/>
-			<Item Name="create Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Raw Data.vi"/>
-			<Item Name="create Volume Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Volume Pattern.vi"/>
-			<Item Name="Data 2D Export Format Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data 2D Export Format Selection.ctl"/>
-			<Item Name="Data Analyzation Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data Analyzation Selection.ctl"/>
-			<Item Name="Device Camera Preset Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Device Camera Preset Selection.ctl"/>
-			<Item Name="display Data 1D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 1D.vi"/>
-			<Item Name="display Data 2D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 2D.vi"/>
-			<Item Name="display Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data.vi"/>
-			<Item Name="execute Complex Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Complex Processing.vi"/>
-			<Item Name="execute Full Range.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Full Range.vi"/>
-			<Item Name="execute Processing.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Processing.vi"/>
-			<Item Name="export Data 2D.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Data 2D.vi"/>
-			<Item Name="export Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Raw Data.vi"/>
-			<Item Name="get Data Slice Analyzed.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Analyzed.vi"/>
-			<Item Name="get Data Slice Index.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Index.vi"/>
-			<Item Name="get Raw Data.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Raw Data.vi"/>
-			<Item Name="init Device.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Device.vi"/>
-			<Item Name="init Full Range.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Full Range.vi"/>
-			<Item Name="init Probe.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Probe.vi"/>
-			<Item Name="load Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/load Calibration.vi"/>
+			<Item Name="create B-Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Pattern.vi"/>
+			<Item Name="create B-Scan Stack Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Stack Pattern.vi"/>
+			<Item Name="create Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Complex Data.vi"/>
+			<Item Name="create Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Data.vi"/>
+			<Item Name="create Fragmented Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Fragmented Scan Pattern.vi"/>
+			<Item Name="create No Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create No Scan Pattern.vi"/>
+			<Item Name="create Processing for Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Processing for Device.vi"/>
+			<Item Name="create Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Raw Data.vi"/>
+			<Item Name="create Volume Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Volume Pattern.vi"/>
+			<Item Name="Data 2D Export Format Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data 2D Export Format Selection.ctl"/>
+			<Item Name="Data Analyzation Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data Analyzation Selection.ctl"/>
+			<Item Name="Device Camera Preset Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Device Camera Preset Selection.ctl"/>
+			<Item Name="display Data 1D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 1D.vi"/>
+			<Item Name="display Data 2D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 2D.vi"/>
+			<Item Name="display Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data.vi"/>
+			<Item Name="execute Complex Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Complex Processing.vi"/>
+			<Item Name="execute Full Range.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Full Range.vi"/>
+			<Item Name="execute Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Processing.vi"/>
+			<Item Name="export Data 2D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Data 2D.vi"/>
+			<Item Name="export Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Raw Data.vi"/>
+			<Item Name="get Data Slice Analyzed.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Analyzed.vi"/>
+			<Item Name="get Data Slice Index.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Index.vi"/>
+			<Item Name="get Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Raw Data.vi"/>
+			<Item Name="init Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Device.vi"/>
+			<Item Name="init Full Range.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Full Range.vi"/>
+			<Item Name="init Probe.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Probe.vi"/>
+			<Item Name="load Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/load Calibration.vi"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
-			<Item Name="measure Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Calibration.vi"/>
-			<Item Name="measure Spectra.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Spectra.vi"/>
+			<Item Name="measure Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Calibration.vi"/>
+			<Item Name="measure Spectra.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Spectra.vi"/>
 			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -435,35 +433,35 @@
 			<Item Name="nivissvc.dll" Type="Document" URL="nivissvc.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Normal Direction Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Normal Direction Selection.ctl"/>
+			<Item Name="Normal Direction Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Normal Direction Selection.ctl"/>
 			<Item Name="OCTNumerics.dll" Type="Document" URL="OCTNumerics.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Probe Parameter Int Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Probe Parameter Int Selection.ctl"/>
-			<Item Name="Processing Flag Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Flag Selection.ctl"/>
-			<Item Name="Processing Parameter Int Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Parameter Int Selection.ctl"/>
-			<Item Name="Raw Data Export Format Selection.ctl" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Raw Data Export Format Selection.ctl"/>
-			<Item Name="set Apodized Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Apodized Spectrum Output.vi"/>
-			<Item Name="set Calibration.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Calibration.vi"/>
-			<Item Name="set Complex Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Complex Scan Output.vi"/>
-			<Item Name="set Device Preset.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Device Preset.vi"/>
-			<Item Name="set Full Range Sensitivity.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Full Range Sensitivity.vi"/>
-			<Item Name="set Hor Mirrored Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Hor Mirrored Scan Output.vi"/>
-			<Item Name="set Offset Corrected Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Offset Corrected Spectrum Output.vi"/>
-			<Item Name="set Output Value by Name.vi" Type="VI" URL="../Hardware/Thorlabs OCT/user.lib/SpectralRadar.llb/set Output Value by Name.vi"/>
-			<Item Name="set Probe Parameter Int.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Probe Parameter Int.vi"/>
-			<Item Name="set Processing Flag.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Flag.vi"/>
-			<Item Name="set Processing Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Output.vi"/>
-			<Item Name="set Processing Parameter Int.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Parameter Int.vi"/>
-			<Item Name="set Scan Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Scan Output.vi"/>
-			<Item Name="set Spectrum Output.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Spectrum Output.vi"/>
-			<Item Name="shift Scan Pattern.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/shift Scan Pattern.vi"/>
+			<Item Name="Probe Parameter Int Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Probe Parameter Int Selection.ctl"/>
+			<Item Name="Processing Flag Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Flag Selection.ctl"/>
+			<Item Name="Processing Parameter Int Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Parameter Int Selection.ctl"/>
+			<Item Name="Raw Data Export Format Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Raw Data Export Format Selection.ctl"/>
+			<Item Name="set Apodized Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Apodized Spectrum Output.vi"/>
+			<Item Name="set Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Calibration.vi"/>
+			<Item Name="set Complex Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Complex Scan Output.vi"/>
+			<Item Name="set Device Preset.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Device Preset.vi"/>
+			<Item Name="set Full Range Sensitivity.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Full Range Sensitivity.vi"/>
+			<Item Name="set Hor Mirrored Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Hor Mirrored Scan Output.vi"/>
+			<Item Name="set Offset Corrected Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Offset Corrected Spectrum Output.vi"/>
+			<Item Name="set Output Value by Name.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/user.lib/SpectralRadar.llb/set Output Value by Name.vi"/>
+			<Item Name="set Probe Parameter Int.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Probe Parameter Int.vi"/>
+			<Item Name="set Processing Flag.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Flag.vi"/>
+			<Item Name="set Processing Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Output.vi"/>
+			<Item Name="set Processing Parameter Int.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Parameter Int.vi"/>
+			<Item Name="set Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Scan Output.vi"/>
+			<Item Name="set Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Spectrum Output.vi"/>
+			<Item Name="shift Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/shift Scan Pattern.vi"/>
 			<Item Name="SpectralRadar.dll" Type="Document" URL="SpectralRadar.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="SpectralRadar.dll" Type="Document" URL="../../../../../Program Files/Thorlabs/SpectralRadar/DLL/SpectralRadar.dll"/>
-			<Item Name="start Measurement.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/start Measurement.vi"/>
-			<Item Name="stop Measurement.vi" Type="VI" URL="../Hardware/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/stop Measurement.vi"/>
+			<Item Name="start Measurement.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/start Measurement.vi"/>
+			<Item Name="stop Measurement.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/stop Measurement.vi"/>
 			<Item Name="Thorlabs.MotionControl.Controls" Type="Document" URL="Thorlabs.MotionControl.Controls">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
