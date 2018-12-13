@@ -374,7 +374,11 @@
 			</Item>
 			<Item Name="_Close Communications.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/_Close Communications.vi"/>
 			<Item Name="abs Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/abs Complex Data.vi"/>
+			<Item Name="AlazarBytesPerBuffer.vi" Type="VI" URL="../Hardware Mfg/AlazarTech SDK/7.2.0/Samples_LabVIEW/Dual Port/Generic_CS.vi/AlazarBytesPerBuffer.vi"/>
 			<Item Name="append Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/append Data.vi"/>
+			<Item Name="ATSApi.dll" Type="Document" URL="ATSApi.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
 			<Item Name="Calibration Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Calibration Selection.ctl"/>
 			<Item Name="clear Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Complex Data.vi"/>
 			<Item Name="clear Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Data.vi"/>
