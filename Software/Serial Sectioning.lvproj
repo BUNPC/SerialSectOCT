@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
-<Project Type="Project" LVVersion="18008000">
+<Project Type="Project" LVVersion="17008000">
+	<Property Name="varPersistentID:{D7B8B090-8CD0-44D4-8AC4-6608B764CFE4}" Type="Ref">/My Computer/Software/General/Shared_Var.lvlib/Image_Index</Property>
+	<Property Name="varPersistentID:{FBA7378F-07AF-49A9-9814-F9DF0642EFC6}" Type="Ref">/My Computer/Software/General/Shared_Var.lvlib/Slice_Index</Property>
 	<Item Name="My Computer" Type="My Computer">
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
@@ -11,31 +13,10 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Software" Type="Folder">
-			<Item Name="From Lars" Type="Folder">
-				<Item Name="MPM_labview_v5" Type="Folder">
-					<Item Name="comments.txt" Type="Document" URL="../From Lars/MPM_labview_v5/comments.txt"/>
-					<Item Name="Detector_setup.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Detector_setup.vi"/>
-					<Item Name="Galvo_track.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Galvo_track.vi"/>
-					<Item Name="Galvotrack.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Galvotrack.vi"/>
-					<Item Name="Gen_2D_pattern.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_2D_pattern.vi"/>
-					<Item Name="Gen_2D_Raster.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_2D_Raster.vi"/>
-					<Item Name="Gen_3D_pattern.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Gen_3D_pattern.vi"/>
-					<Item Name="image_avg.vi" Type="VI" URL="../From Lars/MPM_labview_v5/image_avg.vi"/>
-					<Item Name="image_avg_no_reshape.vi" Type="VI" URL="../From Lars/MPM_labview_v5/image_avg_no_reshape.vi"/>
-					<Item Name="Linecut.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Linecut.vi"/>
-					<Item Name="MPM_imaging -v5.vi" Type="VI" URL="../From Lars/MPM_labview_v5/MPM_imaging -v5.vi"/>
-					<Item Name="Save_data.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Save_data.vi"/>
-					<Item Name="Scan_setup.vi" Type="VI" URL="../From Lars/MPM_labview_v5/Scan_setup.vi"/>
-					<Item Name="summation.m" Type="Document" URL="../From Lars/MPM_labview_v5/summation.m"/>
-					<Item Name="test.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test.vi"/>
-					<Item Name="test_image_avg.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test_image_avg.vi"/>
-					<Item Name="test_image_avg_no_reshape.vi" Type="VI" URL="../From Lars/MPM_labview_v5/test_image_avg_no_reshape.vi"/>
-				</Item>
-			</Item>
 			<Item Name="General" Type="Folder" URL="../General">
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Hardware Mfg" Type="Folder" URL="../Hardware Mfg">
+			<Item Name="Hardware" Type="Folder" URL="../Hardware">
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Test Code" Type="Folder" URL="../Test Code">
@@ -63,20 +44,24 @@
 				<Item Name="8.6CompatibleGlobalVar.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/config.llb/8.6CompatibleGlobalVar.vi"/>
 				<Item Name="Acquire Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Acquire Semaphore.vi"/>
 				<Item Name="AddNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/AddNamedSemaphorePrefix.vi"/>
+				<Item Name="Append Waveforms.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/Append Waveforms.vi"/>
 				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
+				<Item Name="Check for Equality.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/Check for Equality.vi"/>
 				<Item Name="Check if File or Folder Exists.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Check if File or Folder Exists.vi"/>
 				<Item Name="Check Special Tags.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Check Special Tags.vi"/>
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
-				<Item Name="Color (U64)" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Color (U64)"/>
+				<Item Name="Close File+.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Close File+.vi"/>
 				<Item Name="Color to RGB.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/colorconv.llb/Color to RGB.vi"/>
+				<Item Name="compatCalcOffset.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatCalcOffset.vi"/>
+				<Item Name="compatFileDialog.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatFileDialog.vi"/>
+				<Item Name="compatOpenFileOperation.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatOpenFileOperation.vi"/>
+				<Item Name="compatWriteText.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatWriteText.vi"/>
 				<Item Name="Convert property node font to graphics font.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Convert property node font to graphics font.vi"/>
 				<Item Name="Create Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Create Semaphore.vi"/>
 				<Item Name="DAQmx Advance Trigger (Digital Edge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Advance Trigger (Digital Edge).vi"/>
 				<Item Name="DAQmx Advance Trigger (None).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Advance Trigger (None).vi"/>
 				<Item Name="DAQmx Clear Task.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Clear Task.vi"/>
-				<Item Name="DAQmx Configure Output Buffer.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/buffer.llb/DAQmx Configure Output Buffer.vi"/>
-				<Item Name="DAQmx Control Task.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Control Task.vi"/>
 				<Item Name="DAQmx Create Channel (AI-Acceleration-4 Wire DC Voltage).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Channel (AI-Acceleration-4 Wire DC Voltage).vi"/>
 				<Item Name="DAQmx Create Channel (AI-Acceleration-Accelerometer).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Channel (AI-Acceleration-Accelerometer).vi"/>
 				<Item Name="DAQmx Create Channel (AI-Acceleration-Charge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Channel (AI-Acceleration-Charge).vi"/>
@@ -156,63 +141,6 @@
 				<Item Name="DAQmx Create Virtual Channel.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Virtual Channel.vi"/>
 				<Item Name="DAQmx Fill In Error Info.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/miscellaneous.llb/DAQmx Fill In Error Info.vi"/>
 				<Item Name="DAQmx Is Task Done.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Is Task Done.vi"/>
-				<Item Name="DAQmx Read (Analog 1D DBL 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 1D DBL 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 1D DBL NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 1D DBL NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Analog 1D Wfm NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 1D Wfm NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Analog 1D Wfm NChan NSamp Duration).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 1D Wfm NChan NSamp Duration).vi"/>
-				<Item Name="DAQmx Read (Analog 1D Wfm NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 1D Wfm NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 2D DBL NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 2D DBL NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 2D I16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 2D I16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 2D I32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 2D I32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 2D U16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 2D U16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog 2D U32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog 2D U32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Analog DBL 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog DBL 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Analog Wfm 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog Wfm 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Analog Wfm 1Chan NSamp Duration).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog Wfm 1Chan NSamp Duration).vi"/>
-				<Item Name="DAQmx Read (Analog Wfm 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Analog Wfm 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D DBL 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D DBL 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D DBL NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D DBL NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D Pulse Freq 1 Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D Pulse Freq 1 Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D Pulse Ticks 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D Pulse Ticks 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D Pulse Time 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D Pulse Time 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D U32 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D U32 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 1D U32 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 1D U32 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Counter 2D DBL NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 2D DBL NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter 2D U32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter 2D U32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Counter DBL 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter DBL 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Counter Pulse Freq 1 Chan 1 Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter Pulse Freq 1 Chan 1 Samp).vi"/>
-				<Item Name="DAQmx Read (Counter Pulse Ticks 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter Pulse Ticks 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Counter Pulse Time 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter Pulse Time 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Counter U32 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Counter U32 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D Bool 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D Bool 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D Bool NChan 1Samp 1Line).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D Bool NChan 1Samp 1Line).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U8 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U8 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U8 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U8 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U16 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U16 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U16 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U16 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U32 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U32 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D U32 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D U32 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D Wfm NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D Wfm NChan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital 1D Wfm NChan NSamp Duration).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D Wfm NChan NSamp Duration).vi"/>
-				<Item Name="DAQmx Read (Digital 1D Wfm NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 1D Wfm NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 2D Bool NChan 1Samp NLine).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 2D Bool NChan 1Samp NLine).vi"/>
-				<Item Name="DAQmx Read (Digital 2D U8 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 2D U8 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 2D U16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 2D U16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital 2D U32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital 2D U32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Read (Digital Bool 1Line 1Point).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital Bool 1Line 1Point).vi"/>
-				<Item Name="DAQmx Read (Digital U8 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital U8 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital U16 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital U16 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital U32 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital U32 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital Wfm 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital Wfm 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Read (Digital Wfm 1Chan NSamp Duration).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital Wfm 1Chan NSamp Duration).vi"/>
-				<Item Name="DAQmx Read (Digital Wfm 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Digital Wfm 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Read (Raw 1D I8).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D I8).vi"/>
-				<Item Name="DAQmx Read (Raw 1D I16).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D I16).vi"/>
-				<Item Name="DAQmx Read (Raw 1D I32).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D I32).vi"/>
-				<Item Name="DAQmx Read (Raw 1D U8).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D U8).vi"/>
-				<Item Name="DAQmx Read (Raw 1D U16).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D U16).vi"/>
-				<Item Name="DAQmx Read (Raw 1D U32).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read (Raw 1D U32).vi"/>
-				<Item Name="DAQmx Read.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/read.llb/DAQmx Read.vi"/>
 				<Item Name="DAQmx Reference Trigger (Analog Edge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Reference Trigger (Analog Edge).vi"/>
 				<Item Name="DAQmx Reference Trigger (Analog Multi Edge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Reference Trigger (Analog Multi Edge).vi"/>
 				<Item Name="DAQmx Reference Trigger (Analog Window).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Reference Trigger (Analog Window).vi"/>
@@ -238,68 +166,17 @@
 				<Item Name="DAQmx Timing (Use Waveform).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/timing.llb/DAQmx Timing (Use Waveform).vi"/>
 				<Item Name="DAQmx Timing.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/timing.llb/DAQmx Timing.vi"/>
 				<Item Name="DAQmx Trigger.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/trigger.llb/DAQmx Trigger.vi"/>
-				<Item Name="DAQmx Wait Until Done.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Wait Until Done.vi"/>
-				<Item Name="DAQmx Write (Analog 1D DBL 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 1D DBL 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog 1D DBL NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 1D DBL NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Analog 1D Wfm NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 1D Wfm NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Analog 1D Wfm NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 1D Wfm NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog 2D DBL NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 2D DBL NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog 2D I16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 2D I16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog 2D I32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 2D I32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog 2D U16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog 2D U16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Analog DBL 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog DBL 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Analog Wfm 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog Wfm 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Analog Wfm 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Analog Wfm 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Counter 1D Frequency 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1D Frequency 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Counter 1D Frequency NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1D Frequency NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Counter 1D Ticks 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1D Ticks 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Counter 1D Time 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1D Time 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Counter 1D Time NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1D Time NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Counter 1DTicks NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter 1DTicks NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Counter Frequency 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter Frequency 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Counter Ticks 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter Ticks 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Counter Time 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Counter Time 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D Bool 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D Bool 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D Bool NChan 1Samp 1Line).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D Bool NChan 1Samp 1Line).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U8 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U8 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U8 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U8 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U16 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U16 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U16 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U16 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U32 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U32 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D U32 NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D U32 NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D Wfm NChan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D Wfm NChan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital 1D Wfm NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 1D Wfm NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 2D Bool NChan 1Samp NLine).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 2D Bool NChan 1Samp NLine).vi"/>
-				<Item Name="DAQmx Write (Digital 2D U8 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 2D U8 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 2D U16 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 2D U16 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital 2D U32 NChan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital 2D U32 NChan NSamp).vi"/>
-				<Item Name="DAQmx Write (Digital Bool 1Line 1Point).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital Bool 1Line 1Point).vi"/>
-				<Item Name="DAQmx Write (Digital U8 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital U8 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital U16 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital U16 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital U32 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital U32 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital Wfm 1Chan 1Samp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital Wfm 1Chan 1Samp).vi"/>
-				<Item Name="DAQmx Write (Digital Wfm 1Chan NSamp).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Digital Wfm 1Chan NSamp).vi"/>
-				<Item Name="DAQmx Write (Raw 1D I8).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D I8).vi"/>
-				<Item Name="DAQmx Write (Raw 1D I16).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D I16).vi"/>
-				<Item Name="DAQmx Write (Raw 1D I32).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D I32).vi"/>
-				<Item Name="DAQmx Write (Raw 1D U8).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D U8).vi"/>
-				<Item Name="DAQmx Write (Raw 1D U16).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D U16).vi"/>
-				<Item Name="DAQmx Write (Raw 1D U32).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write (Raw 1D U32).vi"/>
-				<Item Name="DAQmx Write.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/write.llb/DAQmx Write.vi"/>
 				<Item Name="Destroy Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Destroy Semaphore.vi"/>
 				<Item Name="Details Display Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Details Display Dialog.vi"/>
 				<Item Name="DialogType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogType.ctl"/>
 				<Item Name="DialogTypeEnum.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogTypeEnum.ctl"/>
 				<Item Name="Draw Flattened Pixmap.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Flattened Pixmap.vi"/>
-				<Item Name="DTbl Digital Size.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Digital Size.vi"/>
-				<Item Name="DTbl Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DTblOps.llb/DTbl Uncompress Digital.vi"/>
-				<Item Name="DWDT Uncompress Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Uncompress Digital.vi"/>
-				<Item Name="Dynamic To Waveform Array.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/transition.llb/Dynamic To Waveform Array.vi"/>
+				<Item Name="DWDT Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Error Code.vi"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
 				<Item Name="Error Code Database.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Code Database.vi"/>
 				<Item Name="ErrWarn.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/ErrWarn.ctl"/>
 				<Item Name="eventvkey.ctl" Type="VI" URL="/&lt;vilib&gt;/event_ctls.llb/eventvkey.ctl"/>
-				<Item Name="ex_CorrectErrorChain.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/ex_CorrectErrorChain.vi"/>
+				<Item Name="Find First Error.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find First Error.vi"/>
 				<Item Name="Find Tag.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find Tag.vi"/>
 				<Item Name="FixBadRect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/pictutil.llb/FixBadRect.vi"/>
 				<Item Name="Format Message String.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Format Message String.vi"/>
@@ -313,7 +190,6 @@
 				<Item Name="GetRTHostConnectedProp.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetRTHostConnectedProp.vi"/>
 				<Item Name="Image Type" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Image Type"/>
 				<Item Name="imagedata.ctl" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/imagedata.ctl"/>
-				<Item Name="IMAQ ColorImageToArray" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ ColorImageToArray"/>
 				<Item Name="IMAQ Copy" Type="VI" URL="/&lt;vilib&gt;/vision/Management.llb/IMAQ Copy"/>
 				<Item Name="IMAQ Create" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Create"/>
 				<Item Name="IMAQ Dispose" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Dispose"/>
@@ -330,7 +206,6 @@
 				<Item Name="NI_AALBase.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALBase.lvlib"/>
 				<Item Name="NI_AALPro.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALPro.lvlib"/>
 				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
-				<Item Name="NI_Gmath.lvlib" Type="Library" URL="/&lt;vilib&gt;/gmath/NI_Gmath.lvlib"/>
 				<Item Name="NI_LVConfig.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/config.llb/NI_LVConfig.lvlib"/>
 				<Item Name="NI_MABase.lvlib" Type="Library" URL="/&lt;vilib&gt;/measure/NI_MABase.lvlib"/>
 				<Item Name="NI_Math Plot Private Lib.lvlib" Type="Library" URL="/&lt;vilib&gt;/Math Plots/Plot Private Lib/NI_Math Plot Private Lib.lvlib"/>
@@ -339,6 +214,7 @@
 				<Item Name="Not A Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Not A Semaphore.vi"/>
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
 				<Item Name="Obtain Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Obtain Semaphore Reference.vi"/>
+				<Item Name="Open_Create_Replace File.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/Open_Create_Replace File.vi"/>
 				<Item Name="Release Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Release Semaphore Reference.vi"/>
 				<Item Name="RemoveNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/RemoveNamedSemaphorePrefix.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
@@ -347,87 +223,46 @@
 				<Item Name="Semaphore RefNum" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore RefNum"/>
 				<Item Name="Semaphore Refnum Core.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore Refnum Core.ctl"/>
 				<Item Name="Set Bold Text.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set Bold Text.vi"/>
-				<Item Name="Set Busy.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Busy.vi"/>
-				<Item Name="Set Cursor (Cursor ID).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor (Cursor ID).vi"/>
-				<Item Name="Set Cursor (Icon Pict).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor (Icon Pict).vi"/>
-				<Item Name="Set Cursor.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Set Cursor.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 				<Item Name="Space Constant.vi" Type="VI" URL="/&lt;vilib&gt;/dlg_ctls.llb/Space Constant.vi"/>
-				<Item Name="subBuildXYGraph.vi" Type="VI" URL="/&lt;vilib&gt;/express/express controls/BuildXYGraphBlock.llb/subBuildXYGraph.vi"/>
-				<Item Name="subFile Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/express/express input/FileDialogBlock.llb/subFile Dialog.vi"/>
-				<Item Name="subTimeDelay.vi" Type="VI" URL="/&lt;vilib&gt;/express/express execution control/TimeDelayBlock.llb/subTimeDelay.vi"/>
 				<Item Name="TagReturnType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/TagReturnType.ctl"/>
 				<Item Name="Three Button Dialog CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog CORE.vi"/>
 				<Item Name="Three Button Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog.vi"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
-				<Item Name="Unset Busy.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/cursorutil.llb/Unset Busy.vi"/>
 				<Item Name="Validate Semaphore Size.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Validate Semaphore Size.vi"/>
 				<Item Name="Version To Dotted String.vi" Type="VI" URL="/&lt;vilib&gt;/_xctls/Version To Dotted String.vi"/>
+				<Item Name="WDT Append Waveforms CDB.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms CDB.vi"/>
+				<Item Name="WDT Append Waveforms CXT.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms CXT.vi"/>
+				<Item Name="WDT Append Waveforms DBL.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms DBL.vi"/>
+				<Item Name="WDT Append Waveforms EXT.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms EXT.vi"/>
+				<Item Name="WDT Append Waveforms I16.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms I16.vi"/>
+				<Item Name="WDT Append Waveforms I32.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms I32.vi"/>
+				<Item Name="WDT Append Waveforms I64.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Append Waveforms I64.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
+				<Item Name="Write Characters To File.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Characters To File.vi"/>
+				<Item Name="Write Delimited Spreadsheet (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (DBL).vi"/>
+				<Item Name="Write Delimited Spreadsheet (I64).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (I64).vi"/>
+				<Item Name="Write Delimited Spreadsheet (string).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (string).vi"/>
+				<Item Name="Write Delimited Spreadsheet.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet.vi"/>
+				<Item Name="Write File+ (string).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write File+ (string).vi"/>
 				<Item Name="Write Spreadsheet String.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Spreadsheet String.vi"/>
-				<Item Name="Write To Spreadsheet File (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (DBL).vi"/>
-				<Item Name="Write To Spreadsheet File (I64).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (I64).vi"/>
-				<Item Name="Write To Spreadsheet File (string).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File (string).vi"/>
-				<Item Name="Write To Spreadsheet File.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write To Spreadsheet File.vi"/>
 				<Item Name="XControlSupport.lvlib" Type="Library" URL="/&lt;vilib&gt;/_xctls/XControlSupport.lvlib"/>
 			</Item>
-			<Item Name="_Close Communications.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/_Close Communications.vi"/>
-			<Item Name="abs Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/abs Complex Data.vi"/>
-			<Item Name="AlazarBytesPerBuffer.vi" Type="VI" URL="../Hardware Mfg/AlazarTech SDK/7.2.0/Samples_LabVIEW/Dual Port/Generic_CS.vi/AlazarBytesPerBuffer.vi"/>
-			<Item Name="append Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/append Data.vi"/>
-			<Item Name="ATSApi.dll" Type="Document" URL="ATSApi.dll">
+			<Item Name="_ChannelSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelSupport/_ChannelSupport.lvlib"/>
+			<Item Name="AxsunOCTControl" Type="VI" URL="AxsunOCTControl">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Calibration Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Calibration Selection.ctl"/>
-			<Item Name="clear Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Complex Data.vi"/>
-			<Item Name="clear Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Data.vi"/>
-			<Item Name="clear Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Processing.vi"/>
-			<Item Name="clear Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Raw Data.vi"/>
-			<Item Name="clear Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/clear Scan Pattern.vi"/>
-			<Item Name="close Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Device.vi"/>
-			<Item Name="close Probe.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/close Probe.vi"/>
-			<Item Name="compute Linear K Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/compute Linear K Raw Data.vi"/>
-			<Item Name="CONEX-CC Absolute Move v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Absolute Move v2.vi"/>
-			<Item Name="CONEX-CC Get Current Position v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Current Position v2.vi"/>
-			<Item Name="CONEX-CC Get Negative Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Negative Software Limit v2.vi"/>
-			<Item Name="CONEX-CC Get Positioner Error And Controller State v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Positioner Error And Controller State v2.vi"/>
-			<Item Name="CONEX-CC Get Positive Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Get Positive Software Limit v2.vi"/>
-			<Item Name="CONEX-CC Relative Move v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Relative Move v2.vi"/>
-			<Item Name="CONEX-CC Set Negative Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Set Negative Software Limit v2.vi"/>
-			<Item Name="CONEX-CC Set Positive Software Limit v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Set Positive Software Limit v2.vi"/>
-			<Item Name="CONEX-CC Stop Motion v2.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-CC/CONEX-CC.llb/CONEX-CC Stop Motion v2.vi"/>
-			<Item Name="Connect Newport Instrument_edit.vi" Type="VI" URL="../Hardware/Table Stage/CONEX/CONEX/CONEX-General/Connect Newport Instrument_edit.vi"/>
-			<Item Name="create B-Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Pattern.vi"/>
-			<Item Name="create B-Scan Stack Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create B-Scan Stack Pattern.vi"/>
-			<Item Name="create Complex Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Complex Data.vi"/>
-			<Item Name="create Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Data.vi"/>
-			<Item Name="create Fragmented Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Fragmented Scan Pattern.vi"/>
-			<Item Name="create No Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create No Scan Pattern.vi"/>
-			<Item Name="create Processing for Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Processing for Device.vi"/>
-			<Item Name="create Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Raw Data.vi"/>
-			<Item Name="create Volume Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/create Volume Pattern.vi"/>
-			<Item Name="Data 2D Export Format Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data 2D Export Format Selection.ctl"/>
-			<Item Name="Data Analyzation Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Data Analyzation Selection.ctl"/>
-			<Item Name="Device Camera Preset Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Device Camera Preset Selection.ctl"/>
-			<Item Name="display Data 1D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 1D.vi"/>
-			<Item Name="display Data 2D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data 2D.vi"/>
-			<Item Name="display Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/display Data.vi"/>
-			<Item Name="execute Complex Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Complex Processing.vi"/>
-			<Item Name="execute Full Range.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Full Range.vi"/>
-			<Item Name="execute Processing.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/execute Processing.vi"/>
-			<Item Name="export Data 2D.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Data 2D.vi"/>
-			<Item Name="export Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/export Raw Data.vi"/>
-			<Item Name="get Data Slice Analyzed.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Analyzed.vi"/>
-			<Item Name="get Data Slice Index.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Data Slice Index.vi"/>
-			<Item Name="get Raw Data.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/get Raw Data.vi"/>
-			<Item Name="init Device.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Device.vi"/>
-			<Item Name="init Full Range.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Full Range.vi"/>
-			<Item Name="init Probe.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/init Probe.vi"/>
-			<Item Name="load Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/load Calibration.vi"/>
+			<Item Name="AxsunOCTControl.dll" Type="Document" URL="../../../../../../nkemp/Documents/Visual Studio 2015/Projects/AxsunProjects_LV2015/Axsun OCT Demo/source/hardware control/AxsunOCTControl.dll"/>
+			<Item Name="ChannelProbePositionAndTitle.vi" Type="VI" URL="/&lt;resource&gt;/ChannelSupport/_ChannelSupport/ChannelProbePositionAndTitle.vi"/>
+			<Item Name="ChannelProbeWindowStagger.vi" Type="VI" URL="/&lt;resource&gt;/ChannelSupport/_ChannelSupport/ChannelProbeWindowStagger.vi"/>
+			<Item Name="Colored Data.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Colored Data.lvclass"/>
+			<Item Name="Coloring.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Coloring.lvclass"/>
+			<Item Name="Complex Data.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Complex Data.lvclass"/>
+			<Item Name="get Error.vi" Type="VI" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/get Error.vi"/>
+			<Item Name="LabVIEW Helper.lvlib" Type="Library" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/LabVIEW Helper.lvlib"/>
+			<Item Name="LabVIEW Helper.lvlib" Type="Library" URL="../../../../SerialSectOCT/Software/Hardware/Thorlabs OCT/user.lib/SpectralRadar.llb/LabVIEW Helper.lvlib"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
-			<Item Name="measure Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Calibration.vi"/>
-			<Item Name="measure Spectra.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/measure Spectra.vi"/>
 			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -437,46 +272,22 @@
 			<Item Name="nivissvc.dll" Type="Document" URL="nivissvc.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Normal Direction Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Normal Direction Selection.ctl"/>
+			<Item Name="OCT Device.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/OCT Device.lvclass"/>
 			<Item Name="OCTNumerics.dll" Type="Document" URL="OCTNumerics.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Probe Parameter Int Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Probe Parameter Int Selection.ctl"/>
-			<Item Name="Processing Flag Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Flag Selection.ctl"/>
-			<Item Name="Processing Parameter Int Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Processing Parameter Int Selection.ctl"/>
-			<Item Name="Raw Data Export Format Selection.ctl" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/Raw Data Export Format Selection.ctl"/>
-			<Item Name="set Apodized Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Apodized Spectrum Output.vi"/>
-			<Item Name="set Calibration.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Calibration.vi"/>
-			<Item Name="set Complex Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Complex Scan Output.vi"/>
-			<Item Name="set Device Preset.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Device Preset.vi"/>
-			<Item Name="set Full Range Sensitivity.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Full Range Sensitivity.vi"/>
-			<Item Name="set Hor Mirrored Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Hor Mirrored Scan Output.vi"/>
-			<Item Name="set Offset Corrected Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Offset Corrected Spectrum Output.vi"/>
-			<Item Name="set Output Value by Name.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/user.lib/SpectralRadar.llb/set Output Value by Name.vi"/>
-			<Item Name="set Probe Parameter Int.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Probe Parameter Int.vi"/>
-			<Item Name="set Processing Flag.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Flag.vi"/>
-			<Item Name="set Processing Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Output.vi"/>
-			<Item Name="set Processing Parameter Int.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Processing Parameter Int.vi"/>
-			<Item Name="set Scan Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Scan Output.vi"/>
-			<Item Name="set Spectrum Output.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/set Spectrum Output.vi"/>
-			<Item Name="shift Scan Pattern.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/shift Scan Pattern.vi"/>
+			<Item Name="Post Processing.lvlib" Type="Library" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Post Processing.lvlib"/>
+			<Item Name="Probe.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Probe.lvclass"/>
+			<Item Name="Processing.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Processing.lvclass"/>
+			<Item Name="Raw Data.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Raw Data.lvclass"/>
+			<Item Name="Scan Pattern.lvclass" Type="LVClass" URL="../../../../../../../Program Files/Thorlabs/SpectralRadar/LabVIEW/2012/user.lib/SpectralRadar.llb/Scan Pattern.lvclass"/>
 			<Item Name="SpectralRadar.dll" Type="Document" URL="SpectralRadar.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="SpectralRadar.dll" Type="Document" URL="../../../../../Program Files/Thorlabs/SpectralRadar/DLL/SpectralRadar.dll"/>
-			<Item Name="start Measurement.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/start Measurement.vi"/>
-			<Item Name="stop Measurement.vi" Type="VI" URL="../Hardware Mfg/Thorlabs OCT/LabVIEW/user.lib/SpectralRadar.llb/stop Measurement.vi"/>
-			<Item Name="Thorlabs.MotionControl.Controls" Type="Document" URL="Thorlabs.MotionControl.Controls">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
+			<Item Name="SpectralRadar.dll" Type="Document" URL="../../../../SerialSectOCT/Software/Test Code/Jiarui/DLL/SpectralRadar.dll"/>
+			<Item Name="Tag-bool.lvlib" Type="Library" URL="/&lt;extravilib&gt;/ChannelInstances/Tag-bool.lvlib"/>
 			<Item Name="Thorlabs.MotionControl.Controls.dll" Type="Document" URL="../Thorlabs.MotionControl.Controls.dll"/>
-			<Item Name="Thorlabs.MotionControl.GenericMotorCLI" Type="Document" URL="Thorlabs.MotionControl.GenericMotorCLI">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
 			<Item Name="Thorlabs.MotionControl.GenericMotorCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.GenericMotorCLI.dll"/>
-			<Item Name="Thorlabs.MotionControl.IntegratedStepperMotorsCLI" Type="Document" URL="Thorlabs.MotionControl.IntegratedStepperMotorsCLI">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
 			<Item Name="Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll" Type="Document" URL="../Thorlabs.MotionControl.IntegratedStepperMotorsCLI.dll"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build"/>
