@@ -51,8 +51,10 @@
 			<Item Name="MainGUI.vi" Type="VI" URL="../MainGUI.vi"/>
 			<Item Name="SettingsGUI.vi" Type="VI" URL="../SettingsGUI.vi"/>
 		</Item>
+		<Item Name="Generate z stage position array.vi" Type="VI" URL="../../../../SerialSectOCT - FFT CPU/SerialSectOCT/Software/General/Generate z stage position array.vi"/>
 		<Item Name="PM Read Test.vi" Type="VI" URL="../../../../Power meter/Private/PM Read Test.vi"/>
 		<Item Name="PM_Close.vi" Type="VI" URL="../../../../Power meter/Private/PM_Close.vi"/>
+		<Item Name="Test stage.vi" Type="VI" URL="../../../../SerialSectOCT - FFT CPU/SerialSectOCT/Software/Test Code/Test stage.vi"/>
 		<Item Name="TLPM.llb" Type="Document" URL="../../../../Power meter/Private/TLPM.llb"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
