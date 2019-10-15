@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <Project Type="Project" LVVersion="17008000">
-	<Property Name="varPersistentID:{D7B8B090-8CD0-44D4-8AC4-6608B764CFE4}" Type="Ref">/My Computer/Software/General/Shared_Var.lvlib/Image_Index</Property>
-	<Property Name="varPersistentID:{FBA7378F-07AF-49A9-9814-F9DF0642EFC6}" Type="Ref">/My Computer/Software/General/Shared_Var.lvlib/Slice_Index</Property>
 	<Item Name="My Computer" Type="My Computer">
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
