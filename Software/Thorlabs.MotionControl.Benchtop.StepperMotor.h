@@ -585,8 +585,13 @@ extern "C"
 
 	/// <summary> Sends a command to the device to make it identify iteself. </summary>
 	/// <param name="serialNo">	The controller serial no. </param>
+<<<<<<< HEAD
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	BENCHTOPSTEPPERMOTOR_API short __cdecl SBC_Identify(char const * serialNo);
+=======
+	/// <param name="channel">  The channel. </param>
+	BENCHTOPSTEPPERMOTOR_API void __cdecl SBC_Identify(char const * serialNo, short channel);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Gets the hardware information from the device. </summary>
 	/// <param name="serialNo">		    The controller serial no. </param>
@@ -638,6 +643,17 @@ extern "C"
     /// 		  \include CodeSnippet_connectionN.cpp
 	BENCHTOPSTEPPERMOTOR_API bool __cdecl SBC_LoadSettings(char const * serialNo, short channel);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The serial no. </param>
+	/// <param name="channel">  The channel. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	BENCHTOPSTEPPERMOTOR_API bool __cdecl SBC_LoadNamedSettings(char const * serialNo, short channel, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary>	Persist device settings to device. </summary>
 	/// <param name="serialNo">	The serial no. </param>
 	/// <param name="channel"> 	The channel. </param>

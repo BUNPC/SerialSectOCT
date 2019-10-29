@@ -16,6 +16,10 @@
 
 #include <OaIdl.h>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 /** @defgroup KCubeNanoTrak KCube NanoTrak
  *  This section details the Structures and Functions relavent to the  @ref KNA101_page "KCube NanoTrak"<br />
  *  For an example of how to connect to the device and perform simple operations use the following links:
@@ -159,6 +163,7 @@ extern "C"
 
 	/// <summary> NanoTrak Feedback Source. </summary>
 	/// \ingroup Common
+<<<<<<< HEAD
 	typedef enum NT_FeedbackSource : WORD
 	{
 		NT_FeedbackSourceUndefined = 0x00, ///< Undefined.
@@ -168,10 +173,19 @@ extern "C"
 		NT_BNC_5v = 0x04, ///< The  BNC input source at 5V.
 		NT_BNC_10v = 0x05, ///< The  BNC input source at 10V
 	} NT_FeedbackSource;
+=======
+	typedef enum KNA_FeedbackSource : WORD
+	{
+		NT_FeedbackSourceUndefined = 0x00, ///< Undefined.
+		NT_TIA = 0x01, ///< The TIA input source.
+		NT_IO1_5v = 0x04, ///< The  IO1 input source at 5V.
+	} KNA_FeedbackSource;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Defines the number TIA ranges. </summary>
 	#define NUM_TIA_RANGES	16
 
+<<<<<<< HEAD
 	/// <summary> NanoTrak TIA Ranges. </summary>
 	/// \ingroup Common
 	typedef enum NT_TIARange : WORD
@@ -191,6 +205,38 @@ extern "C"
 		NT_TIARange13_3mA = 0x000F, ///< 3 mA range.
 		NT_TIARange14_10mA = 0x0010 ///< 10 mA range.
 	} NT_TIARange;
+=======
+	/// <summary> Values that represent KNA_TIARange. </summary>
+	typedef enum KNA_TIARange : WORD
+	{
+		/// <summary> An enum constant representing the NT tia range 1 5n an option. </summary>
+		KNA_TIARange1_5nA = 0x0003,
+		/// <summary> An enum constant representing the NT tia range 2 16.6n an option. </summary>
+		KNA_TIARange2_16_6nA = 0x0004,
+		/// <summary> An enum constant representing the NT tia range 3 50n an option. </summary>
+		KNA_TIARange3_50nA = 0x0005,
+		/// <summary> An enum constant representing the NT tia range 4 166n an option. </summary>
+		KNA_TIARange4_166nA = 0x0006,
+		/// <summary> An enum constant representing the NT tia range 5 500n an option. </summary>
+		KNA_TIARange5_500nA = 0x0007,
+		/// <summary> An enum constant representing the NT tia range 6 1.65u an option. </summary>
+		KNA_TIARange6_1_66uA = 0x0008,
+		/// <summary> An enum constant representing the NT tia range 7 5u an option. </summary>
+		KNA_TIARange7_5uA = 0x0009,
+		/// <summary> An enum constant representing the NT tia range 8 16.6u an option. </summary>
+		KNA_TIARange8_16_6uA = 0x000A,
+		/// <summary> An enum constant representing the NT tia range 9 50u an option. </summary>
+		KNA_TIARange9_50uA = 0x000B,
+		/// <summary> An enum constant representing the NT tia range 10 166u an option. </summary>
+		KNA_TIARange10_166uA = 0x000C,
+		/// <summary> An enum constant representing the NT tia range 11 500u an option. </summary>
+		KNA_TIARange11_500uA = 0x000D,
+		/// <summary> An enum constant representing the NT tia range 12 1.66m an option. </summary>
+		KNA_TIARange12_1_66mA = 0x000E,
+		/// <summary> An enum constant representing the NT tia range 13 5m an option. </summary>
+		KNA_TIARange13_5mA = 0x000F,
+	} KNA_TIARange;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> The Odd or Even TIA Range specification. </summary>
 	/// \ingroup Common
@@ -240,6 +286,7 @@ extern "C"
 		NT_AutoRangeAtParameter = 0x0004 ///<Autorange TIA at supplied parameter range.
 	} NT_TIARangeMode;
 
+<<<<<<< HEAD
 	/// <summary> Values that represent Low Pass Frequencdies. </summary>
 	/// \ingroup Common
 	typedef enum NT_LowPassFrequency : WORD
@@ -254,6 +301,48 @@ extern "C"
 
 	/// <summary> NanoTrak Output Voltage Range. </summary>
 	/// \ingroup Common
+=======
+	/// <summary> NanoTrak Output Voltage Range. </summary>
+	/// \ingroup Common
+	/// 
+	/// <summary> Values that represent Low Voltage Range. </summary>
+	/// <remarks> This field is fixed and cannt be changed</remarks>
+	enum KNA_LowVoltageRange : WORD
+	{
+		KNA_VoltageRange_10v = 0x0002 ///<10v output range.
+	};
+
+	/// <summary> Values that represent Low Output Voltage Route. </summary>
+	/// <remarks> This field is fixed and cannt be changed</remarks>
+	enum KNA_LowOutputVoltageRoute : WORD
+	{
+		KNA_IO1Only = 0x0001 ///<Output to IO1 connector only.
+	};
+
+	/// <summary> Values that represent High Voltage Range. </summary>
+	/// <remarks> The 2 channels parameters must be combined with a bitwise OR</remarks>
+	enum KNA_HighVoltageRange : WORD
+	{
+		KNA_Default_Range = 0x00, ///<Default value both channels 75v.
+		KNA_VoltageRange_CH1_75v = 0x00, ///<Channel 1 75v.
+		KNA_VoltageRange_CH1_150v = 0x01, ///<Channel 1 150v.
+		KNA_VoltageRange_CH2_75v = 0x00, ///<Channel 2 75v.
+		KNA_VoltageRange_CH2_150v = 0x10 ///<Channel 2 150v.
+	};
+
+	/// <summary> Values that represent High Output Voltage Route. </summary>
+	/// <remarks> The IN, OUT and Boost parameters must be combined with a bitwise OR</remarks>
+	enum KNA_HighOutputVoltageRoute : WORD
+	{
+		KNA_Default_Route = 0x0000,///<Default value, all off
+		KNA_ExtIn_PIN = 0x0000,///<Input via PIn
+		KNA_ExtIn_IO1 = 0x0001,///<Input via IO1
+		KNA_ExtOut_Dis = 0x0000,///<Output Disabled
+		KNA_ExtOut_IO2 = 0x0010,///<Output via IO2
+		KNA_EnableInputBoost = 0x0100///<Boost inputs enabled
+	};
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	typedef enum NT_VoltageRange : WORD
 	{
 		NT_VoltageRangeUndefined = 0x0000, ///<Undefined.
@@ -265,8 +354,13 @@ extern "C"
 	/// \ingroup Common
 	typedef enum NT_OutputVoltageRoute : WORD
 	{
+<<<<<<< HEAD
 		NT_SMAOnly = 0x0001, ///<Output to SMA connector only.
 		NT_HubOrSMA = 0x0002 ///<Output to SMA connector and Hub.
+=======
+		NT_IO1Only = 0x0001, ///<Output to IO1 connector only.
+		NT_HubOrIO1 = 0x0002 ///<Output to IO1 connector and Hub.
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	} NT_OutputVoltageRoute;
 
 	/// <summary> The Input mode units. </summary>
@@ -278,6 +372,7 @@ extern "C"
 		NT_Db ///<Display as dBm.
 	} NT_PowerInputUnits;
 
+<<<<<<< HEAD
 	/// <summary> The SMA units. </summary>
 	/// \ingroup Common
 	typedef enum NT_SMA_Units : WORD
@@ -289,6 +384,67 @@ extern "C"
 
 	/// \endcond
 
+=======
+	/// <summary> The IO1 units. </summary>
+	/// \ingroup Common
+	typedef enum NT_IO1_Units : WORD
+	{
+		NT_Voltage, ///<IO1 output as Voltage.
+		NT_FullRange, ///<IO1 output as % Full Range.
+		NT_UserDefined ///<IO1 output as User Defined.
+	} NT_IO1_Units;
+
+	/// <summary> Values that represent wheel Rate of Change. </summary>
+	typedef enum KNA_WheelAdjustRate : __int16
+	{
+		/// <summary> An enum constant representing the kmot js low option. </summary>
+		KNA_WM_Low = 0x00,
+		/// <summary> An enum constant representing the kmot js medium option. </summary>
+		KNA_WM_Medium = 0x01,
+		/// <summary> An enum constant representing the kmot js high option. </summary>
+		KNA_WM_High = 0x02,
+	} KNA_WheelAdjustRate;
+
+	/// <summary> Values that represent Trigger Port Mode. </summary>
+	typedef enum KNA_TriggerPortMode : __int16
+	{
+		KNA_TrigDisabled = 0x00,///< Trigger Disabled
+		KNA_TrigIn_GPI = 0x01,///< General purpose logic input (<see cref="PCC_GetStatusBits(const char * serialNo)"> GetStatusBits</see>)
+		KNA_TrigIn_VoltageStepUp = 0x02,///< Move relative using relative move parameters
+		KNA_TrigIn_VoltageStepDown = 0x03,///< Move absolute using absolute move parameters
+		KNA_TrigOut_GPO = 0x0A,///< General purpose output (<see cref="PCC_SetDigitalOutputs(const char * serialNo, byte outputBits)"> SetDigitalOutputs</see>)
+	} KNA_TriggerPortMode;
+
+	/// <summary> Values that represent Trigger Port Polarity. </summary>
+	typedef enum KNA_TriggerPortPolarity : __int16
+	{
+		KNA_TrigPolarityHigh = 0x01,///< Trigger Polarity high
+		KNA_TrigPolarityLow = 0x02,///< Trigger Polarity Low
+	} KNA_TriggerPortPolarity;
+	/// \endcond
+
+	/// <summary> Values that represent NT_FeedbackSource. </summary>
+	enum KNA_Channels : WORD
+	{
+		/// <summary>	An enum constant representing the kna channel undefined option. </summary>
+		KNA_ChannelUndefined = 0x00,
+		/// <summary>	An enum constant representing the kna channel 1 option. </summary>
+		KNA_Channel1 = 0x01,
+		/// <summary>	An enum constant representing the kna channel 2 option. </summary>
+		KNA_Channel2 = 0x02,
+	};
+
+	/// <summary> The Piezo Control Modes. </summary>
+	typedef enum KNA_FeedbackModeTypes : short
+	{
+		PZ_ControlModeUndefined = 0, ///<Undefined
+		PZ_OpenLoop = 1, ///<Open Loop mode.
+		PZ_CloseLoop = 2, ///<Closed Loop mode.
+		PZ_OpenLoopSmooth = 3, ///<Open Loop mode with smoothing.
+		PZ_CloseLoopSmooth = 4 ///<Closed Loop mode with smoothing.
+	} KNA_FeedbackModeTypes;
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	#pragma pack(1)
 	
 	/// <summary> Structure used to hold any parameter which has a horizontal and vertical component, i.e. position. </summary>
@@ -336,7 +492,11 @@ extern "C"
 	} NT_CircleDiameterLUT;
 
 	/// <summary> Structure containing TIA range parameters. </summary>
+<<<<<<< HEAD
 	typedef struct NT_TIARangeParameters
+=======
+	typedef struct KNA_TIARangeParameters
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	{
 		/// <summary> Chooses automatic or manual ranging and currently selected or new range. <see cref="NT_TIARangeMode" />
 		/// 	<list type=table>
@@ -364,6 +524,7 @@ extern "C"
 		///		</list> </summary>
 		NT_OddOrEven changeToOddOrEven;
 		/// <summary> TIA Range to use if in manual mode: <br />
+<<<<<<< HEAD
 		/// 		  <see cref="NT_TIARange" /> for TIA ranges. </summary>
 		NT_TIARange newRange;
 	} NT_TIARangeParameters;
@@ -394,11 +555,20 @@ extern "C"
 
 	/// <summary> Structure containing TIA reading. </summary>
 	typedef struct NT_TIAReading
+=======
+		/// 		  <see cref="KNA_TIARange" /> for TIA ranges. </summary>
+		KNA_TIARange newRange;
+	} KNA_TIARangeParameters;
+
+	/// <summary> Structure containing TIA reading. </summary>
+	typedef struct KNA_TIAReading
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	{
 		/// <summary> Absolute reading. </summary>
 		float absoluteReading;
 		/// <summary> Relative reading 0-32767 for 0 - 100% of selected current range value. </summary>
 		WORD relativeReading;
+<<<<<<< HEAD
 		/// <summary> Selected current range from the <see cref="NT_TIARange" />. </summary>
 		NT_TIARange selectedRange;
 		/// <summary> Indicates whether read signal is in range, over range or under range. </summary>
@@ -427,6 +597,43 @@ extern "C"
 		/// <summary> Not in use. </summary>
 		WORD unused;
 	} NT_IOSettings;
+=======
+		/// <summary> Selected current range from the <see cref="KNA_TIARange" />. </summary>
+		KNA_TIARange selectedRange;
+		/// <summary> Indicates whether read signal is in range, over range or under range. </summary>
+		NT_UnderOrOver underOrOverRead;
+	} KNA_TIAReading;
+
+
+	/// <summary> Structure containing electronic input and output settings. </summary>
+	typedef struct KNA_IOSettings
+	{
+		/// <summary> Low Voltage Output range: <see cref="NT_VoltageRange" />
+		///		<list type=table>
+		///			<item><term>0 - 10V output range.</term><term>2</term></item>
+		///		</list> </summary>
+		KNA_LowVoltageRange lowVoltageOutRange;
+		/// <summary> Low Voltage Output routing: <see cref="NT_OutputVoltageRoute" />
+		///		<list type=table>
+		///			<item><term>Output to IO1 connector.</term><term>1</term></item>
+		KNA_LowOutputVoltageRoute lowVoltageOutputRoute;
+		/// <summary> High Voltage Output routing flags: <see cref="NT_OutputVoltageRoute" />
+		/// <Remarks> Default Value = 0, (CH1_75V | CH2_75V) </Remarks>
+		///		<list type=table>
+		///			<item><term>CH1_150v (0x01).</term><term>Set Channel 1 range to 150v when set otherwise 75v</term></item>
+		///			<item><term>CH2_150v (0x01).</term><term>Set Channel 2 range to 150v when set otherwise 75v</term></item>
+		///		</list> </summary>
+		KNA_HighVoltageRange highVoltageOutRange;
+		/// <summary> High Voltage Output routing: <see cref="NT_OutputVoltageRoute" />
+		/// <Remarks> Default Value = 0, (ExtIn_PIN | ExtOut_Dis) </Remarks>
+		///		<list type=table>
+		///			<item><term>ExtIn_IO1 (0x01).</term><term>Set input from IO1 otherwise input from PIn</term></item>
+		///			<item><term>ExtOut_IO1 (0x10).</term><term>Set output via IO1 otherwise disable IO1 output</term></item>
+		///			<item><term>EnableInputBoost (0x100).</term><term>Enable Input Boost when set</term></item>
+		///		</list> </summary>
+		KNA_HighOutputVoltageRoute highVoltageOutputRoute;
+	} KNA_IOSettings;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> structure containing NT Gain parameters. </summary>
 	typedef struct NT_GainParameters
@@ -437,7 +644,81 @@ extern "C"
 		short gain;
 	} NT_GainParameters;
 
+<<<<<<< HEAD
 	#pragma pack()
+=======
+	/// <summary> Structure containing the MMI Parameters. </summary>
+	/// <value> Device GUI parameters. </value>
+	typedef struct KNA_MMIParams
+	{
+		/// <summary> The voltage adjust rate. </summary>
+		KNA_WheelAdjustRate WheelAdjustRate;
+		/// <summary> The display intensity, range 0 to 100%. </summary>
+		__int16 DisplayIntensity;
+		/// <summary> Reserved fields. </summary>
+		__int16 reserved[6];
+	} KNA_MMIParams;
+
+	/// <summary> KCube piezo trigger configuration. </summary>
+	typedef struct KNA_TriggerConfig
+	{
+		/// <summary> The trigger 1 mode. </summary>
+		/// <remarks> The trigger 1 operating mode:
+		/// 		  <list type=table>
+		///				<item><term>0</term><term>Trigger disabled</term></item>
+		///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+		///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+		///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+		///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+		///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+		/// 		  </list>
+		/// 		  </remarks>
+		KNA_TriggerPortMode Trigger1Mode;
+		/// <summary> The trigger 1 polarity. </summary>
+		/// <remarks> The trigger 1 output polaritye:
+		/// 		  <list type=table>
+		///				<item><term>1</term><term>Output high when set</term></item>
+		///				<item><term>2</term><term>Output low when set</term></item>
+		/// 		  </list>
+		/// 		  </remarks>
+		KNA_TriggerPortPolarity Trigger1Polarity;
+		__int16 unused1;
+		/// <summary> The trigger 2 mode. </summary>
+		/// <remarks> The trigger 2 operating mode:
+		/// 		  <list type=table>
+		///				<item><term>0</term><term>Trigger disabled</term></item>
+		///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+		///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+		///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+		///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+		///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+		/// 		  </list>
+		/// 		  </remarks>
+		KNA_TriggerPortMode Trigger2Mode;
+		/// <summary> The trigger 2 polarity. </summary>
+		/// <remarks> The trigger 2 output polarity:
+		/// 		  <list type=table>
+		///				<item><term>1</term><term>Output high when set</term></item>
+		///				<item><term>2</term><term>Output low when set</term></item>
+		/// 		  </list>
+		/// 		  </remarks>
+		KNA_TriggerPortPolarity Trigger2Polarity;
+		__int16 unused2;
+		/// <summary> reserved fields. </summary>
+		__int16 reserved[4];
+	} KNA_TriggerConfig;
+
+	/// <summary> Structure containing feedback loop constants. </summary>
+	typedef struct KNA_FeedbackLoopConstants
+	{
+		/// <summary> The proportional term. </summary>
+		short proportionalTerm;
+		/// <summary> The integral term. </summary>
+		short integralTerm;
+	} KNA_FeedbackLoopConstants;
+
+#pragma pack()
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
      /// <summary> Build the DeviceList. </summary>
     /// <remarks> This function builds an internal collection of all devices found on the USB that are not currently open. <br />
@@ -632,6 +913,16 @@ extern "C"
     /// 		  \include CodeSnippet_connection1.cpp
 	NANOTRAK_API bool __cdecl NT_LoadSettings(char const * serialNo);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	NANOTRAK_API bool __cdecl NT_LoadNamedSettings(char const * serialNo, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> persist the devices current settings. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> <c>true</c> if successful, false if not. </returns>
@@ -644,11 +935,14 @@ extern "C"
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	NANOTRAK_API short __cdecl NT_Disconnect(char const * serialNo);
 
+<<<<<<< HEAD
 	/// <summary> Gets the hub bay number this device is fitted to. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The number, 0x00 if unknown or 0xff if not on a hub. </returns>
 	NANOTRAK_API char __cdecl NT_GetHubBay(char const * serialNo);
 
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> Requests the NanoTrak signal state. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
@@ -898,15 +1192,24 @@ extern "C"
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params)" />
 	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
 	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
 	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
 	/// <seealso cref="NT_SetTIARange(char const * serialNo, NT_TIARange range)" />
+=======
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
+	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
+	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	NANOTRAK_API short __cdecl NT_RequestTIArangeParams(char const * serialNo);
 
 	/// <summary> Gets the TIA range parameters. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
+<<<<<<< HEAD
 	/// <param name="params"> Address of the NT_TIARangeParameters to receive the  TIA range parameters. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params)" />
@@ -919,13 +1222,32 @@ extern "C"
 	/// <summary> Sets the TIA range parameters. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <param name="params"> Address of the NT_TIARangeParameters containing the new TIA range parameters. </param>
+=======
+	/// <param name="params"> Address of the KNA_TIARangeParameters to receive the  TIA range parameters. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
+	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
+	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+	NANOTRAK_API short __cdecl NT_GetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params);
+
+	/// <summary> Sets the TIA range parameters. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="params"> Address of the KNA_TIARangeParameters containing the new TIA range parameters. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
 	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
 	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
 	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetTIARange(char const * serialNo, NT_TIARange range)" />
 	NANOTRAK_API short __cdecl NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params);
+=======
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+	NANOTRAK_API short __cdecl NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Get the TIA Range Mode and OddEven mode. </summary>
 	/// <param name="serialNo"> The device serial no. </param>
@@ -944,10 +1266,17 @@ extern "C"
 	/// 					</list> </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params)" />
 	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
 	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
 	/// <seealso cref="NT_SetTIARange(char const * serialNo, NT_TIARange range)" />
+=======
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
+	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	NANOTRAK_API short __cdecl NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven);
 
 	/// <summary> Get the TIA Range Mode and OddEven mode. </summary>
@@ -967,16 +1296,24 @@ extern "C"
 	/// 					</list> </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params)" />
 	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
 	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
 	/// <seealso cref="NT_SetTIARange(char const * serialNo, NT_TIARange range)" />
+=======
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
+	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	NANOTRAK_API short __cdecl NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven);
 
 	/// <summary> Gets the TIA range. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The range value, 
 	/// 					<list type=table>
+<<<<<<< HEAD
 	///								<item><term>0-3nA range.</term><term>3</term></item>
 	///								<item><term>0-10nA range.</term><term>4</term></item>
 	///								<item><term>0-30nA range.</term><term>5</term></item>
@@ -999,11 +1336,35 @@ extern "C"
 	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
 	/// <seealso cref="NT_SetTIARange(char const * serialNo, NT_TIARange range)" />
 	NANOTRAK_API NT_TIARange __cdecl NT_GetTIARange(char const * serialNo);
+=======
+	///								<item><term>0-5nA range.</term><term>3</term></item>
+	///								<item><term>0-16.6nA range.</term><term>4</term></item>
+	///								<item><term>0-50nA range.</term><term>5</term></item>
+	///								<item><term>0-166nA range.</term><term>6</term></item>
+	///								<item><term>0-500nA range.</term><term>7</term></item>
+	///								<item><term>0-1.66uA range.</term><term>8</term></item>
+	///								<item><term>0-5uA range.</term><term>9</term></item>
+	///								<item><term>0-16.6uA range.</term><term>10</term></item>
+	///								<item><term>0-50uA range.</term><term>11</term></item>
+	///								<item><term>0-166uA range.</term><term>12</term></item>
+	///								<item><term>0-500uA range.</term><term>13</term></item>
+	///								<item><term>0-1.66mA range.</term><term>14</term></item>
+	///								<item><term>0-5mA range.</term><term>15</term></item>
+	///							  </list>  </returns>
+	/// <seealso cref="NT_RequesTIArangeParams(char const * serialNo)" />
+	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
+	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
+	/// <seealso cref="NT_SetTIARange(char const * serialNo, KNA_TIARange range)" />
+	NANOTRAK_API KNA_TIARange __cdecl NT_GetTIARange(char const * serialNo);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Sets TIA range. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <param name="range">	The TIA range.
 	/// 					<list type=table>
+<<<<<<< HEAD
 	///								<item><term>0-3nA range.</term><term>3</term></item>
 	///								<item><term>0-10nA range.</term><term>4</term></item>
 	///								<item><term>0-30nA range.</term><term>5</term></item>
@@ -1018,15 +1379,38 @@ extern "C"
 	///								<item><term>0-1mA range.</term><term>14</term></item>
 	///								<item><term>0-3mA range.</term><term>15</term></item>
 	///								<item><term>0-10mA range.</term><term>16</term></item>
+=======
+	///								<item><term>0-5nA range.</term><term>3</term></item>
+	///								<item><term>0-16.6nA range.</term><term>4</term></item>
+	///								<item><term>0-50nA range.</term><term>5</term></item>
+	///								<item><term>0-166nA range.</term><term>6</term></item>
+	///								<item><term>0-500nA range.</term><term>7</term></item>
+	///								<item><term>0-1.66uA range.</term><term>8</term></item>
+	///								<item><term>0-5uA range.</term><term>9</term></item>
+	///								<item><term>0-16.6uA range.</term><term>10</term></item>
+	///								<item><term>0-50uA range.</term><term>11</term></item>
+	///								<item><term>0-166uA range.</term><term>12</term></item>
+	///								<item><term>0-500uA range.</term><term>13</term></item>
+	///								<item><term>0-1.66mA range.</term><term>14</term></item>
+	///								<item><term>0-5mA range.</term><term>15</term></item>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	///							  </list> </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_RequesTIArangeParams(char const * serialNo)" />
 	/// <seealso cref="NT_GetTIArangeParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, NT_TIARangeParameters *params)" />
 	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
 	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
 	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
 	NANOTRAK_API short __cdecl NT_SetTIARange(char const * serialNo, NT_TIARange range);
+=======
+	/// <seealso cref="NT_SetTIArangeParams(char const * serialNo, KNA_TIARangeParameters *params)" />
+	/// <seealso cref="NT_GetRangeMode(char const * serialNo, NT_TIARangeMode *mode, NT_OddOrEven *oddOrEven)" />
+	/// <seealso cref="NT_SetRangeMode(char const * serialNo, NT_TIARangeMode mode, NT_OddOrEven oddOrEven)" />
+	/// <seealso cref="NT_GetTIARange(char const * serialNo)" />
+	NANOTRAK_API short __cdecl NT_SetTIARange(char const * serialNo, KNA_TIARange range);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Requests the control loop gain. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
@@ -1050,6 +1434,7 @@ extern "C"
 	/// <seealso cref="NT_GetGain(char const * serialNo)" />
 	NANOTRAK_API short __cdecl NT_SetGain(char const * serialNo, short gain);
 
+<<<<<<< HEAD
 	/// <summary> Requests the NanoTrak tracking threshold signal. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
@@ -1073,11 +1458,17 @@ extern "C"
 	/// <seealso cref="NT_GetTIALPFilterParams(char const * serialNo, NT_LowPassFilterParameters *params)" />
 	NANOTRAK_API short __cdecl NT_SetTIALPFilterParams(char const * serialNo, NT_LowPassFilterParameters *params);
 
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> Requests the NanoTrak Feedback Source. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_GetFeedbackSource(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetFeedbackSource(char const * serialNo, NT_FeedbackSource input)" />
+=======
+	/// <seealso cref="NT_SetFeedbackSource(char const * serialNo, KNA_FeedbackSource input)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	NANOTRAK_API short __cdecl NT_RequestFeedbackSource(char const * serialNo);
 
 	/// <summary> Gets the NanoTrak feedback source. </summary>
@@ -1091,8 +1482,13 @@ extern "C"
 	///							<item><term>BNC 10v range</term><term>5</term></item>
 	/// 					 </list> </returns>
 	/// <seealso cref="NT_RequesFeedbackSource(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_SetFeedbackSource(char const * serialNo, NT_FeedbackSource input)" />
 	NANOTRAK_API NT_FeedbackSource __cdecl NT_GetFeedbackSource(char const * serialNo);
+=======
+	/// <seealso cref="NT_SetFeedbackSource(char const * serialNo, KNA_FeedbackSource input)" />
+	NANOTRAK_API KNA_FeedbackSource __cdecl NT_GetFeedbackSource(char const * serialNo);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Sets the NanoTrak feedback source. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
@@ -1107,7 +1503,11 @@ extern "C"
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_RequesFeedbackSource(char const * serialNo)" />
 	/// <seealso cref="NT_GetFeedbackSource(char const * serialNo)" />
+<<<<<<< HEAD
 	NANOTRAK_API short __cdecl NT_SetFeedbackSource(char const * serialNo, NT_FeedbackSource input);
+=======
+	NANOTRAK_API short __cdecl NT_SetFeedbackSource(char const * serialNo, KNA_FeedbackSource input);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Gets the LED brightness. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
@@ -1125,14 +1525,22 @@ extern "C"
 	/// <summary> Requests the input/output options. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+<<<<<<< HEAD
 	/// <seealso cref="NT_GetIOsettings(const char * serialNo, NT_VoltageRange *lowVoltageOutRange, NT_OutputVoltageRoute *lowVoltageOutputRoute)" />
 	/// <seealso cref="NT_SetIOsettings(const char * serialNo, NT_VoltageRange lowVoltageOutRange, NT_OutputVoltageRoute lowVoltageOutputRoute)" />
 	/// <seealso cref="NT_GetIOsettingsBlock(const char * serialNo, NT_IOSettings *IOsettings)" />
 	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, NT_IOSettings *IOsettings)" />
+=======
+	/// <seealso cref="NT_GetIOsettings(const char * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute)" />
+	/// <seealso cref="NT_SetIOsettings(const char * serialNo, KNA_HighVoltageRange highVoltageOutRange, KNA_HighOutputVoltageRoute highVoltageOutputRoute)" />
+	/// <seealso cref="NT_GetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	NANOTRAK_API short __cdecl NT_RequestIOsettings(char const * serialNo);
 
 	/// <summary> Gets the input/output settings in a block. </summary>
 	/// <param name="serialNo"> The device serial no. </param>
+<<<<<<< HEAD
 	/// <param name="IOsettings"> Address of the NT_IOSettings to receive the input/output settings. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_RequestIOsettings(const char * serialNo)" />
@@ -1188,6 +1596,299 @@ extern "C"
 	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, NT_IOSettings *IOsettings)" />
 	/// <seealso cref="NT_GetIOsettings(char const * serialNo, NT_VoltageRange *lowVoltageOutRange, NT_OutputVoltageRoute *lowVoltageOutputRoute)" />
 	NANOTRAK_API short __cdecl NT_SetIOsettings(char const * serialNo, NT_VoltageRange lowVoltageOutRange, NT_OutputVoltageRoute lowVoltageOutputRoute);
+=======
+	/// <param name="IOsettings"> Address of the KNA_IOSettings to receive the input/output settings. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestIOsettings(const char * serialNo)" />
+	/// <seealso cref="NT_SetIOsettings(const char * serialNo, KNA_HighVoltageRange highVoltageOutRange, KNA_HighOutputVoltageRoute highVoltageOutputRoute)" />
+	/// <seealso cref="NT_GetIOsettings(char const * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute)" />
+	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	NANOTRAK_API short __cdecl NT_GetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings);
+
+	/// <summary> Sets the input/output options in a block. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="IOsettings"> Address of the KNA_IOSettings containing the new input/output settings.. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestIOsettings(const char * serialNo)" />
+	/// <seealso cref="NT_GetIOsettings(char const * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute)" />
+	/// <seealso cref="NT_GetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	NANOTRAK_API short __cdecl NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings);
+
+	/// <summary> Gets the input/output options. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="highVoltageOutRange">Default Value = 0, (CH1_75V | CH2_75V) </Remarks>
+	///		<list type=table>
+	///			<item><term>CH1_150v (0x01).</term><term>Set Channel 1 range to 150v when set otherwise 75v</term></item>
+	///			<item><term>CH2_150v (0x01).</term><term>Set Channel 2 range to 150v when set otherwise 75v</term></item>
+	///		</list>  </param>
+	/// <param name="highVoltageOutputRoute"> Default Value = 0, (ExtIn_PIN | ExtOut_Dis) </Remarks>
+	///		<list type=table>
+	///			<item><term>ExtIn_SMA (0x01).</term><term>Set input from SMA otherwise input from PIn</term></item>
+	///			<item><term>ExtOut_SMA (0x10).</term><term>Set output via SMA otherwise disable SMA output</term></item>
+	///			<item><term>EnableInputBoost (0x100).</term><term>Enable Input Boost when set</term></item>
+	///		</list>   </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestIOsettings(const char * serialNo)" />
+	/// <seealso cref="NT_SetIOsettings(const char * serialNo, KNA_HighVoltageRange highVoltageOutRange, KNA_HighOutputVoltageRoute highVoltageOutputRoute)" />
+	/// <seealso cref="NT_GetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	NANOTRAK_API short __cdecl NT_GetIOsettings(char const * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute);
+
+	/// <summary> Sets the input/output options. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="highVoltageOutRange">Default Value = 0, (CH1_75V | CH2_75V) </Remarks>
+	///		<list type=table>
+	///			<item><term>CH1_150v (0x01).</term><term>Set Channel 1 range to 150v when set otherwise 75v</term></item>
+	///			<item><term>CH2_150v (0x01).</term><term>Set Channel 2 range to 150v when set otherwise 75v</term></item>
+	///		</list>  </param>
+	/// <param name="highVoltageOutputRoute"> Default Value = 0, (ExtIn_PIN | ExtOut_Dis) </Remarks>
+	///		<list type=table>
+	///			<item><term>ExtIn_SMA (0x01).</term><term>Set input from SMA otherwise input from PIn</term></item>
+	///			<item><term>ExtOut_SMA (0x10).</term><term>Set output via SMA otherwise disable SMA output</term></item>
+	///			<item><term>EnableInputBoost (0x100).</term><term>Enable Input Boost when set</term></item>
+	///		</list>   </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestIOsettings(const char * serialNo)" />
+	/// <seealso cref="NT_GetIOsettings(const char * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute)" />
+	/// <seealso cref="NT_SetIOsettingsBlock(const char * serialNo, KNA_IOSettings *IOsettings)" />
+	/// <seealso cref="NT_GetIOsettings(char const * serialNo, KNA_HighVoltageRange *highVoltageOutRange, KNA_HighOutputVoltageRoute *highVoltageOutputRoute)" />
+	NANOTRAK_API short __cdecl NT_SetIOsettings(char const * serialNo, KNA_HighVoltageRange highVoltageOutRange, KNA_HighOutputVoltageRoute highVoltageOutputRoute);
+
+	/// <summary> Gets the feedback mode. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <returns> The feedback mode <list type=table>
+	///				<item><term>Open Loop</term><term>1</term></item>
+	///				<item><term>Closed Loop</term><term>2</term></item>
+	///				<item><term>Open Loop smoothed</term><term>3</term></item>
+	///				<item><term>Closed Loop smoothed</term><term>4</term></item>
+	/// 		  </list> </returns>
+	/// <seealso cref="NT_RequestFeedbackMode(char const * serialNo, KNA_Channels channel)" />
+	/// <seealso cref="NT_SetFeedbackMode(char const * serialNo, KNA_Channels channel, KNA_FeedbackModeTypes mode)" />
+	NANOTRAK_API KNA_FeedbackModeTypes __cdecl NT_GetFeedbackMode(char const * serialNo, KNA_Channels channel);
+
+	/// <summary>	Requests the feedback mode from the device. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetFeedbackMode(char const * serialNo, KNA_Channels channel)" />
+	/// <seealso cref="NT_SetFeedbackMode(char const * serialNo, KNA_Channels channel, KNA_FeedbackModeTypes mode)" />
+	NANOTRAK_API bool __cdecl NT_RequestFeedbackMode(char const * serialNo, KNA_Channels channel);
+
+	/// <summary> Sets the feedback mode. </summary>
+	/// <param name="serialNo">	The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <param name="mode"> The feedback mode <list type=table>
+	///				<item><term>Open Loop</term><term>1</term></item>
+	///				<item><term>Closed Loop</term><term>2</term></item>
+	///				<item><term>Open Loop smoothed</term><term>3</term></item>
+	///				<item><term>Closed Loop smoothed</term><term>4</term></item>
+	/// 		  </list>. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestFeedbackMode(char const * serialNo, KNA_Channels channel)" />
+	/// <seealso cref="NT_GetFeedbackMode(char const * serialNo, KNA_Channels channel)" />
+	NANOTRAK_API short __cdecl NT_SetFeedbackMode(char const * serialNo, KNA_Channels channel, KNA_FeedbackModeTypes mode);
+
+	/// <summary> Requests that the feedback loop constants be read from the device. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <returns>	True if it succeeds, false if it fails. </returns>
+	/// <seealso cref="NT_GetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short * proportionalTerm, short * integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm)" />
+	/// <seealso cref="NT_GetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	NANOTRAK_API bool __cdecl NT_RequestFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel);
+
+	/// <summary> Gets the feedback loop constants. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <param name="proportionalTerm"> The address of the parameter to receive the proportional parameter. </param>
+	/// <param name="integralTerm"> The address of the parameter to receive the integral parameter. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm)" />
+	/// <seealso cref="NT_GetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	NANOTRAK_API short __cdecl NT_GetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short * proportionalTerm, short * integralTerm);
+
+	/// <summary> Sets the feedback loop constants. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <param name="proportionalTerm"> The proportional term of the PID loop from 0 to 255. </param>
+	/// <param name="integralTerm"> The integral term of the PID loop from 0 to 255. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_RequestFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel)" />
+	/// <seealso cref="NT_GetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short * proportionalTerm, short * integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	NANOTRAK_API short __cdecl NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm);
+
+	/// <summary> Gets the feedback loop constants in a block. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <param name="proportionalAndIntegralConstants"> The address of the KNA_FeedbackLoopConstants to receive the feedback loop constants. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short * proportionalTerm, short * integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	NANOTRAK_API short __cdecl NT_GetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants);
+
+	/// <summary> Sets the feedback loop constants in a block. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="channel"> The channel (1 or 2)</param>
+	/// <param name="proportionalAndIntegralConstants"> The address of the KNA_FeedbackLoopConstants containing the new feedback loop constants. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short * proportionalTerm, short * integralTerm)" />
+	/// <seealso cref="NT_SetFeedbackLoopPIconsts(char const * serialNo, KNA_Channels channel, short proportionalTerm, short integralTerm)" />
+	/// <seealso cref="NT_GetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants)" />
+	NANOTRAK_API short __cdecl NT_SetFeedbackLoopPIconstsBlock(const char * serialNo, KNA_Channels channel, KNA_FeedbackLoopConstants *proportionalAndIntegralConstants);
+
+	/// <summary> Request that the MMI Parameters for the KCube Display Interface be read from the device. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	True if it succeeds, false if it fails. </returns>
+	NANOTRAK_API  bool __cdecl NT_RequestMMIParams(char const * serialNo);
+
+	/// <summary> Get the MMI Parameters for the KCube Display Interface. </summary>
+	/// <remarks> @deprecated superceded by <see cref="CC_SetMMIParams(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity)"/> </remarks>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="wheelAdjustRate">  The wheel move at voltage rate.
+	/// 					<list type=table>
+	///							<item><term>0</term><term>Low voltage change rate</term></item>
+	///							<item><term>1</term><term>Medium voltage change rate.></item>
+	///							<item><term>2</term><term>High voltage change rate.</term></item>
+	/// 					</list> </param>
+	/// <param name="displayIntensity">	    The display intensity, range 0 to 100%. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_SetMMIParams(char const * serialNo, KNA_WheelAdjustRate voltageAdjustRate, __int16 displayIntensity)" />
+	/// <seealso cref="NT_SetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	/// <seealso cref="NT_GetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	NANOTRAK_API  short __cdecl NT_GetMMIParams(char const * serialNo, KNA_WheelAdjustRate *wheelAdjustRate, __int16 *displayIntensity);
+
+	/// <summary> Set the MMI Parameters for the KCube Display Interface. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="wheelAdjustRate">  The wheel move at voltage rate.
+	/// 					<list type=table>
+	///							<item><term>0</term><term>Low voltage change rate</term></item>
+	///							<item><term>1</term><term>Medium voltage change rate.></item>
+	///							<item><term>2</term><term>High voltage change rate.</term></item>
+	/// 					</list> </param>
+	/// <param name="displayIntensity">	    The display intensity, range 0 to 100%. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetMMIParamsExt(char const * serialNo, KNA_WheelMode *wheelMode, KNA_WheelAdjustRate *voltageAdjustRate, __int32 *voltageStep, KNA_WheelDirectionSense *directionSense, __int32 *presetVoltage1, __int32 *presetVoltage2, __int16 *displayIntensity)" />
+	/// <seealso cref="NT_SetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	/// <seealso cref="NT_GetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	NANOTRAK_API short __cdecl NT_SetMMIParams(char const * serialNo, KNA_WheelAdjustRate wheelAdjustRate, __int16 displayIntensity);
+
+	/// <summary> Requests that the trigger config parameters are read from the device. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	True if it succeeds, false if it fails. </returns>
+	/// <seealso cref="NT_GetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode *trigger1Mode, KNA_TriggerPortPolarity *trigger1Polarity, KNA_TriggerPortMode *trigger2Mode, KNA_TriggerPortPolarity *trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode trigger1Mode, KNA_TriggerPortPolarity trigger1Polarity, KNA_TriggerPortMode trigger2Mode, KNA_TriggerPortPolarity trigger2Polarity)" />
+	NANOTRAK_API bool __cdecl NT_RequestTriggerConfigParams(char const * serialNo);
+
+	/// <summary> Get the Trigger Configuration Parameters. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="trigger1Mode">	    The trigger 1 mode.<list type=table>
+	///				<item><term>0</term><term>Trigger disabled</term></item>
+	///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+	///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+	///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+	///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+	///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+	///		 		  </list></param>
+	/// <param name="trigger1Polarity"> The trigger 1 polarity.<list type=table>
+	///						<item><term>1</term><term>Output high when set</term></item>
+	///						<item><term>2</term><term>Output low when set</term></item>
+	///		 		  </list> </param>
+	/// <param name="trigger2Mode">	    The trigger 2 mode.<list type=table>
+	///				<item><term>0</term><term>Trigger disabled</term></item>
+	///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+	///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+	///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+	///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+	///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+	///		 		  </list></param>
+	/// <param name="trigger2Polarity"> The trigger 2 polarity.<list type=table>
+	///						<item><term>1</term><term>Output high when set</term></item>
+	///						<item><term>2</term><term>Output low when set</term></item>
+	///		 		  </list> </param>
+	///	<returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	///	<seealso cref="NT_RequestTriggerConfigParams(char const * serialNo)" />
+	///	<seealso cref="NT_SetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode trigger1Mode, KNA_TriggerPortPolarity trigger1Polarity, KNA_TriggerPortMode trigger2Mode, KNA_TriggerPortPolarity trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	/// <seealso cref="NT_GetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	NANOTRAK_API  short __cdecl NT_GetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode *trigger1Mode, KNA_TriggerPortPolarity *trigger1Polarity, KNA_TriggerPortMode *trigger2Mode, KNA_TriggerPortPolarity *trigger2Polarity);
+
+	/// <summary> Set the Trigger Configuration Parameters. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="trigger1Mode">	    The trigger 1 mode.<list type=table>
+	///				<item><term>0</term><term>Trigger disabled</term></item>
+	///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+	///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+	///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+	///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+	///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+	///		 		  </list></param>
+	/// <param name="trigger1Polarity"> The trigger 1 polarity.<list type=table>
+	///						<item><term>1</term><term>Output high when set</term></item>
+	///						<item><term>2</term><term>Output low when set</term></item>
+	///		 		  </list> </param>
+	/// <param name="trigger2Mode">	    The trigger 2 mode.<list type=table>
+	///				<item><term>0</term><term>Trigger disabled</term></item>
+	///				<item><term>1</term><term>Trigger Input - set as latched</term></item>
+	///				<item><term>2</term><term>Trigger Tracking - set as tracking</term></item>
+	///				<item><term>3</term><term>Trigger Home - Trigger when homed</term></item>
+	///				<item><term>10</term><term>Trigger Output - Trigger Output</term></item>
+	///				<item><term>11</term><term>Trigger Output - Trigger when tracking</term></item>
+	///		 		  </list></param>
+	/// <param name="trigger2Polarity"> The trigger 2 polarity.<list type=table>
+	///						<item><term>1</term><term>Output high when set</term></item>
+	///						<item><term>2</term><term>Output low when set</term></item>
+	///		 		  </list> </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	///	<seealso cref="NT_RequestTriggerConfigParams(char const * serialNo)" />
+	/// <seealso cref="NT_GetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode *trigger1Mode, KNA_TriggerPortPolarity *trigger1Polarity, KNA_TriggerPortMode *trigger2Mode, KNA_TriggerPortPolarity *trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	/// <seealso cref="NT_GetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	NANOTRAK_API short __cdecl NT_SetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode trigger1Mode, KNA_TriggerPortPolarity trigger1Polarity, KNA_TriggerPortMode trigger2Mode, KNA_TriggerPortPolarity trigger2Polarity);
+
+	/// <summary> Gets the MMI parameters for the device. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="mmiParams"> Options for controlling the mmi. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetMMIParamsExt(char const * serialNo, KNA_WheelMode *wheelMode, KNA_WheelAdjustRate *voltageAdjustRate, __int32 *voltageStep, KNA_WheelDirectionSense *directionSense, __int32 *presetVoltage1, __int32 *presetVoltage2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
+	/// <seealso cref="NT_SetMMIParamsExt(char const * serialNo, KNA_WheelMode wheelMode, KNA_WheelAdjustRate voltageAdjustRate, __int32 voltageStep, KNA_WheelDirectionSense directionSense, __int32 presetVoltage1, __int32 presetVoltage2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+	/// <seealso cref="NT_SetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	NANOTRAK_API short __cdecl NT_GetMMIParamsBlock(char const * serialNo, KNA_MMIParams *mmiParams);
+
+	/// <summary> Sets the MMI parameters for the device. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="mmiParams"> Options for controlling the mmi. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GetMMIParamsExt(char const * serialNo, KNA_WheelMode *wheelMode, KNA_WheelAdjustRate *voltageAdjustRate, __int32 *voltageStep, KNA_WheelDirectionSense *directionSense, __int32 *presetVoltage1, __int32 *presetVoltage2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
+	/// <seealso cref="NT_SetMMIParamsExt(char const * serialNo, KNA_WheelMode wheelMode, KNA_WheelAdjustRate voltageAdjustRate, __int32 voltageStep, KNA_WheelDirectionSense directionSense, __int32 presetVoltage1, __int32 presetVoltage2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+	/// <seealso cref="NT_GetMMIParamsBlock(const char * serialNo, KNA_MMIParams *mmiParams)" />
+	NANOTRAK_API short __cdecl NT_SetMMIParamsBlock(char const * serialNo, KNA_MMIParams *mmiParams);
+
+	/// <summary> Gets the trigger configuration parameters block. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="triggerConfigParams"> Options for controlling the trigger configuration. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GeTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode *trigger1Mode, KNA_TriggerPortPolarity *trigger1Polarity, KNA_TriggerPortMode *trigger2Mode, KNA_TriggerPortPolarity *trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode trigger1Mode, KNA_TriggerPortPolarity trigger1Polarity, KNA_TriggerPortMode trigger2Mode, KNA_TriggerPortPolarity trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	NANOTRAK_API short __cdecl NT_GetTriggerConfigParamsBlock(char const * serialNo, KNA_TriggerConfig *triggerConfigParams);
+
+	/// <summary> Sets the trigger configuration parameters block. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="triggerConfigParams"> Options for controlling the trigger configuration. </param>
+	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="NT_GeTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode *trigger1Mode, KNA_TriggerPortPolarity *trigger1Polarity, KNA_TriggerPortMode *trigger2Mode, KNA_TriggerPortPolarity *trigger2Polarity)" />
+	/// <seealso cref="NT_SetTriggerConfigParams(char const * serialNo, KNA_TriggerPortMode trigger1Mode, KNA_TriggerPortPolarity trigger1Polarity, KNA_TriggerPortMode trigger2Mode, KNA_TriggerPortPolarity trigger2Polarity)" />
+	/// <seealso cref="NT_GetTriggerConfigParamsBlock(const char * serialNo, KNA_TriggerConfig *triggerConfigParams)" />
+	NANOTRAK_API short __cdecl NT_SetTriggerConfigParamsBlock(char const * serialNo, KNA_TriggerConfig *triggerConfigParams);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> clears the message queue. </summary>
 	/// <remarks> see \ref C_MESSAGES_page "Device Messages" for details on how to use messages. </remarks>
@@ -1249,7 +1950,11 @@ extern "C"
 	/// 		  NOTE this is called automatically if Polling is enabled for the device using <see cref="NT_StartPolling(char const * serialNo, int milliseconds)" />. </remarks>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successfully requested. </returns>
+<<<<<<< HEAD
 	/// <seealso cref=" NT_GetReading(const char * serialNo, NT_TIAReading *reading)" />
+=======
+	/// <seealso cref=" NT_GetReading(const char * serialNo, KNA_TIAReading *reading)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="NT_StartPolling(char const * serialNo, int milliseconds)" />
 	NANOTRAK_API short __cdecl NT_RequestReading(char const * serialNo);
 
@@ -1259,12 +1964,20 @@ extern "C"
 	///			  or use <see cref="NT_RequestStatus(char const * serialNo)" />
 	/// 		  or use the polling functions, <see cref="NT_StartPolling(char const * serialNo, int milliseconds)" />.  </remarks>
 	/// <param name="serialNo">	The device serial no. </param>
+<<<<<<< HEAD
 	/// <param name="reading"> Address of the NT_TIAReading to recieve the TIA data. </param>
+=======
+	/// <param name="reading"> Address of the KNA_TIAReading to recieve the TIA data. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="NT_RequestReading(char const * serialNo)" />
 	/// <seealso cref="NT_RequestStatus(char const * serialNo)" />
 	/// <seealso cref="NT_StartPolling(char const * serialNo, int milliseconds)" />
+<<<<<<< HEAD
 	NANOTRAK_API short __cdecl NT_GetReading(const char * serialNo, NT_TIAReading *reading);
+=======
+	NANOTRAK_API short __cdecl NT_GetReading(const char * serialNo, KNA_TIAReading *reading);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Requests the status bits and reading. </summary>
 	/// <remarks> This needs to be called to get the device to send it's current status.<br />
@@ -1273,7 +1986,11 @@ extern "C"
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successfully requested. </returns>
 	/// <seealso cref="NT_RequestReading(char const * serialNo)" />
 	/// <seealso cref="NT_RequestStatusBits(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="NT_GetReading(const char * serialNo, NT_TIAReading *reading)" />
+=======
+	/// <seealso cref="NT_GetReading(const char * serialNo, KNA_TIAReading *reading)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="NT_GetStatusBits(char const * serialNo)" />
 	/// <seealso cref="NT_StartPolling(char const * serialNo, int milliseconds)" />
 	NANOTRAK_API short __cdecl NT_RequestStatus(char const * serialNo);
@@ -1380,5 +2097,47 @@ extern "C"
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successfully requested. </returns>
 	NANOTRAK_API short __cdecl NT_RequestSettings(char const * serialNo);
+<<<<<<< HEAD
+=======
+
+	/// <summary>	Request an XY scan. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	A short. </returns>
+	NANOTRAK_API short __cdecl NT_RequestXYScan(char const * serialNo);
+
+	/// <summary>	Stops an XY scan. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	A short. </returns>
+	NANOTRAK_API short __cdecl NT_StopXYScan(char const * serialNo);
+
+	/// <summary>	Query if the device is XY scanning. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	True if xy scanning, false if not. </returns>
+	NANOTRAK_API bool __cdecl NT_IsXYScanning(char const * serialNo);
+
+	/// <summary>	Queries if an XY scan line is available. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="lineNo">	The line no. </param>
+	/// <returns>	True if the xy scan line is available, false if not. </returns>
+	NANOTRAK_API bool __cdecl NT_IsXYScanLineAvailable(char const * serialNo, int lineNo);
+
+	/// <summary>	Queries if the XY scan is available. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	True if the xy scan is available, false if not. </returns>
+	NANOTRAK_API bool __cdecl NT_IsXYScanAvailable(char const * serialNo);
+
+	/// <summary>	Gets XY scan range. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <returns>	The calculated xy scan range. </returns>
+	NANOTRAK_API KNA_TIARange __cdecl NT_GetXYScanRange(char const * serialNo);
+
+	/// <summary>	Gets XY scan line. </summary>
+	/// <param name="serialNo">  	The device serial no. </param>
+	/// <param name="lineNo">	 	The line no. </param>
+	/// <param name="line">		 	[in,out] The line. </param>
+	/// <param name="bufferSize">	Size of the buffer (96 bytes required for each line). </param>
+	/// <returns>	The xy scan line. </returns>
+	NANOTRAK_API short __cdecl NT_GetXYScanLine(char const * serialNo, int lineNo, byte *line, int bufferSize);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 }
 /** @} */ // KCubeNanoTrak

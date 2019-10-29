@@ -154,8 +154,11 @@ extern "C"
 	{
 		KLS_Disabled = 0,///<Trigger disabled
 		KLS_Input = 1,///<General IO input
+<<<<<<< HEAD
 		KLS_ModulationTrigger = 2,///<Modulation trigger
 		KLS_SetPower = 3,///<Set power trigger
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		KLS_Output = 0x0a,///<General IO Output
 		KLS_LaserOn = 0x0b,///<Laser Output ON trigger
 		KLS_InterlockEnabled = 0x0c,///<Interlock enabled trigger
@@ -177,8 +180,11 @@ extern "C"
 		/// <summary>	The trigger 1 mode. <list type=table>
 		///				<item><term>Disabled</term><term></term>0</item>
 		///				<item><term>General Input</term><term></term>1</item>
+<<<<<<< HEAD
 		///				<item><term>Modulation Trigger</term><term></term>2</item>
 		///				<item><term>Set Power Trigger</term><term></term>3</item>
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		///				<item><term>General Output</term><term></term>10</item>
 		///				<item><term>Laser Output On</term><term></term>11</item>
 		///				<item><term>Interlock enabled</term><term></term>12</item>
@@ -192,6 +198,7 @@ extern "C"
 		///				<item><term>Active Low</term><term></term>2</item>
 		/// 		  </list></summary>
 		KLS_TrigPolarity polarity1;
+<<<<<<< HEAD
 		/// <summary>	The trigger 1 power, 0 to 32767 equivalent to 0 to 100%. </summary>
 		__int16 power1;
 		/// <summary>	The trigger 2 mode. <list type=table>
@@ -199,6 +206,13 @@ extern "C"
 		///				<item><term>General Input</term><term></term>1</item>
 		///				<item><term>Modulation Trigger</term><term></term>2</item>
 		///				<item><term>Set Power Trigger</term><term></term>3</item>
+=======
+		/// <summary>	Reserved field for trigger 1. </summary>
+		__int16 reserved1;
+		/// <summary>	The trigger 2 mode. <list type=table>
+		///				<item><term>Disabled</term><term></term>0</item>
+		///				<item><term>General Input</term><term></term>1</item>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		///				<item><term>General Output</term><term></term>10</item>
 		///				<item><term>Laser Output On</term><term></term>11</item>
 		///				<item><term>Interlock enabled</term><term></term>12</item>
@@ -212,8 +226,13 @@ extern "C"
 		///				<item><term>Active Low</term><term></term>2</item>
 		/// 		  </list></summary>
 		KLS_TrigPolarity polarity2;
+<<<<<<< HEAD
 		/// <summary>	The trigger 2 power, 0 to 32767 equivalent to 0 to 100%. </summary>
 		__int16 power2;
+=======
+		/// <summary>	Reserved field for trigger 2. </summary>
+		__int16 reserved2;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	} KLS_TrigIOParams;
 
     /// <summary> Build the DeviceList. </summary>
@@ -409,6 +428,16 @@ extern "C"
     /// 		  \include CodeSnippet_connection1.cpp
 	KLASERSOURCE_API bool __cdecl LS_LoadSettings(char const * serialNo);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	KLASERSOURCE_API bool __cdecl LS_LoadNamedSettings(char const * serialNo, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> persist the devices current settings. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> <c>true</c> if successful, false if not. </returns>
@@ -598,8 +627,13 @@ extern "C"
 	/// <summary> Requests the Trigger IO parameters. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+<<<<<<< HEAD
 	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, short *power1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2, short *power2)" />
 	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, short power1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2, short power2)" />
+=======
+	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2)" />
+	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	KLASERSOURCE_API short __cdecl LS_RequestTrigIOParams(char const * serialNo);
@@ -609,8 +643,11 @@ extern "C"
 	/// <param name="mode1">		The Trigger1 mode. <list type=table>
 	///				<item><term>Disabled</term><term>0</term></item>
 	///				<item><term>General Input</term><term>1</term></item>
+<<<<<<< HEAD
 	///				<item><term>Modulation Trigger</term><term>2</term></item>
 	///				<item><term>Set Power Trigger</term><term>3</term></item>
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	///				<item><term>General Output</term><term>10</term></item>
 	///				<item><term>Laser Output On</term><term>11</term></item>
 	///				<item><term>Interlock enabled</term><term>12</term></item>
@@ -622,12 +659,18 @@ extern "C"
 	///				<item><term>Active High</term><term>1</term></item>
 	///				<item><term>Active Low</term><term>2</term></item>
 	/// 		  </list></param>
+<<<<<<< HEAD
 	/// <param name="power1">   	The Trigger1 power. Range 0 to 32767 equivalent to 0 to 100% power. </param>
 	/// <param name="mode2">		The Trigger2 mode.<list type=table>
 	///				<item><term>Disabled</term><term>0</term></item>
 	///				<item><term>General Input</term><term>1</term></item>
 	///				<item><term>Modulation Trigger</term><term>2</term></item>
 	///				<item><term>Set Power Trigger</term><term>3</term></item>
+=======
+	/// <param name="mode2">		The Trigger2 mode.<list type=table>
+	///				<item><term>Disabled</term><term>0</term></item>
+	///				<item><term>General Input</term><term>1</term></item>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	///				<item><term>General Output</term><term>10</term></item>
 	///				<item><term>Laser Output On</term><term>11</term></item>
 	///				<item><term>Interlock enabled</term><term>12</term></item>
@@ -639,6 +682,7 @@ extern "C"
 	///				<item><term>Active High</term><term>1</term></item>
 	///				<item><term>Active Low</term><term>2</term></item>
 	/// 		  </list> </param>
+<<<<<<< HEAD
 	/// <param name="power2">   	The Trigger2 power. Range 0 to 32767 equivalent to 0 to 100% power.</param>
 	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
@@ -646,14 +690,25 @@ extern "C"
 	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	KLASERSOURCE_API short __cdecl LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, short *power1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2, short *power2);
+=======
+	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
+	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2)" />
+	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
+	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
+	KLASERSOURCE_API short __cdecl LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary>	Sets the Trigger IO parameters. </summary>
 	/// <param name="serialNo"> 	The device serial no. </param>
 	/// <param name="mode1">		The Trigger1 mode. <list type=table>
 	///				<item><term>Disabled</term><term>0</term></item>
 	///				<item><term>General Input</term><term>1</term></item>
+<<<<<<< HEAD
 	///				<item><term>Modulation Trigger</term><term>2</term></item>
 	///				<item><term>Set Power Trigger</term><term>3</term></item>
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	///				<item><term>General Output</term><term>10</term></item>
 	///				<item><term>Laser Output On</term><term>11</term></item>
 	///				<item><term>Interlock enabled</term><term>12</term></item>
@@ -665,12 +720,18 @@ extern "C"
 	///				<item><term>Active High</term><term>1</term></item>
 	///				<item><term>Active Low</term><term>2</term></item>
 	/// 		  </list></param>
+<<<<<<< HEAD
 	/// <param name="power1">   	The Trigger1 power. Range 0 to 32767 equivalent to 0 to 100% power. </param>
 	/// <param name="mode2">		The Trigger2 mode. <list type=table>
 	///				<item><term>Disabled</term><term>0</term></item>
 	///				<item><term>General Input</term><term>1</term></item>
 	///				<item><term>Modulation Trigger</term><term>2</term></item>
 	///				<item><term>Set Power Trigger</term><term>3</term></item>
+=======
+	/// <param name="mode2">		The Trigger2 mode. <list type=table>
+	///				<item><term>Disabled</term><term>0</term></item>
+	///				<item><term>General Input</term><term>1</term></item>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	///				<item><term>General Output</term><term>10</term></item>
 	///				<item><term>Laser Output On</term><term>11</term></item>
 	///				<item><term>Interlock enabled</term><term>12</term></item>
@@ -682,6 +743,7 @@ extern "C"
 	///				<item><term>Active High</term><term>1</term></item>
 	///				<item><term>Active Low</term><term>2</term></item>
 	/// 		  </list> </param>
+<<<<<<< HEAD
 	/// <param name="power2">   	The Trigger2 power. Range 0 to 32767 equivalent to 0 to 100% power.</param>
 	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
@@ -689,14 +751,27 @@ extern "C"
 	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	KLASERSOURCE_API short __cdecl LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, short power1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2, short power2);
+=======
+	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
+	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
+	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2)" />
+	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
+	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
+	KLASERSOURCE_API short __cdecl LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2);
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary>	Gets the Trigger IO parameters. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <param name="params">  	The trigger IO structure. </param>
 	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, short *power1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2, short *power2)" />
 	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, short power1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2, short power2)" />
+=======
+	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2)" />
+	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	KLASERSOURCE_API short __cdecl LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params);
 
@@ -705,8 +780,13 @@ extern "C"
 	/// <param name="params">  	The trigger IO structure. </param>
 	/// <returns>	The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="LS_RequestTrigIOParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, short *power1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2, short *power2)" />
 	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, short power1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2, short power2)" />
+=======
+	/// <seealso cref="LS_GetTrigIOParams(char const * serialNo, KLS_TriggerMode *mode1, KLS_TrigPolarity *polarity1, KLS_TriggerMode *mode2, KLS_TrigPolarity *polarity2)" />
+	/// <seealso cref="LS_SetTrigIOParams(char const * serialNo, KLS_TriggerMode mode1, KLS_TrigPolarity polarity1, KLS_TriggerMode mode2, KLS_TrigPolarity polarity2)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="LS_GetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params)" />
 	KLASERSOURCE_API short __cdecl LS_SetTrigIOParamsBlock(char const * serialNo, KLS_TrigIOParams *params);
 

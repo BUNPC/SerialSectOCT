@@ -564,6 +564,16 @@ extern "C"
 	/// 		  \include CodeSnippet_connection1.cpp
 	BENCHPRECISIONPIEZO_API bool __cdecl PPC_LoadSettings(char const * serialNo);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	BENCHPRECISIONPIEZO_API bool __cdecl PPC_LoadNamedSettings(char const * serialNo, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary>	Persist device settings to device. </summary>
 	/// <param name="serialNo">	The serial no. </param>
 	/// <returns>	True if it succeeds, false if it fails. </returns>
@@ -1024,6 +1034,17 @@ extern "C"
 	/// 		  \include CodeSnippet_connection1.cpp
 	BENCHPRECISIONPIEZO_API bool __cdecl PPC2_LoadSettings(char const * serialNo, int channel);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The serial no. </param>
+	/// <param name="channel">  The channel. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	BENCHPRECISIONPIEZO_API bool __cdecl PPC2_LoadNamedSettings(char const * serialNo, short channel, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary>	Persist device settings to device. </summary>
 	/// <param name="serialNo">	The serial no. </param>
 	/// <param name="channel"> 	The channel. </param>

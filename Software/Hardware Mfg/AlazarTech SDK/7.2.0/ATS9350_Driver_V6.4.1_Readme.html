@@ -1,0 +1,315 @@
+<h1>Change Log</h1>
+This file lists all important changes to ATS9350<h2>[6.4.1] - 2018-11-12</h2>
+<h3>Added</h3>
+<ul>
+<li><code>AlazarExtractNPTFootersEx()</code>, which allows to extract NPT footers correctly in
+all acquisition modes for all boards that support this feature.</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>Issue where <code>AlazarAbortAsyncRead()</code> would not properly terminate a running
+acquisition on ATS9360, ATS9371, ATS9373 and ATS9416. This could cause data
+alignment problems with applications that stop and start acquisition multiple
+times consecutively, or with LabVIEW code samples.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>No change in the driver for this release</li></ul>
+<h3>Deprecated</h3>
+<ul>
+<li><code>AlazarExtractNPTFooters()</code>, <code>AlazarExtractFFTNPTFooters()</code> and
+<code>AlazarExtractTimeDomainNPTFooters()</code>. These functions have been superseded by
+<code>AlazarExtractNPTFootersEx()</code>.</li></ul>
+<h2>[6.4.0] - 2018-10-18</h2>
+<h3>Added</h3>
+<ul>
+<li><code>AlazarConfigureFastBufferLock()</code> function</li></ul>
+<h2>[6.3.0] - 2018-09-24</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for ATS9453</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>ATS9352 not recognized</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>No change in the driver for this release</li></ul>
+<h2>[6.2.1] - 2018-08-16</h2>
+<h3>Added</h3>
+<ul>
+<li><code>CAP_SUPPORT_8_BIT_PACKING</code> and <code>CAP_SUPPORT_12_BIT_PACKING</code> entries to
+<code>AlazarQueryCapability()</code>.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>Various API function descriptions to make them easier to understand.</li></ul>
+<h2>[6.2.0] - 2018-07-31</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Channel memory sharing on ATS9637.</li></ul>
+<h3>Added</h3>
+<ul>
+<li>Support for ATS9352</li></ul>
+<h2>[6.1.4] - 2018-06-19</h2>
+<h3>Changed</h3>
+<ul>
+<li>No user visible changes</li></ul>
+<h2>[6.1.3] - 2018-06-12</h2>
+<h3>Changed</h3>
+<ul>
+<li>No user visible changes</li></ul>
+<h2>[6.1.2] - 2018-05-16</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Regression introduced in version 5.10.25 that caused ATS9870 master/slave
+systems to show acquisition timeout problems.</li></ul>
+<h2>[6.1.1] - 2018-04-27</h2>
+<h3>Changed</h3>
+<ul>
+<li>Fix an issue where installation would not work properly on updated Windows 7
+systems.</li></ul>
+<h2>[6.1.0] - 2018-04-17</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for ATS-GMA</li><li>Support for on board memory size greater than 4 Giga samples via functions
+<code>AlazarGetChannelInfoEx()</code>, <code>AlazarQueryCapabilityLL()</code>,
+<code>AlazarGetParameterLL()</code> and <code>AlazarSetParameterLL()</code></li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>AlazarAllocBufferU16Ex correctly exported</li></ul>
+<h2>[6.0.3] - 2018-03-02</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for Windows silent installation.</li><li>Support for ATS9637</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>Regression where ATS9870's internal clock rates would not be set properly for
+rates lower than 1 GS/s.</li></ul>
+<h2>[6.0.2] - 2018-02-12</h2>
+<h3>Added</h3>
+<ul>
+<li>Add internal support for DIS DSP module.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>Set the default of number of DMA buffers allocated by the <code>ADMA_ALLOC_BUFFERS</code>
+API to 4 instead of 64. This default value can be modified with the
+<code>SETGET_ASYNC_BUFFCOUNT</code> parameter.</li></ul>
+<h2>[6.0.1] - 2017-11-30</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for ATS9371</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>Issue with <code>SET_BUFFERS_PER_TRIGGER_ENABLE</code> that makes it set the double the
+requested value in dual-channel mode</li></ul>
+<h2>[6.0.0] - 2017-08-02</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for Windows 10 Signature Enforcement mode. In computers where this
+mode is active, versions of this driver before 6.0.0 will not install
+correctly. Instead, a window titled "Windows requires a digitally signed
+driver" will appear during or shortly after the installation process.</li><li>Cleanup step in <code>AlazarBeforeAsyncRead()</code> to ensure that previous acquisitions
+are terminated.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>Make the Visual Studio 2015 redistributable installers passive. This solves an
+issue where, on some computers, the installer prompt would stay hidden behind
+the main installer's window.</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fix typo in <code>AlazarFFTBackgroundSubtractionSetRecordS16()</code>'s documentation.</li></ul>
+<h2>[5.10.24] - 2017-04-17</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug in AlazarSetCaptureClock that resulted in false PLLNotLocked errors</li><li>Bug in AlazarDSP that causes window functions downloaded to the on-FPGA FFT
+module to be corrupted, causing increased noise in on-FPGA FFT</li></ul>
+<h2>[5.10.23] - 2017-02-28</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug that would cause the PCIe speed and width to be displayed wrong with
+ATSApi DLL v5.10.20 and above</li><li>Bug in AlazarDSP on-FPGA FFT mode where the incorrect multiplier was used for
+the fft log output when <code>FFT_OUTPUT_FORMAT_RAW_PLUS_FFT</code> was activated.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>Deactivate ATU7825 detection in Windows to prevent GUID conflict.</li></ul>
+<h2>[5.10.22] - 2016-11-25</h2>
+<h3>Added</h3>
+<ul>
+<li><code>SET_BUFFERS_PER_TRIGGER_ENABLE</code> parameter for <code>AlazarSetParameterUL()</code>.</li></ul>
+<h2>[5.10.21] - 2016-11-08</h2>
+<h3>Removed</h3>
+<ul>
+<li><code>AlazarParseFPGAName()</code>. Now returns <code>ApiUnsupportedFunction</code> without doing
+anything.</li></ul>
+<h2>[5.10.20] - 2016-11-07</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for Windows Driver Kit 10</li></ul>
+<h2>[5.10.19] - 2016-10-20</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug under Windows in ATS9360/ATS9373/ATS9416 driver and library that was not
+reading EEPROM data at initialization time, which could cause an incorrect
+input offset and not detect available memory with user-created applications.
+Workaround for this bug used to be to run AlazarDSO or AlazarSysInfo before
+launching user-created application, thus forcing the EEPROM data to be read.
+This workaround is no longer required.</li></ul>
+<h2>[5.10.18] - 2016-09-19</h2>
+<h3>Added</h3>
+<ul>
+<li><code>AlazarExtractFFTNPTFooters()</code></li></ul>
+<h3>Deprecated</h3>
+<ul>
+<li><code>AlazarExtractNPTFooters()</code>. This function has been superseeded by
+<code>AlazarExtractFFTNPTFooters()</code> and <code>AlazarExtractTimeDomainNPTFooters()</code>.</li></ul>
+<h2>[5.10.17] - 2016-09-15</h2>
+<h3>Added</h3>
+<ul>
+<li>Preliminary support for dual-buffer mode</li></ul>
+<h2>[5.10.16] - 2016-09-02</h2>
+<h3>Added</h3>
+<ul>
+<li>AlazarSetADCBackgroundCompensation function</li></ul>
+<h2>[5.10.14] - 2016-07-22</h2>
+<h3>Added</h3>
+<ul>
+<li>The equivalent of DSOs F4 information for ApiFlags</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>Use headers from ATS-SDK</li></ul>
+<h2>[5.10.3] - 2016-06-02</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Prevent the library from writing to stdout</li></ul>
+<h2>[5.10.2] - 2015-11-13</h2>
+<h3>Changed</h3>
+<ul>
+<li>Internal slicing of FFT data</li></ul>
+<h2>[5.10.0] - 2015-10-09</h2>
+<h3>Added</h3>
+<ul>
+<li>Add support for AlazarDSP</li></ul>
+<h2>[5.9.29] - 2015-09-04</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug in AlazarRC that made temporary tmp.txt file appear.</li></ul>
+<h2>[5.9.28] - 2015-08-11</h2>
+<h3>Changed</h3>
+<ul>
+<li>Default log file path to /tmp/ATSApi.log under Linux</li></ul>
+<h2>[5.9.27] - 2015-08-11</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for NPT record footers</li></ul>
+<h2>[5.9.26] - 2015-06-08</h2>
+<h3>Changed</h3>
+<ul>
+<li>No change</li></ul>
+<h2>[5.9.25] - 2015-06-05</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug where ATS9626 hc default coprocessor is not downloaded</li></ul>
+<h3>Added</h3>
+<ul>
+<li>Support for resuming from sleep and hibernation states, and Windows 8 "fast
+start-up". The driver aborts DMA transfers with error 559 (<code>ApiPowerDown</code>)
+when the system enters a low power state.</li></ul>
+<h2>[5.9.24] - 2015-05-05</h2>
+<h3>Changed</h3>
+<ul>
+<li>CMake-based build</li></ul>
+<h2>[5.9.23] - 2015-02-17</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for multi-threaded operation</li></ul>
+<h3>Fixed</h3>
+<ul>
+<li>Bug introduced in 5.9.21 that caused <code>AlazarBeforeAsyncRead()</code> to return
+<code>ApiInvalidOffset</code> in NPT mode.</li></ul>
+<h2>[5.9.21] - 2014-10-29</h2>
+<h3>Fixed</h3>
+<ul>
+<li><code>AlazarGetCpldVersion()</code> to return 8-bit major and minor values</li></ul>
+<h2>[5.9.20] - 2014-07-15</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for internal 10 MHz PLL clock source</li></ul>
+<h2>[5.9.7] - 2012-10-12</h2>
+<h3>Added</h3>
+<ul>
+<li>Support undisturbed pacer output with FPGA 18.13 or later.</li></ul>
+<h2>[5.9.6] - 2012-07-31</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for advanced 10 MHz PLL option</li></ul>
+<h2>[5.9.0] - 2012-02-23</h2>
+<h3>Added</h3>
+<ul>
+<li>Version 5.9.0 updates DpInst.exe to support installation under Korean Windows.</li></ul>
+<h2>[5.8.10] - 2011-09-09</h2>
+<h3>Added</h3>
+<ul>
+<li>Update driver to allow two or more application threads to access a board's
+registers at the same time.</li></ul>
+<h2>[5.8.7] - 2011-07-27</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bugs that resulted in the digitizer not working correctly when in PC's with
+3.4 GHz or greater processors, such as the Intel Core i7-2600K. The symptoms
+of this problem included intermittent DC offset errors on input channels and
+the failure of the on-board memory detection causing PCI Express boards to be
+reported as a FIFO-Only.</li></ul>
+<h2>[5.8.4] - 2011-06-03</h2>
+<h3>Added</h3>
+<ul>
+<li>support for TTL external trigger mode introduced in ATS9350 hardware version
+1.5.</li></ul>
+<h2>[5.8.3] - 2011-05-02</h2>
+<h3>Added</h3>
+<ul>
+<li>Version 5.8.3 does not include any new functionality for this board's driver.</li></ul>
+<h2>[5.7.17] - 2010-08-11</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug that resulted in incorrect sample rates on the slaves of an ATS9350
+Master/Slave configuration.</li></ul>
+<h2>[5.7.16] - 2010-08-10</h2>
+<h3>Added</h3>
+<ul>
+<li>Support for ATS9350 Master/Slave configuration.</li></ul>
+<h2>[5.7.15] - 2010-07-20</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug where LED 13 lights up on driver download.</li></ul>
+<h2>[5.7.14] - 2010-06-22</h2>
+<h3>Added</h3>
+<ul>
+<li><code>AlazazarSetClockSwitchOver()</code> which allows scanning applications using an
+external clock input to switch to an internal "dummy" clock during re-trace
+intervals if the external clock signal is not suitable to drive the ADCs
+during re-trace internvals.</li></ul>
+<h2>[5.7.13] - 2010-06-17</h2>
+<h3>Added</h3>
+<ul>
+<li>Allows driver to control SPI communication with VCO when FPGA version 14.9 or
+later is installed.</li></ul>
+<h2>[5.7.12] - 2010-05-20</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug that caused <code>AlazarHyperDisp()</code> to return <code>ApiUnsupportedFunction</code> even if
+supported by the firmware.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li>VCO parameters in the ATS9350.sys file to reduce spurious noise levels.</li></ul>
+<h2>[5.7.10] - 2010-03-31</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug affecting stability in "10 MHz PLL" external clock mode.</li></ul>
+<h3>Changed</h3>
+<ul>
+<li><code>AlazarHyperDispEx()</code> to work with 64-bit transfer offsets.</li></ul>
+<h2>[5.7.8]</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Bug in version 5.7.7 where the 10 MHz PLL clock is not set properly.</li></ul>
+<h2>[5.7.7]</h2>
+<h3>Added</h3>
+<ul>
+<li>This version adds nothing to the ATS9350 driver.</li></ul>

@@ -723,6 +723,17 @@ extern "C"
 	/// 		  \include CodeSnippet_connectionN.cpp
 	BRUSHLESSMOTOR_API bool __cdecl BMC_LoadSettings(char const * serialNo, short channel);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The serial no. </param>
+	/// <param name="channel">  The channel. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	BRUSHLESSMOTOR_API bool __cdecl BMC_LoadNamedSettings(char const * serialNo, short channel, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> persist the devices current settings. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <param name="channel">  The channel (1 to n). </param>

@@ -160,6 +160,7 @@ extern "C"
 		MOT_PhaseAB = 0x2,///< Phase A and B
 	} MOT_CurrentLoopPhases;
 
+<<<<<<< HEAD
 	/// <summary> Values that represent Joystick Direction Sense. </summary>
 	typedef enum KMOT_JoystickDirectionSense : __int16
 	{
@@ -174,6 +175,22 @@ extern "C"
 		KMOT_JS_Jog = 0x02,///< Phase B
 		KMOT_JS_MoveAbsolute = 0x03,///< Phase A and B
 	} KMOT_JoyStickMode;
+=======
+	/// <summary> Values that represent Wheel Direction Sense. </summary>
+	typedef enum KMOT_WheelDirectionSense : __int16
+	{
+		KMOT_WM_Positive = 0x01,///< Move at constant velocity
+		KMOT_WM_Negative = 0x02,///< Phase B
+	} KMOT_WheelDirectionSense;
+
+	/// <summary> Values that represent the Wheel Mode. </summary>
+	typedef enum KMOT_WheelMode : __int16
+	{
+		KMOT_WM_Velocity = 0x01,///< Move at constant velocity
+		KMOT_WM_Jog = 0x02,///< Phase B
+		KMOT_WM_MoveAbsolute = 0x03,///< Phase A and B
+	} KMOT_WheelMode;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 
 	/// <summary> Values that represent Trigger Port Mode. </summary>
 	typedef enum KMOT_TriggerPortMode : __int16
@@ -510,6 +527,7 @@ extern "C"
 	/// <value> Device GUI parameters. </value>
 	typedef struct KMOT_MMIParams
 	{
+<<<<<<< HEAD
 		/// <summary> The joystick mode. </summary>
 		/// <remarks> The joystick mode is one of the following:
 		/// 		  <list type=table>
@@ -526,6 +544,24 @@ extern "C"
 		__int32 JoystickAcceleration; 
 		/// <summary> The joystick direction sense. </summary>
 		MOT_DirectionSense JoystickDirectionSense;
+=======
+		/// <summary> The wheel mode. </summary>
+		/// <remarks> The wheel mode is one of the following:
+		/// 		  <list type=table>
+		///				<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the wheel action</term></item>
+		///				<item><term>2</term><term>Jog<br />The device will jog forward or backward according to the wheel action.<br />
+		///					  The device will jog according to the Jog parameters</term></item>
+		///				<item><term>3</term><term>Move Absolute<br />The device will move to either Preset Po 1 or 2 according to the wheel action.</term></item>
+		/// 		  </list>
+		/// 		  </remarks>
+		KMOT_WheelMode WheelMode;
+		/// <summary> The wheel maximum velocity. </summary>
+		__int32 WheelMaxVelocity; 
+		/// <summary> The wheel acceleration. </summary>
+		__int32 WheelAcceleration; 
+		/// <summary> The wheel direction sense. </summary>
+		MOT_DirectionSense WheelDirectionSense;
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		/// <summary> The first preset position in encoder counts. </summary>
 		__int32 PresetPos1; 
 		/// <summary> The second preset position in encoder counts. </summary>
@@ -810,6 +846,16 @@ extern "C"
 	/// 		  \include CodeSnippet_connection1.cpp
 	BRUSHLESSMOTOR_API bool __cdecl BMC_LoadSettings(char const * serialNo);
 
+<<<<<<< HEAD
+=======
+	/// <summary> Update device with named settings. </summary>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="settingsName"> Name of settings stored away from device. </param>
+	/// <returns> <c>true</c> if successful, false if not. </returns>
+	///             \include CodeSnippet_connection1.cpp
+	BRUSHLESSMOTOR_API bool __cdecl BMC_LoadNamedSettings(char const * serialNo, char const *settingsName);
+
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> persist the devices current settings. </summary>
 	/// <param name="serialNo">	The device serial no. </param>
 	/// <returns> <c>true</c> if successful, false if not. </returns>
@@ -1324,6 +1370,7 @@ extern "C"
 
 	/// <summary> Get the MMI Parameters for the KCube Display Interface. </summary>
 	/// <param name="serialNo"> The device serial no. </param>
+<<<<<<< HEAD
 	/// <param name="joystickMode">	The device joystick mode.
 	/// 					<list type=table>
 	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the joystick action</term></item>
@@ -1334,6 +1381,18 @@ extern "C"
 	/// <param name="joystickMaxVelocity">  The joystick maximum velocity in \ref DeviceUnits_page. </param>
 	/// <param name="joystickAcceleration"> The joystick acceleration in \ref DeviceUnits_page. </param>
 	/// <param name="directionSense">	    The joystick direction sense. </param>
+=======
+	/// <param name="wheelMode">	The device wheel mode.
+	/// 					<list type=table>
+	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the wheel action</term></item>
+	///							<item><term>2</term><term>Jog<br />The device will jog forward or backward according to the wheel action.<br />
+	///								  The device will jog according to the Jog parameters</term></item>
+	///							<item><term>3</term><term>Move Absolute<br />The device will move to either Preset Po 1 or 2 according to the wheel action.</term></item>
+	/// 					</list> </param>
+	/// <param name="wheelMaxVelocity">  The wheel maximum velocity in \ref DeviceUnits_page. </param>
+	/// <param name="wheelAcceleration"> The wheel acceleration in \ref DeviceUnits_page. </param>
+	/// <param name="directionSense">	    The wheel direction sense. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <param name="presetPosition1">	    The first preset position in \ref DeviceUnits_page. </param>
 	/// <param name="presetPosition2">	    The second preset position in \ref DeviceUnits_page. </param>
 	/// <param name="displayIntensity">	    The display intensity, range 0 to 100%. </param>
@@ -1341,6 +1400,7 @@ extern "C"
 	/// <param name="displayDimIntensity">	The display dimmed intensity, range 0 to 10 (after the timeout period the device display will dim). </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode joystickMode, __int32 joystickMaxVelocity, __int32 joystickAcceleration, KMOT_JoystickDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
@@ -1360,19 +1420,48 @@ extern "C"
 	/// <param name="joystickMaxVelocity">  The joystick maximum velocity in \ref DeviceUnits_page. </param>
 	/// <param name="joystickAcceleration"> The joystick acceleration in \ref DeviceUnits_page. </param>
 	/// <param name="directionSense">	    The joystick direction sense. </param>
+=======
+	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	BRUSHLESSMOTOR_API  short __cdecl BMC_GetMMIParamsExt(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense,
+		__int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity);
+
+	/// <summary> Get the MMI Parameters for the KCube Display Interface. </summary>
+	/// <remarks> @deprecated superceded by <see cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)"/> </remarks>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="wheelMode">	The device wheel mode.
+	/// 					<list type=table>
+	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the wheel action</term></item>
+	///							<item><term>2</term><term>Jog<br />The device will jog forward or backward according to the wheel action.<br />
+	///								  The device will jog according to the Jog parameters</term></item>
+	///							<item><term>3</term><term>Move Absolute<br />The device will move to either Preset Po 1 or 2 according to the wheel action.</term></item>
+	/// 					</list> </param>
+	/// <param name="wheelMaxVelocity">  The wheel maximum velocity in \ref DeviceUnits_page. </param>
+	/// <param name="wheelAcceleration"> The wheel acceleration in \ref DeviceUnits_page. </param>
+	/// <param name="directionSense">	    The wheel direction sense. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <param name="presetPosition1">	    The first preset position in \ref DeviceUnits_page. </param>
 	/// <param name="presetPosition2">	    The second preset position in \ref DeviceUnits_page. </param>
 	/// <param name="displayIntensity">	    The display intensity, range 0 to 100%. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_SetMMIParams(char const * serialNo, KMOT_JoyStickMode joystickMode, __int32 joystickMaxVelocity, __int32 joystickAcceleration, KMOT_JoystickDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	BRUSHLESSMOTOR_API  short __cdecl BMC_GetMMIParams(char const * serialNo, KMOT_JoyStickMode *joystickMode, __int32 *joystickMaxVelocity, __int32 *joystickAcceleration, KMOT_JoystickDirectionSense *directionSense,
+=======
+	/// <seealso cref="BMC_SetMMIParams(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	BRUSHLESSMOTOR_API  short __cdecl BMC_GetMMIParams(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense,
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		__int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity);
 
 	/// <summary> Set the MMI Parameters for the KCube Display Interface. </summary>
 	/// <param name="serialNo"> The device serial no. </param>
+<<<<<<< HEAD
 	/// <param name="joystickMode">	The device joystick mode.
 	/// 					<list type=table>
 	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the joystick action</term></item>
@@ -1382,6 +1471,17 @@ extern "C"
 	/// 					</list> </param>
 	/// <param name="joystickMaxVelocity">  The joystick maximum velocity in \ref DeviceUnits_page. </param>
 	/// <param name="joystickAcceleration"> The joystick acceleration in \ref DeviceUnits_page. </param>
+=======
+	/// <param name="wheelMode">	The device wheel mode.
+	/// 					<list type=table>
+	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the wheel action</term></item>
+	///							<item><term>2</term><term>Jog<br />The device will jog forward or backward according to the wheel action.<br />
+	///								  The device will jog according to the Jog parameters</term></item>
+	///							<item><term>3</term><term>Move Absolute<br />The device will move to either Preset Po 1 or 2 according to the wheel action.</term></item>
+	/// 					</list> </param>
+	/// <param name="wheelMaxVelocity">  The wheel maximum velocity in \ref DeviceUnits_page. </param>
+	/// <param name="wheelAcceleration"> The wheel acceleration in \ref DeviceUnits_page. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <param name="directionSense">	    The direction sense. </param>
 	/// <param name="presetPosition1">	    The first preset position in \ref DeviceUnits_page. </param>
 	/// <param name="presetPosition2">	    The second preset position in \ref DeviceUnits_page. </param>
@@ -1390,6 +1490,7 @@ extern "C"
 	/// <param name="displayDimIntensity">	The display dimmed intensity, range 0 to 10 (after the timeout period the device display will dim). </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode *joystickMode, __int32 *joystickMaxVelocity, __int32 *joystickAcceleration, KMOT_JoystickDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
@@ -1408,16 +1509,43 @@ extern "C"
 	/// 					</list> </param>
 	/// <param name="joystickMaxVelocity">  The joystick maximum velocity in \ref DeviceUnits_page. </param>
 	/// <param name="joystickAcceleration"> The joystick acceleration in \ref DeviceUnits_page. </param>
+=======
+	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	BRUSHLESSMOTOR_API short __cdecl BMC_SetMMIParamsExt(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense,
+		__int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity);
+
+	/// <summary> Set the MMI Parameters for the KCube Display Interface. </summary>
+	/// <remarks> @deprecated superceded by <see cref="BMC_SetMMIParams(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity)"/> </remarks>
+	/// <param name="serialNo"> The device serial no. </param>
+	/// <param name="wheelMode">	The device wheel mode.
+	/// 					<list type=table>
+	///							<item><term>1</term><term>Constant Velocity<br />The device will continue moving until the end stop is reached or the duration of the wheel action</term></item>
+	///							<item><term>2</term><term>Jog<br />The device will jog forward or backward according to the wheel action.<br />
+	///								  The device will jog according to the Jog parameters</term></item>
+	///							<item><term>3</term><term>Move Absolute<br />The device will move to either Preset Po 1 or 2 according to the wheel action.</term></item>
+	/// 					</list> </param>
+	/// <param name="wheelMaxVelocity">  The wheel maximum velocity in \ref DeviceUnits_page. </param>
+	/// <param name="wheelAcceleration"> The wheel acceleration in \ref DeviceUnits_page. </param>
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <param name="directionSense">	    The direction sense. </param>
 	/// <param name="presetPosition1">	    The first preset position in \ref DeviceUnits_page. </param>
 	/// <param name="presetPosition2">	    The second preset position in \ref DeviceUnits_page. </param>
 	/// <param name="displayIntensity">	    The display intensity, range 0 to 100%. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_GetMMIParams(char const * serialNo, KMOT_JoyStickMode *joystickMode, __int32 *joystickMaxVelocity, __int32 *joystickAcceleration, KMOT_JoystickDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	BRUSHLESSMOTOR_API short __cdecl BMC_SetMMIParams(char const * serialNo, KMOT_JoyStickMode joystickMode, __int32 joystickMaxVelocity, __int32 joystickAcceleration, KMOT_JoystickDirectionSense directionSense,
+=======
+	/// <seealso cref="BMC_GetMMIParams(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
+	BRUSHLESSMOTOR_API short __cdecl BMC_SetMMIParams(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense,
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 		__int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity);
 
 	/// <summary> Requests the Trigger Configuration Parameters. </summary>
@@ -1571,8 +1699,13 @@ extern "C"
 	/// <param name="mmiParams"> Options for controlling the mmi. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode *joystickMode, __int32 *joystickMaxVelocity, __int32 *joystickAcceleration, KMOT_JoystickDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode joystickMode, __int32 joystickMaxVelocity, __int32 joystickAcceleration, KMOT_JoystickDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+=======
+	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="BMC_SetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	BRUSHLESSMOTOR_API short BMC_GetMMIParamsBlock(char const * serialNo, KMOT_MMIParams *mmiParams);
 
@@ -1581,8 +1714,13 @@ extern "C"
 	/// <param name="mmiParams"> Options for controlling the mmi. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
 	/// <seealso cref="BMC_RequestMMIParams(char const * serialNo)" />
+<<<<<<< HEAD
 	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode *joystickMode, __int32 *joystickMaxVelocity, __int32 *joystickAcceleration, KMOT_JoystickDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
 	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_JoyStickMode joystickMode, __int32 joystickMaxVelocity, __int32 joystickAcceleration, KMOT_JoystickDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+=======
+	/// <seealso cref="BMC_GetMMIParamsExt(char const * serialNo, KMOT_WheelMode *wheelMode, __int32 *wheelMaxVelocity, __int32 *wheelAcceleration, KMOT_WheelDirectionSense *directionSense, __int32 *presetPosition1, __int32 *presetPosition2, __int16 *displayIntensity, __int16 *displayTimeout, __int16 *displayDimIntensity)" />
+	/// <seealso cref="BMC_SetMMIParamsExt(char const * serialNo, KMOT_WheelMode wheelMode, __int32 wheelMaxVelocity, __int32 wheelAcceleration, KMOT_WheelDirectionSense directionSense, __int32 presetPosition1, __int32 presetPosition2, __int16 displayIntensity, __int16 displayTimeout, __int16 displayDimIntensity)" />
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <seealso cref="BMC_GetMMIParamsBlock(const char * serialNo, KMOT_MMIParams *mmiParams)" />
 	BRUSHLESSMOTOR_API short BMC_SetMMIParamsBlock(char const * serialNo, KMOT_MMIParams *mmiParams);
 
@@ -2088,6 +2226,7 @@ extern "C"
 	/// <seealso cref="BMC_GetCurrentLoopParams(char const * serialNo, MOT_BrushlessCurrentLoopParameters *currentLoopParams)" />
 	BRUSHLESSMOTOR_API short __cdecl BMC_SetCurrentLoopParams(const char * serialNo, MOT_BrushlessCurrentLoopParameters *currentLoopParams);
 
+<<<<<<< HEAD
 	/// <summary> Requests the current loop parameters for holding at required position. </summary>
 	/// <param name="serialNo"> The serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
@@ -2111,6 +2250,8 @@ extern "C"
 	/// <seealso cref="BMC_GetSettledCurrentLoopParams(char const * serialNo, MOT_BrushlessCurrentLoopParameters *currentLoopParams)" />
 	BRUSHLESSMOTOR_API short __cdecl BMC_SetSettledCurrentLoopParams(const char * serialNo, MOT_BrushlessCurrentLoopParameters *currentLoopParams);
 
+=======
+>>>>>>> 9b8cb43ab55f0ed4c938b4fc9e9c0014ab49d335
 	/// <summary> Requests the electric output parameters. </summary>
 	/// <param name="serialNo"> The serial no. </param>
 	/// <returns> The error code (see \ref C_DLL_ERRORCODES_page "Error Codes") or zero if successful. </returns>
