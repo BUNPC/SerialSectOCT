@@ -1,0 +1,232 @@
+;===========================================================================
+; ThorlabsPowerMeterDFU.inf
+
+;  Copyright (c) 2017 Thorlabs GmbH
+;===========================================================================
+[Version]
+Signature   = "$Windows NT$"
+DriverPackageDisplayName=%PACKAGE_DESC%
+Class       = "USBDevice"
+ClassGuid   = {88bae032-5a81-49f0-bc3d-a4ff138216d6}
+Provider    = %VendorName%
+CatalogFile = ThorlabsPowerMeterDFU.cat
+DriverVer   = 12/15/2017, 2.0.0
+
+;===========================================================================
+;  Class Installer
+;===========================================================================
+[ClassInstall32]
+Addreg = WinUSBDeviceClassReg
+
+[WinUSBDeviceClassReg]
+HKR,,,0,"Universal Serial Bus devices"
+HKR,,Icon,,-20
+
+[Manufacturer]
+%VendorName% = libusbDevice_WinUSB,NTx86,NTamd64,NTarm
+
+;===========================================================================
+; Vista 32bit and higher (Windows 7 32bit)
+[libusbDevice_WinUSB.NTx86]
+%DeviceNameBootloader%	= USB_Install, USB\%DeviceIDBootloader%
+
+%DeviceNamePM100A% 		= USB_Install, USB\%DeviceIDPM100A%
+%DeviceNamePM100ADFU% 	= USB_Install, USB\%DeviceIDPM100ADFU%
+%DeviceNamePM100ADFU1%	= USB_Install, USB\%DeviceIDPM100ADFU1%
+
+%DeviceNamePM100D% 		= USB_Install, USB\%DeviceIDPM100D%
+%DeviceNamePM100DDFU% 	= USB_Install, USB\%DeviceIDPM100DDFU%
+%DeviceNamePM100DDFU1%	= USB_Install, USB\%DeviceIDPM100DDFU1%
+
+%DeviceNamePM100USB% 	= USB_Install, USB\%DeviceIDPM100USB%
+
+%DeviceNamePM160% 		= USB_Install, USB\%DeviceIDPM160%
+%DeviceNamePM160DFU% 	= USB_Install, USB\%DeviceIDPM160DFU%
+%DeviceNamePM160DFU1%	= USB_Install, USB\%DeviceIDPM160DFU1%
+%DeviceNamePM160T% 		= USB_Install, USB\%DeviceIDPM160T%
+%DeviceNamePM160TDFU% 	= USB_Install, USB\%DeviceIDPM160TDFU%
+%DeviceNamePM160TDFU1% 	= USB_Install, USB\%DeviceIDPM160TDFU1%
+
+%DeviceNamePM200% 		= USB_Install, USB\%DeviceIDPM200%
+
+%DeviceNamePM400% 		= USB_Install, USB\%DeviceIDPM400%
+%DeviceNamePM400DFU% 	= USB_Install, USB\%DeviceIDPM400DFU%
+%DeviceNamePM400DFU1% 	= USB_Install, USB\%DeviceIDPM400DFU1%
+
+; Windows XP 64bit and higher (Vista 64bit / Windows7 64bit)
+[libusbDevice_WinUSB.NTamd64]
+%DeviceNameBootloader%	= USB_Install, USB\%DeviceIDBootloader%
+
+%DeviceNamePM100A% 		= USB_Install, USB\%DeviceIDPM100A%
+%DeviceNamePM100ADFU% 	= USB_Install, USB\%DeviceIDPM100ADFU%
+%DeviceNamePM100ADFU1%	= USB_Install, USB\%DeviceIDPM100ADFU1%
+
+%DeviceNamePM100D% 		= USB_Install, USB\%DeviceIDPM100D%
+%DeviceNamePM100DDFU% 	= USB_Install, USB\%DeviceIDPM100DDFU%
+%DeviceNamePM100DDFU1%	= USB_Install, USB\%DeviceIDPM100DDFU1%
+
+%DeviceNamePM100USB% 	= USB_Install, USB\%DeviceIDPM100USB%
+
+%DeviceNamePM160% 		= USB_Install, USB\%DeviceIDPM160%
+%DeviceNamePM160DFU% 	= USB_Install, USB\%DeviceIDPM160DFU%
+%DeviceNamePM160DFU1%	= USB_Install, USB\%DeviceIDPM160DFU1%
+%DeviceNamePM160T% 		= USB_Install, USB\%DeviceIDPM160T%
+%DeviceNamePM160TDFU% 	= USB_Install, USB\%DeviceIDPM160TDFU%
+%DeviceNamePM160TDFU1% 	= USB_Install, USB\%DeviceIDPM160TDFU1%
+
+%DeviceNamePM200% 		= USB_Install, USB\%DeviceIDPM200%
+
+%DeviceNamePM400% 		= USB_Install, USB\%DeviceIDPM400%
+%DeviceNamePM400DFU% 	= USB_Install, USB\%DeviceIDPM400DFU%
+%DeviceNamePM400DFU1% 	= USB_Install, USB\%DeviceIDPM400DFU1%
+
+[libusbDevice_WinUSB.NTarm]
+%DeviceNameBootloader%	= USB_Install, USB\%DeviceIDBootloader%
+
+%DeviceNamePM100A% 		= USB_Install, USB\%DeviceIDPM100A%
+%DeviceNamePM100ADFU% 	= USB_Install, USB\%DeviceIDPM100ADFU%
+%DeviceNamePM100ADFU1%	= USB_Install, USB\%DeviceIDPM100ADFU1%
+
+%DeviceNamePM100D% 		= USB_Install, USB\%DeviceIDPM100D%
+%DeviceNamePM100DDFU% 	= USB_Install, USB\%DeviceIDPM100DDFU%
+%DeviceNamePM100DDFU1%	= USB_Install, USB\%DeviceIDPM100DDFU1%
+
+%DeviceNamePM100USB% 	= USB_Install, USB\%DeviceIDPM100USB%
+
+%DeviceNamePM160% 		= USB_Install, USB\%DeviceIDPM160%
+%DeviceNamePM160DFU% 	= USB_Install, USB\%DeviceIDPM160DFU%
+%DeviceNamePM160DFU1%	= USB_Install, USB\%DeviceIDPM160DFU1%
+%DeviceNamePM160T% 		= USB_Install, USB\%DeviceIDPM160T%
+%DeviceNamePM160TDFU% 	= USB_Install, USB\%DeviceIDPM160TDFU%
+%DeviceNamePM160TDFU1% 	= USB_Install, USB\%DeviceIDPM160TDFU1%
+
+%DeviceNamePM200% 		= USB_Install, USB\%DeviceIDPM200%
+
+%DeviceNamePM400% 		= USB_Install, USB\%DeviceIDPM400%
+%DeviceNamePM400DFU% 	= USB_Install, USB\%DeviceIDPM400DFU%
+%DeviceNamePM400DFU1% 	= USB_Install, USB\%DeviceIDPM400DFU1%
+
+;===========================================================================
+[USB_Install]
+Include = winusb.inf
+Needs   = WINUSB.NT
+
+[USB_Install.Services]
+Include    = winusb.inf
+AddService = WinUSB,0x00000002,WinUSB_ServiceInstall
+
+[WinUSB_ServiceInstall]
+DisplayName   = %WinUsb_Service_DisplayName%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\WinUSB.sys
+
+[USB_Install.Wdf]
+KmdfService = WINUSB, WinUsb_Install
+
+[WinUSB_Install]
+KmdfLibraryVersion = 1.11
+
+[USB_Install.HW]
+AddReg = AddDeviceInterfaceGUID
+
+[NoDeviceInterfaceGUID]
+; Avoids adding a DeviceInterfaceGUID for generic driver
+
+[AddDeviceInterfaceGUID]
+HKR,,DeviceInterfaceGUIDs,0x10000,%DeviceGUID%
+
+[USB_Install.CoInstallers]
+AddReg    = CoInstallers_AddReg
+CopyFiles = CoInstallers_CopyFiles
+
+[CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WdfCoInstaller01011.dll,WdfCoInstaller","WinUSBCoInstaller2.dll"
+
+[CoInstallers_CopyFiles]
+WinUSBCoInstaller2.dll
+WdfCoInstaller01011.dll
+
+[DestinationDirs]
+CoInstallers_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %SourceName%
+
+[SourceDisksFiles.x86]
+WinUSBCoInstaller2.dll = 1,x86
+WdfCoInstaller01011.dll = 1,x86
+
+[SourceDisksFiles.amd64]
+WinUSBCoInstaller2.dll = 1,amd64
+WdfCoInstaller01011.dll = 1,amd64
+
+[SourceDisksFiles.arm]
+WinUSBCoInstaller2.dll = 1,arm
+WdfCoInstaller01011.dll = 1,arm
+
+;===========================================================================
+;	Vendor Strings
+;===========================================================================
+[Strings]
+DeviceGUID          = "{FFF4276A-2AAF-475C-8C4A-FFC30FC9D064}"
+VendorName          = "Thorlabs GmbH"
+SourceName          = "PM100A Install Disk"
+PACKAGE_DESC        = "- Power Meter Driver Package"
+
+; Device Names
+DeviceNameBootloader= "DFU Class Bootloader"
+DeviceNamePM100A 	= "PM100A"
+DeviceNamePM100ADFU = "PM100A with DFU"
+DeviceNamePM100ADFU1= "PM100A with DFU1"
+DeviceNamePM100D 	= "PM100D"
+DeviceNamePM100DDFU = "PM100D with DFU"
+DeviceNamePM100DDFU1= "PM100D with DFU1"
+DeviceNamePM100USB 	= "PM100USB (Interface 0 TMC)"
+DeviceNamePM160 	= "PM160"
+DeviceNamePM160DFU 	= "PM160 with DFU"
+DeviceNamePM160DFU1	= "PM160 with DFU1"
+DeviceNamePM160T 	= "PM160T"
+DeviceNamePM160TDFU = "PM160T with DFU"
+DeviceNamePM160TDFU1= "PM160T with DFU1"
+DeviceNamePM200 	= "PM200"
+DeviceNamePM400 	= "PM400"
+DeviceNamePM400DFU 	= "PM400 with DFU"
+DeviceNamePM400DFU1	= "PM400 with DFU1"
+
+; Device IDs
+DeviceIDBootloader  = "USB\VID_1313&PID_80FF"
+DeviceIDPM100A   	= "VID_1313&PID_8079"
+DeviceIDPM100ADFU   = "VID_1313&PID_8071&MI_00"
+DeviceIDPM100ADFU1  = "VID_1313&PID_8071&MI_01"
+DeviceIDPM100D   	= "VID_1313&PID_8078"
+DeviceIDPM100DDFU   = "VID_1313&PID_8070&MI_00"
+DeviceIDPM100DDFU1  = "VID_1313&PID_8070&MI_01"
+DeviceIDPM100USB   	= "VID_1313&PID_8072&MI_00"
+DeviceIDPM100USB1  	= "VID_1313&PID_8072&MI_01"
+DeviceIDPM160   	= "VID_1313&PID_807B"
+DeviceIDPM160DFU   	= "VID_1313&PID_8073&MI_00"
+DeviceIDPM160DFU1  	= "VID_1313&PID_8073&MI_01"
+DeviceIDPM160T   	= "VID_1313&PID_807C"
+DeviceIDPM160TDFU   = "VID_1313&PID_8074&MI_00"
+DeviceIDPM160TDFU1  = "VID_1313&PID_8074&MI_01"
+DeviceIDPM200   	= "VID_1313&PID_80B0"
+DeviceIDPM400   	= "VID_1313&PID_807D"
+DeviceIDPM400DFU   	= "VID_1313&PID_8075&MI_00"
+DeviceIDPM400DFU1  	= "VID_1313&PID_8075&MI_01"
+
+; WinUSB Service Macros
+WinUsb_Service_DisplayName = "WinUSB Driver"
+SERVICE_BOOT_START = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED = 0x4
+
+SERVICE_KERNEL_DRIVER = 0x1
+SERVICE_ERROR_IGNORE = 0x0
+SERVICE_ERROR_NORMAL = 0x1
+SERVICE_ERROR_SEVERE = 0x2
+SERVICE_ERROR_CRITICAL = 0x3
+

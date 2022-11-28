@@ -1,0 +1,25 @@
+var modules =
+[
+    [ "Error Handling", "group___error_handling.html", "group___error_handling" ],
+    [ "Data Access", "group___data.html", "group___data" ],
+    [ "Data Creation and Clearing", "group___data_creation.html", "group___data_creation" ],
+    [ "Hardware", "group___hardware.html", "group___hardware" ],
+    [ "Internal Values", "group___internal.html", "group___internal" ],
+    [ "Pattern Factory/Probe", "group___probe.html", "group___probe" ],
+    [ "Scan Pattern", "group___scan_pattern.html", "group___scan_pattern" ],
+    [ "Acquisition", "group___acquisition.html", "group___acquisition" ],
+    [ "Processing", "group___processing.html", "group___processing" ],
+    [ "Export and Import", "group___export.html", "group___export" ],
+    [ "Volume", "group___volume.html", "group___volume" ],
+    [ "ProbeCalibration", "group___probe_calibration.html", null ],
+    [ "Doppler", "group___doppler.html", "group___doppler" ],
+    [ "Service", "group___service.html", "group___service" ],
+    [ "Settings", "group___settings.html", "group___settings" ],
+    [ "Coloring", "group___coloring.html", "group___coloring" ],
+    [ "Camera", "group___camera.html", "group___camera" ],
+    [ "Buffer", "group___buffer.html", "group___buffer" ],
+    [ "File Handling", "group__filehandling.html", "group__filehandling" ],
+    [ "BETA_API", "group___b_e_t_a___a_p_i.html", "group___b_e_t_a___a_p_i" ],
+    [ "Post Processing", "group___post_processing.html", "group___post_processing" ],
+    [ "Polarization", "group___polarization.html", "group___polarization" ]
+];

@@ -1,0 +1,29 @@
+<measurement>
+  <fixed-image filename="vol_label.tif" nonzeropoints="382515" intersection="220076"/>
+  <moving-image filename="vessel05115.tif" nonzeropoints="428044" intersection="220076"/>
+  <metrics>
+    <MAHLNBS name="Mahanabolis Distance" symbol="MAHLNBS" type="distance" value="0.079823"/>
+    <DICE name="Dice Coefficient (F1-Measure)" symbol="DICE" type="similarity" value="0.351921"/>
+    <JACRD name="Jaccard Coefficient" symbol="JACRD" type="similarity" value="0.213534"/>
+    <AUC name="Area under ROC Curve" symbol="AUC" type="similarity" value="0.682245"/>
+    <KAPPA name="Cohen Kappa" symbol="KAPPA" type="similarity" value="0.351235"/>
+    <RNDIND name="Rand Index" symbol="RNDIND" type="similarity" value="0.997257"/>
+    <ADJRIND name="Adjusted Rand Index" symbol="ADJRIND" type="similarity" value="0.350752"/>
+    <ICCORR name="Interclass Correlation" symbol="ICCORR" type="similarity" value="0.351916"/>
+    <VOLSMTY name="Volumetric Similarity Coefficient" symbol="VOLSMTY" type="similarity" value="0.963598"/>
+    <MUTINF name="Mutual Information" symbol="MUTINF" type="similarity" value="0.002803"/>
+    <HDRFDST name="Hausdorff Distance" symbol="HDRFDST" type="distance" value="110.950439" executiontime="11550"/>
+    <AVGDIST name="Average Hausdorff Distance" symbol="AVGDIST" type="distance" value="6.913327" executiontime="3241160"/>
+    <VARINFO name="Variation of Information" symbol="VARINFO" type="distance" value="0.018387"/>
+    <GCOERR name="Global Consistency Error" symbol="GCOERR" type="distance" value="0.002267"/>
+    <PROBDST name="Probabilistic Distance" symbol="PROBDST" type="distance" value="0.007222"/>
+    <SNSVTY name="Sensitivity (Recall, true positive rate)" symbol="SNSVTY" type="similarity" value="0.365216"/>
+    <SPCFTY name="Specificity (true negative rate)" symbol="SPCFTY" type="similarity" value="0.999274"/>
+    <PRCISON name="Precision (Confidence)" symbol="PRCISON" type="similarity" value="0.339561"/>
+    <FMEASR name="F-Measure" symbol="FMEASR" type="similarity" value="0.351921"/>
+    <ACURCY name="Accuracy" symbol="ACURCY" type="similarity" value="0.998627"/>
+    <FALLOUT name="Fallout (false positive rate)" symbol="FALLOUT" type="distance" value="0.000726"/>
+  </metrics>
+  <time total-executiontime="3344710"/>
+  <dimention max_x="1119" max_y="903" max_z="582"/>
+</measurement>

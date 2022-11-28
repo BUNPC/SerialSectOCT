@@ -1,0 +1,2 @@
+run("Image Sequence... ", "format=TIFF save=C:\Users\blank\OneDrive\_Documents\_BU\_Bigio\Images\Test\TEST_ZSTACK_NEW_exp55ms_mag20X\IMG_SEQ\");
+close();
