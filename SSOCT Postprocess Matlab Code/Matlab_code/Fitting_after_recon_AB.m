@@ -1,5 +1,5 @@
-folder  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_7597/';
-P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_7597_2P/';   % 2P file path
+folder  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_6047/';
+P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_6047_2P/';   % 2P file path
 datapath=strcat(folder,'dist_corrected/'); 
 
 % add subfunctions for the script. Change directory if not running on BU SCC
@@ -10,8 +10,8 @@ addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code');
 
 % cd(datapath);
-ntile=100;
-nslice=20; % define total number of slices
+ntile=88;
+nslice=22; % define total number of slices
 njobs=1;
 section=ceil(ntile/njobs);
 create_dir(nslice, folder); 
@@ -21,8 +21,8 @@ xx=866;    % xx is the X displacement of two adjacent tile align in the X direct
 xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
 yy=866;    % yy is the Y displacement of two adjacent tile align in the Y direction
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
-numX=10;    % #tiles in X direction
-numY=10;    % #tiles in Y direction
+numX=11;    % #tiles in X direction
+numY=8;    % #tiles in Y direction
 Xoverlap=0.05;   % overlap in X direction
 Yoverlap=0.05;   % overlap in Y direction
 disp=[xx xy yy yx];
@@ -70,7 +70,8 @@ for islice=id%:nslice
 %         cross(21:end,:,:)=tmp;
         %%
 %         Optical_fitting_immune2surf(co, cross, islice, iFile, folder, 0.05, 80, 80, ds_factor);
-        Optical_fitting_3p(co, cross, islice, iFile, folder, 0.04, 130, 100, ds_factor, 110)
+%       Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,threshold, mus_depth, bfg_depth, ds_factor, zf)
+        Optical_fitting_3p(co, cross, islice, iFile, folder, 0.045, 130, 100, ds_factor, 68) % for a new sample, change 
     end
 %     rewrite_aip_tiles(folder,islice,numX*numY);
     stitch=0;
@@ -78,8 +79,8 @@ for islice=id%:nslice
 %     MIP_stitch('mip', P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);
 %     Ret_stitch('ret_aip', P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);  
 %     AIP_stitch(P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);  
-    Mus_stitch('mus',P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);           % stitch mus
-    Mub_stitch('mub', P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+%     Mus_stitch('mus',P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);           % stitch mus
+%     Mub_stitch('mub', P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
     Bfg_stitch('bfg', P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
 %     BKG_stitch('BKG', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
 % %     BaSiC_shading_and_ref_stitch(islice,P2path,folder, numX*numY, 60, 44); %8790:70, 7524:60, NC4: 60

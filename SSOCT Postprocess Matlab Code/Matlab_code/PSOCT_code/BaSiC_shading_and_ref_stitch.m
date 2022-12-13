@@ -1,4 +1,4 @@
-function[]=BaSiC_shading_and_ref_stitch(id,P2path, datapath, ntiles, depth, thickness,stitch)
+function[]=BaSiC_shading_and_ref_stitch(id,P2path, datapath, ntiles, depth, thickness,stitch, aip_threshold)
 % add path of functions
 addpath('/projectnb/npbssmic/s/Matlab_code/fitting_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/PostProcessing');
@@ -55,23 +55,7 @@ for depth = 1:size(co,1)
     for tile=1:ntiles
         slice=squeeze(ref_tiles(tile,depth,:,:)); 
         tiffname=strcat(tmp_path,'ref.tif');
-        if tile==1
-            t = Tiff(tiffname,'w');
-        else
-            t = Tiff(tiffname,'a');
-        end
-        tagstruct.ImageLength     = size(slice,1);
-        tagstruct.ImageWidth      = size(slice,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(slice);
-        t.close();
+        SaveTiff(slice,tile,tiffname);
     end
     toc
     macropath=strcat(tmp_path,'BaSiC.ijm');
@@ -178,6 +162,25 @@ for nslice=id
     Ref=Mosaic./Masque;
     Ref(isnan(Ref(:)))=0;
     Ref=single(Ref);
+    
+    load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+    AIP=imresize(AIP,resize_factor);
+    mask=zeros(size(AIP));
+    mask(AIP>aip_threshold)=1;
+    
+    if size(mask,1)>size(Ref,1)
+        xx=size(Ref,1);
+    else
+        xx=size(mask,1);
+    end
+    if size(mask,2)>size(Ref,2)
+        yy=size(Ref,2);
+    else
+        yy=size(mask,2);
+    end
+    for ii = 1:size(Ref,3)
+        Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
+    end
 
     save(strcat(datapath2,'volume/ref',num2str(nslice),'.mat'),'Ref','-v7.3');
 

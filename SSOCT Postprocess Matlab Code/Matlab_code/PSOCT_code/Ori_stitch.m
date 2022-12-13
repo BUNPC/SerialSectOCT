@@ -1,4 +1,4 @@
-function Ori_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch)
+function Ori_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold)
 %% stitch the retardance using the coordinates from AIP stitch
 % add subfunctions for the script
 addpath('/projectnb/npbssmic/s/Matlab_code');
@@ -227,6 +227,12 @@ if strcmp(sys,'Thorlabs')
     Mosaic=Mosaic';
 end
 ori2D=Mosaic;
+
+load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+mask=zeros(size(AIP));
+mask(AIP>aip_threshold)=1;
+ori2D=ori2D.*mask;
+
 save(strcat(datapath,'orientation/',target,num2str(id),'.mat'),'ori2D');
   
 Mosaic = single(Mosaic);   

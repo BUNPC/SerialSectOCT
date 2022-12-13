@@ -1,4 +1,4 @@
-function MIP_stitch(target, P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch)
+function MIP_stitch(target, P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold)
 %% stitch the retardance using the coordinates from AIP stitch
 % add subfunctions for the script
 addpath('/projectnb/npbssmic/s/Matlab_code');
@@ -203,13 +203,19 @@ for i=1:length(index)
         
 end
 
-MosaicFinal=Mosaic./Masque;
-MosaicFinal(isnan(MosaicFinal))=0;
+MIP=Mosaic./Masque;
+MIP(isnan(MIP))=0;
+
+load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+mask=zeros(size(AIP));
+mask(AIP>aip_threshold)=1;
+MIP=MIP.*mask;
+
 if strcmp(sys,'Thorlabs')
-    MosaicFinal=MosaicFinal';
+    MIP=MIP';
 end
 % tmp=imresize(MosaicFinal,0.25);
-save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MosaicFinal');
+save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MIP');
   
 % MosaicFinal = single(tmp);   
 %     nii=make_nii(MosaicFinal,[],[],64);
@@ -218,7 +224,7 @@ save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MosaicFinal');
 % cd(filepath);
 tiffname=strcat(datapath,'mip/',target,num2str(id),'.tif');
 t = Tiff(tiffname,'w');
-image=single(MosaicFinal);
+image=single(MIP);
 tagstruct.ImageLength     = size(image,1);
 tagstruct.ImageWidth      = size(image,2);
 tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;

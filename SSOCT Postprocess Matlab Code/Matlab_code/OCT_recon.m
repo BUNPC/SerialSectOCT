@@ -35,21 +35,31 @@ addpath('/projectnb/npbssmic/s/Matlab_code/PostProcessing');
 addpath('/projectnb/npbssmic/s/Matlab_code/PSOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code');
+%% ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MANUAL ADJUSTMENT EACH TIME FOR A NEW SAMPLE!
 % specify dataset directory
-datapath  = '/projectnb2/npbssmic/ns/BA4445_samples/BA4445_5_slice17_end/';
-P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/AD_10382_2P/';   % 2P file path
-nslice=76; % define total number of slice
-njobs=1; % number of jobs per slice in SCC parallel processing, default to be 1
-% specify OCT system name
-sys = 'PSOCT';
+OCTpath  = '/projectnb2/npbssmic/ns/BA4445_samples/BA4445_I59/';  % OCT data path.             ADJUST FOR EACH SAMPLE!!!
+P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/AD_10382_2P/';  % 2P data path.
+% leave unchanged if no 2P data is avalable                                                    ADJUST FOR EACH SAMPLE!!!
+nslice=92;   % total number of imaging slices.                                                 ADJUST FOR EACH SAMPLE!!!
+stitch=1; % 1 means using OCT data to generate stitching coordinates, 
+% 0 means using 2P stitching coordinates.                                                      ADJUST FOR EACH SAMPLE!!!
+
+% if using OCT images to generate stitching coordinates, you need three slices that are separated in z for stitching (why three? three channels in RGB format.)
+% However, say, you have total of 100 slices, but you don't have enough space in SCC so you want to run 50 slices at a time, then the following slice numbers should be smaller than 50
+stitch_slice1=5;    % if stitch == 1, first slice for stitching                                ADJUST FOR EACH SAMPLE!!!
+stitch_slice2=25;   % if stitch == 1, second slice for stitching                               ADJUST FOR EACH SAMPLE!!!
+stitch_slice3=45;   % if stitch == 1, third slice for stitching                                ADJUST FOR EACH SAMPLE!!!
+
+njobs=1; % number of parallel tasks per slice in SCC parallel processing, default to be 1, meaning each task handles one slice
+sys = 'PSOCT'; % specify OCT system name. default to be 'PSOCT
 % specify mosaic parameters, you can get it from Imagej stitching
-%% xx yy is positive for dataset acquired after sep 06
+% xx yy is positive for dataset acquired after sep 06
 xx=866;    % xx is the X displacement of two adjacent tile align in the X direction
 xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
 yy=866;    % yy is the Y displacement of two adjacent tile align in the Y direction
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
-numX=17;    % #tiles in X direction
-numY=13;    % #tiles in Y direction
+numX=18;    % #tiles in X direction                                                            ADJUST FOR EACH SAMPLE!!!
+numY=15;    % #tiles in Y direction                                                            ADJUST FOR EACH SAMPLE!!!
 Xoverlap=0.05;   % overlap in X direction
 Yoverlap=0.05;   % overlap in Y direction
 disp=[xx xy yy yx];
@@ -65,29 +75,37 @@ if(strcmp(sys,'PSOCT'))
     grid_matrix=reshape(grid_matrix, 4,1100,1100);
 end
 % directory that stores distortion corrected 3D tiles. Optional
-corrected_path=strcat(datapath,'dist_corrected/'); 
-mkdir(strcat(datapath,'dist_corrected'));
-mkdir(strcat(datapath,'dist_corrected/volume'));
-cd(datapath);
-filename0=dir(strcat('21-*AB.dat')); % count #tiles per slice
-ntile=length(filename0);
+corrected_path=strcat(OCTpath,'dist_corrected/'); 
+mkdir(strcat(OCTpath,'dist_corrected'));
+mkdir(strcat(OCTpath,'dist_corrected/volume'));
+cd(OCTpath);
 
+filename0=dir(strcat('92-*AB.dat')); % count #tiles per slice                                  ADJUST FOR EACH SAMPLE!!!
+ntile=length(filename0);
+start_pixel=70; % start depth for calculating MIP, retardance, and volume reconstruction. 
+% Should be 10-20 pixels bellow tissue surface.                                                ADJUST FOR EACH SAMPLE!!!
+slice_thickness = 70; % imaging slice thickness in pixels. 
+% For U01 sample should be 70, for Ann Mckee samples should be 44.                             ADJUST FOR EACH SAMPLE!!!
+aip_threshold=0.045; % intensity threshold for AIP (before BaSiC shading correction) 
+% to remove agarous.                                                                           ADJUST FOR EACH SAMPLE!!!
+aip_threshold_post_BaSiC=aip_threshold/3; % intensity threshold for AIP (after BaSiC shading correction) to remove agarous. 
+%%
 % the $SGE-TASK-ID environment variable read in is CHARACTER, need to transfer to number
-id = 72;%str2num(id);   
-section=ceil(ntile/njobs);
-istart=1;%(id-1)*section+1;
-istop=0;%section;
+id = str2num(id);   
+section=ceil(ntile/njobs); % total tiles per each paralle task, usually equal to total tiles per slice
+istart=1;%(id-1)*section+1; starting tile number for each parallel task
+istop=section; % end time number for each parallel task
 % create folder for AIPs and MIPs
-create_dir(nslice, datapath);  
-if ~isfile(strcat(datapath,'surface.mat'))
-    Hui_sum_all(datapath,ntile, 11,300); % parameters: data path, ntile, slice#, Z pixels. slice# should be the one that was cut even.
+create_dir(nslice, OCTpath);  
+if ~isfile(strcat(OCTpath,'surface.mat'))
+    Hui_sum_all(OCTpath,ntile, 11,300); % parameters: data path, ntile, slice#, Z pixels. slice# should be the one that was cut even.
 end
-cd(datapath);
-load(strcat(datapath,'surface.mat'));
+cd(OCTpath);
+load(strcat(OCTpath,'surface.mat'));
 surface=round(surface-min(surface(:)));
 %%
 for islice=id
-    cd(datapath)
+    cd(OCTpath)
     for iFile=istart:istop
         % Generate filename, volume dimension before loading file
         name=strsplit(filename0(iFile).name,'.');  
@@ -101,7 +119,7 @@ for islice=id
         end
         name1=strcat(num2str(islice),'-',num2str(iFile),'-',num2str(Zsize),'-',num2str(Xsize),'-',num2str(Ysize),'-AB.dat'); 
         % load data
-        ifilePath = [datapath,name1];
+        ifilePath = [OCTpath,name1];
         amp = ReadDat_int16(ifilePath, dim1)./65535*4;
         message=strcat('Tile No. ',string(iFile),' is read.', datestr(now,'DD:HH:MM'),'\n');
         fprintf(message);
@@ -124,15 +142,15 @@ for islice=id
 %              ori = Grid_correction(ori, grid_matrix, 1050, 51, 1050, 51, size(ori,1));  
              ref=sqrt(cross.^2+co.^2);
              ret=atan(cross./co)./pi*180;
-             ori(ref<0.04)=0;
-             ret(ref<0.04)=0;
+%              ori(ref<aip_threshold)=0;
+%              ret(ref<aip_threshold)=0;
         end
          % surface profiling and save to folder
          sur=surprofile2(ref,sys,10);
-         surname=strcat(datapath,'surf/vol',num2str(slice_index),'/',num2str(iFile),'.mat');
+         surname=strcat(OCTpath,'surf/vol',num2str(slice_index),'/',num2str(iFile),'.mat');
          save(surname,'sur');
          % Generating AIP, MIP, retardance AIP in mat
-         start_pixel=70; % start depth needs to be configured for each sample !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         
          mip=squeeze(max(ref(start_pixel:start_pixel+50,:,:),[],1)); 
          aip=squeeze(mean(ref(1:110,:,:),1));
          ret_aip=squeeze(mean(ret(start_pixel:start_pixel+100,:,:),1));  
@@ -143,8 +161,9 @@ for islice=id
          sur=round(Vq);
          ori2D=Gen_ori_2D(ori,sur,40);
          
+         
          % saving corrected tiles to folder. Optional
-         if(mean2(aip)>0.03 || std2(aip)>0.002)
+         if(mean2(aip)>aip_threshold )
            name1=strcat(num2str(islice),'-',num2str(iFile),'-',num2str(size(cross,1)),'-',num2str(size(cross,2)),'-',num2str(size(cross,3)),'.dat'); % gen file name for reflectivity
            FILE_ref=strcat(corrected_path, 'cross-', name1);
            FID=fopen(FILE_ref,'w');
@@ -170,105 +189,29 @@ for islice=id
          
          
         % Saving AIP.tif
-        aip=single(aip);
-        tiffname=strcat(datapath,'aip/vol',num2str(slice_index),'/','AIP.tif');
-        if iFile==1
-            t = Tiff(tiffname,'w');
-        else
-            t = Tiff(tiffname,'a');
-        end
-        tagstruct.ImageLength     = size(aip,1);
-        tagstruct.ImageWidth      = size(aip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(aip);
-        t.close();
+        tiffname=strcat(OCTpath,'aip/vol',num2str(slice_index),'/','AIP.tif');
+        SaveTiff(aip,iFile,tiffname);
         
        % Saving retardance AIP.tif
-        ret_aip=single(ret_aip);
-        tiffname=strcat(datapath,'retardance/vol',num2str(slice_index),'/','RET.tif');
-        if iFile==1
-            t = Tiff(tiffname,'w');
-        else
-            t = Tiff(tiffname,'a');
-        end
-        tagstruct.ImageLength     = size(ret_aip,1);
-        tagstruct.ImageWidth      = size(ret_aip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(ret_aip);
-        t.close();
-
+        tiffname=strcat(OCTpath,'retardance/vol',num2str(slice_index),'/','RET.tif');
+        SaveTiff(ret_aip,iFile,tiffname);
 
         % Saving orientation ORI.tif
-        ori2D=single(ori2D);
-        tiffname=strcat(datapath,'orientation/vol',num2str(slice_index),'/','ORI.tif');
-        if iFile==1
-            t = Tiff(tiffname,'w');
-        else
-            t = Tiff(tiffname,'a');
-        end
-        tagstruct.ImageLength     = size(ori2D,1);
-        tagstruct.ImageWidth      = size(ori2D,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(ori2D);
-        t.close();
-
+        tiffname=strcat(OCTpath,'orientation/vol',num2str(slice_index),'/','ORI.tif');
+        SaveTiff(ori2D,iFile,tiffname);
 
         % Saving MIP.tif
-        mip=single(mip);
-        tiffname=strcat(datapath,'mip/vol',num2str(slice_index),'/','MIP.tif');
-        if iFile==1
-            t = Tiff(tiffname,'w');
-        else
-            t = Tiff(tiffname,'a');
-        end
-        tagstruct.ImageLength     = size(mip,1);
-        tagstruct.ImageWidth      = size(mip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(mip);
-        t.close();
+        tiffname=strcat(OCTpath,'mip/vol',num2str(slice_index),'/','MIP.tif');
+        SaveTiff(mip,iFile,tiffname);
 
         fprintf(strcat('Tile No. ',string(iFile),' is reconstructed.', datestr(now,'DD:HH:MM'),'\n'));
     end   
 %% Stitching
-    start_pixel=70; 
-    stitch=1; % 1 using OCT stitching coordinates, 0 using 2P stitching coordinates
-%     fid=fopen(strcat(datapath,'log',num2str(id),'.txt'),'w');
-%     fclose(fid);
-%     cd(datapath)
-%     logfiles=dir(strcat(datapath,'log*.txt')); 
-%     while length(logfiles)~=19
-%         pause(600);
-%     end
-%     Gen_OCT_coord(datapath,disp,mosaic,pxlsize,islice,pattern, 5, 9, 15)
-%     AIP_stitch(P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch);                     % stitch AIP
+    if id==1
+        Gen_OCT_coord(OCTpath,disp,mosaic,pxlsize,islice,pattern, stitch_slice1, stitch_slice2, stitch_slice3); % generating OCT stitching coordinates
+    end
+    AIP_stitch(P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                             % stitch AIP
+    %% stitching fitting results. DO NOT use them for U01 samples. FItting is usually performed separately after RECON.
 %     Mus_stitch('mus',P2path,datapath,disp,mosaic,pxlsize./10,islice,pattern,sys,stitch);           % stitch mus
 %     Mub_stitch('mub', P2path,datapath,disp,mosaic,pxlsize./10,islice,pattern,sys,stitch);           % stitch mub
 % %     rewrite_bfg_tiles(datapath,islice,numX*numY);
@@ -277,21 +220,20 @@ for islice=id
 %     ZF_stitch('ZF', P2path, datapath,disp,mosaic,pxlsize./10,islice,pattern,sys,stitch);
 %     ZR_stitch('ZR', P2path, datapath,disp,mosaic,pxlsize./10,islice,pattern,sys,stitch);
 %     BKG_stitch('BKG', P2path, datapath,disp,mosaic,pxlsize./10,islice,pattern,sys,stitch);
-%     MIP_stitch('mip', P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch);
-%     Surf_stitch('sur',P2path,datapath,disp,mosaic,pxlsize/10,islice,pattern,sys,stitch);              % stitch surface
-%     Ret_stitch('ret_aip', P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch);              % stitch retardance AIP
-%     Ori_stitch('ori2D', P2path,datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch); 
-%     Gen_ori_RGB(datapath,islice, 0.015);
-    BaSiC_shading_and_ref_stitch(islice,P2path,datapath, numX*numY, start_pixel, 70,stitch); % volume recon start depth, thickness(pixels)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-%     BaSiC_shading_and_ori_stitch(islice,P2path,datapath, numX*numY, 1, 200); % volu
+    %%
+    MIP_stitch('mip', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                      % stitch MIP
+    Surf_stitch('sur',P2path,OCTpath,disp,mosaic,pxlsize/10,islice,pattern,sys,stitch);                                            % stitch surface
+    Ret_stitch('ret_aip', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                  % stitch retardance AIP
+    Ori_stitch('ori2D', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                    % stitch orientation
+    Gen_ori_RGB(OCTpath,islice, 0.015);                                                                                            % convert orientation to RGB using color wheel
+    BaSiC_shading_and_ref_stitch(islice,P2path,OCTpath, numX*numY, start_pixel, slice_thickness,stitch,aip_threshold_post_BaSiC);  % volume recon 
+%     BaSiC_shading_and_ori_stitch(islice,P2path,datapath, numX*numY, 1, 200); 
     fprintf(strcat('Slice No. ',num2str(islice),' is stitched.', datestr(now,'DD:HH:MM'),'\n'));
-    
-
 end
-fid=fopen(strcat(datapath,'aip/log',num2str(id),'.txt'),'w');
+fid=fopen(strcat(OCTpath,'aip/log',num2str(id),'.txt'),'w');
 fclose(fid);
-cd(strcat(datapath,'aip/'))
-logfiles=dir(strcat(datapath,'aip/log*.txt')); 
+cd(strcat(OCTpath,'aip/'))
+logfiles=dir(strcat(OCTpath,'aip/log*.txt')); 
 % if length(logfiles)==nslice
 %    delete log*.txt
 % %    Concat_ref_vol(nslice,datapath);

@@ -1,4 +1,4 @@
-function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch)
+function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold)
 %%% ---------------------- %%%
 % function version of mosaicing & blending
 % input: displacement parameters: four elements array [xx xy yy yx]
@@ -224,7 +224,11 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     if stitch==1
         coordpath = strcat(datapath,'aip/RGB/');
         f=strcat(coordpath,'TileConfiguration.registered.txt');
-        coord = read_Fiji_coord(f,'Composite');
+        if isfile(f)
+            coord = read_Fiji_coord(f,'Composite');
+        else
+            pause(600)
+        end
     
     % use following 3 lines if stitch using OCT coordinates -- obsolete
 %     f=strcat(datapath,'aip/vol',num2str(9),'/TileConfiguration.registered.txt');
@@ -297,15 +301,17 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
         end
     end
     % process the blended image
-    MosaicFinal=Mosaic./Masque;
-    MosaicFinal=MosaicFinal-min(min(MosaicFinal));
-    MosaicFinal(isnan(MosaicFinal))=0;
+    AIP=Mosaic./Masque;
+%     AIP=AIP-min(min(AIP));
+    AIP(isnan(AIP))=0;
     if strcmp(sys,'Thorlabs')
-        MosaicFinal=MosaicFinal';
+        AIP=AIP';
     end
+    mask=zeros(size(AIP));
+    mask(AIP>aip_threshold)=1;
+    AIP=AIP.*mask;
     
-aip=MosaicFinal;
-save(strcat(datapath,'aip/aip',num2str(islice),'.mat'),'aip');
+    save(strcat(datapath,'aip/aip',num2str(islice),'.mat'),'AIP');
     %% save as nifti or tiff    
 %          nii=make_nii(MosaicFinal,[],[],64);
 %          cd('C:\Users\jryang\Downloads\');
@@ -314,7 +320,7 @@ save(strcat(datapath,'aip/aip',num2str(islice),'.mat'),'aip');
     tiffname=strcat(datapath,'aip/','aip',num2str(islice),'.tif');
 %     imwrite(MosaicFinal,tiffname,'Compression','none');
     t = Tiff(tiffname,'w');
-    image=single(MosaicFinal);
+    image=single(AIP);
     tagstruct.ImageLength     = size(image,1);
     tagstruct.ImageWidth      = size(image,2);
     tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;

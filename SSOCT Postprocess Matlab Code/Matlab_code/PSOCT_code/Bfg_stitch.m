@@ -154,7 +154,7 @@ ramp=rampx.*rampy;      % blending mask
         
         %%%%%%%%%%%%%%%%%%%
         % add on background
-        us=single(imread(strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
+        us=single(imread(strcat(datapath,'fitting_4x/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
 %         us=imresize(us,10/ds);
         if(strcmp(datapath,'/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_8095/'))
             bfg=bfg+(1-bfg_bg)./(10+us).*0.005;
@@ -164,8 +164,8 @@ ramp=rampx.*rampy;      % blending mask
 %         bfg=bfg+bfg_bg.bg.*0.00006./(1+us./3); %NC6974,NC6839
 %         bfg=bfg+bfg_bg.bg.*0.000015.*(1+us./3); %NC8653
 %         bfg=bfg+bfg_bg.bg.*0.0001./(1+us./3); %NC6047
-%         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_NC6047_ul.mat');%NC6047
-%         bfg=bfg+bfg_bg.bg.*0.000017.*(1+us./3); %NC6047
+        bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_NC6047_ul.mat');%NC6047
+        bfg=bfg+bfg_bg.bg.*0.000017.*(1+us./3); %NC6047
 %         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_AD10382.mat');
 %         tmp=bfg_bg.bg;
 %         tmp=imresize(tmp,10/ds);
@@ -177,9 +177,9 @@ ramp=rampx.*rampy;      % blending mask
 %         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_CTE6489.mat');
 %         bfg=bfg+bfg_bg.bg.*0.00008./(1+us./5); %CTE6489,CTE7019,CTE6912
 %         bfg=bfg+bfg_bg.bg.*0.00015./(1+us./5); %CTE7126
-        bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_AD7597.mat');
-        bg=bfg_bg.bg; bg=imresize(bg,10/ds);
-        bfg=bfg+bg.*0.0003./(1+us./5); %CTE7126
+%         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_AD7597.mat');
+%         bg=bfg_bg.bg; bg=imresize(bg,10/ds);
+%         bfg=bfg+bg.*0.0003./(1+us./5); %CTE7126
 
         avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
         save(avgname,'bfg');  

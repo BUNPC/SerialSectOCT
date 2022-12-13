@@ -1,13 +1,13 @@
 function[]=Gen_ori_RGB(datapath,islice, ts_aip)
 %% generate orientation map in RGB
-load('/projectnb2/npbssmic/s/Matlab_code/PSOCT_code/cmap_v3.mat');
+load('/projectnb2/npbssmic/s/Matlab_code/PSOCT_code/cmap.mat');
 load(strcat(datapath,'retardance/ret_aip',num2str(islice),'.mat'));
 load(strcat(datapath,'aip/aip',num2str(islice),'.mat'));
 load(strcat(datapath,'orientation/ori2D',num2str(islice),'.mat'));
 phi_for_cwheel=phi_for_cwheel./pi*180;
 abs_m=zeros(size(ret_aip));
 % abs_m((ret_aip)>ts_ret)=1;
-abs_m(aip>ts_aip)=1;
+abs_m(AIP>ts_aip)=1;
 ret_aip=ret_aip.*abs_m;
 ret_aip=ret_aip./90;
 ori2D=ori2D.*abs_m;
