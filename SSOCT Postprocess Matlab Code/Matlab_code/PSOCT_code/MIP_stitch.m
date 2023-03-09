@@ -205,8 +205,12 @@ end
 
 MIP=Mosaic./Masque;
 MIP(isnan(MIP))=0;
-
-load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+if rem(id,2)==0
+        id_aip=id-1;
+else
+    id_aip=id;
+end
+load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 MIP=MIP.*mask;
@@ -215,7 +219,7 @@ if strcmp(sys,'Thorlabs')
     MIP=MIP';
 end
 % tmp=imresize(MosaicFinal,0.25);
-save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MIP');
+save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MIP','-v7.3');
   
 % MosaicFinal = single(tmp);   
 %     nii=make_nii(MosaicFinal,[],[],64);

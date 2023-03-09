@@ -1,4 +1,4 @@
-function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold)
+function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold, aip_threshold_post_BaSiC)
 %%% ---------------------- %%%
 % function version of mosaicing & blending
 % input: displacement parameters: four elements array [xx xy yy yx]
@@ -9,7 +9,8 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
 %
 % Author: Jiarui Yang, Shuaibin Chang
 % 10/28/19
-%% define parameters
+%% define parameters for stitching slices individually -- we don't use individual stitching anymore, but still keep it just in case in the future we want to do it
+   % we don't use the 
    %displacement parameters
     xx=disp(1);
     xy=disp(2);
@@ -86,7 +87,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     end
     grid(2,:)=grid(2,:)-min(grid(2,:));
     
-    %% generate distorted grid pattern& write coordinates to file
+    %% Select sample tiles, exclude agarose tiles
     filepath=strcat(datapath,'aip/vol',num2str(islice),'/');
     cd(filepath);
     fileID = fopen([filepath 'TileConfiguration.txt'],'w');
@@ -99,7 +100,8 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     flagged=0;
     for j=1:numTile
         aip = single(imread(filename0(1).name, j));
-        if std(aip(:))>=0.002     % threshold tunable for agarose blocks, visual examine after done
+        % threshold tunable for agarose blocks, you should do visual examination of aip.tif after finishing
+        if mean2(aip)>aip_threshold || std2(aip)>aip_threshold/4     
             tile_flag(j)=1;
             fprintf(fileID,[num2str(j) '_aip.tif; ; (%d, %d)\n'],round(grid(:,j)));
             if flagged==0
@@ -173,7 +175,9 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     end
     
     try
-        % wirte shading corrected AIP_cor.tif tiles
+        % wirte shading corrected AIP_cor.tif tiles, the shading corrected
+        % tissue tiles will repace uncorrected tissue tiles, but agarose
+        % tiles will stay uncorrected
         filename0=strcat(datapath,'aip/vol',num2str(islice),'/','AIP_cor.tif');
         filename0=dir(filename0);
         for iFile=1:sum(tile_flag)
@@ -205,7 +209,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
         end
     catch
     end
-    %% generate Macro file for stitching, unused
+    %% generate Macro file for stitching
     macropath=[filepath,'Macro.ijm'];
     filepath_rev=strcat(datapath,'aip/');
     fid_Macro = fopen(macropath, 'w');
@@ -214,13 +218,13 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     fprintf(fid_Macro,'run("Quit");\n');
     fclose(fid_Macro);
 
-    %% execute Macro file
+    %% execute Macro file, comment out this section if using universal stitching coordinates from RGB stitching
 %     tic
 % % % %     system(['/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --headless -macro ',macropath]);
 %     toc
 
-    %% get FIJI stitching info
-    % use following 3 lines if stitch using OCT coordinates
+    %% get FIJI stitching coordinates
+    % use following 3 lines if stitching using OCT coordinates
     if stitch==1
         coordpath = strcat(datapath,'aip/RGB/');
         f=strcat(coordpath,'TileConfiguration.registered.txt');
@@ -230,8 +234,11 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
             pause(600)
         end
     
-    % use following 3 lines if stitch using OCT coordinates -- obsolete
-%     f=strcat(datapath,'aip/vol',num2str(9),'/TileConfiguration.registered.txt');
+    % use following 3 lines if stitching using individual slice OCT
+    % coordinates -- we don't use this anymore since stacking will be
+    % difficult if we stitch each slice individually
+    
+%     f=strcat(datapath,'aip/vol',num2str(islice),'/TileConfiguration.registered.txt');
 %     coord = read_Fiji_coord(f,'aip');
     else
     % use following 3 lines if stitch using 2P coordinates
@@ -240,9 +247,6 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
         coord = read_Fiji_coord(f,'Composite');
         coord(2:3,:)=coord(2:3,:).*2/3;
     end
-%          coord(2:3,:)=coord(2:3,:).*2/3; %for samples after 09/17/21
-%     coord(2,:)=coord(2,:).*1.62/3; %for sample 8921 only
-%     coord(3,:)=coord(3,:).*1.82/3; %for sample 8921  only
 
     % define coordinates for each tile
     Xcen=zeros(size(coord,2),1);
@@ -275,8 +279,9 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     elseif strcmp(sys,'Thorlabs')
         [rampy,rampx]=meshgrid(x, y);
     end   
-    ramp=rampy.*rampx;      % blending mask
-  
+    ramp=rampy.*rampx;    
+    
+    % blending mask
     Mosaic = zeros(max(Xcen)+Xsize ,max(Ycen)+Ysize);
     Masque = zeros(size(Mosaic));
 
@@ -287,31 +292,36 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
         % load file and linear blend
         filename0=dir(strcat(num2str(in),'.mat'));
         load(filename0.name);
-        if std2(aip)<0.002
+
+        % remove agarose tiles
+        if tile_flag(in)==0
             aip=zeros(size(aip));
         end
         row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);                                                 %changed by stephan
         column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
         
         Masque(row,column)=Masque(row,column)+ramp;
+        % blending
         if strcmp(sys,'PSOCT')
             Mosaic(row,column)=Mosaic(row,column)+aip.*ramp;
         elseif strcmp(sys,'Thorlabs')
             Mosaic(row,column)=Mosaic(row,column)+aip'.*ramp;
         end
     end
-    % process the blended image
+    % flatten the blending mask
     AIP=Mosaic./Masque;
 %     AIP=AIP-min(min(AIP));
+% remove NAN values
     AIP(isnan(AIP))=0;
     if strcmp(sys,'Thorlabs')
         AIP=AIP';
     end
+    % remove agarose using aip_threshold
     mask=zeros(size(AIP));
-    mask(AIP>aip_threshold)=1;
-    AIP=AIP.*mask;
+    mask(AIP>aip_threshold_post_BaSiC)=1;
+    AIP=single(AIP.*mask);
     
-    save(strcat(datapath,'aip/aip',num2str(islice),'.mat'),'AIP');
+    save(strcat(datapath,'aip/aip',num2str(islice),'.mat'),'AIP','-v7.3');
     %% save as nifti or tiff    
 %          nii=make_nii(MosaicFinal,[],[],64);
 %          cd('C:\Users\jryang\Downloads\');

@@ -209,12 +209,17 @@ ret_aip(isnan(ret_aip))=0;
 if strcmp(sys,'Thorlabs')
     ret_aip=ret_aip';
 end
-load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+if rem(id,2)==0
+    id_aip=id-1;
+else
+    id_aip=id;
+end
+load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 ret_aip=ret_aip.*mask;
 
-save(strcat(datapath,'retardance/',target,num2str(id),'.mat'),'ret_aip');
+save(strcat(datapath,'retardance/',target,num2str(id),'.mat'),'ret_aip','-v7.3');
   
 ret_aip = single(ret_aip);   
 %     nii=make_nii(MosaicFinal,[],[],64);

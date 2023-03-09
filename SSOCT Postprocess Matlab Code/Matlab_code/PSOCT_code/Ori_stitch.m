@@ -227,8 +227,12 @@ if strcmp(sys,'Thorlabs')
     Mosaic=Mosaic';
 end
 ori2D=Mosaic;
-
-load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
+if rem(id,2)==0
+        id_aip=id-1;
+else
+    id_aip=id;
+end
+load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 ori2D=ori2D.*mask;

@@ -31,7 +31,7 @@ for i=1:ntiles
         cross = single(ReadDat_int16(ifilePath, dim))./65535*4;
         % Jiarui: added depth normalization to see if it can improve z
         % profile
-        cross=depth_corr(cross,0.003);
+%         cross=depth_corr(cross,0.003);
         cross=cross(depth:depth+thickness-1,:,:);
         cross=imresize3(cross,resize_factor);
 
@@ -39,7 +39,7 @@ for i=1:ntiles
         ifilePath=[datapath2,filename0(1).name];
         co = single(ReadDat_int16(ifilePath, dim))./65535*4;
         % added depth normalization
-        co=depth_corr(co,0.003);
+%         co=depth_corr(co,0.003);
         co=co(depth:depth+thickness-1,:,:);
         co=imresize3(co,resize_factor);
         
@@ -163,25 +163,30 @@ for nslice=id
     Ref(isnan(Ref(:)))=0;
     Ref=single(Ref);
     
-    load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
-    AIP=imresize(AIP,resize_factor);
-    mask=zeros(size(AIP));
-    mask(AIP>aip_threshold)=1;
-    
-    if size(mask,1)>size(Ref,1)
-        xx=size(Ref,1);
-    else
-        xx=size(mask,1);
-    end
-    if size(mask,2)>size(Ref,2)
-        yy=size(Ref,2);
-    else
-        yy=size(mask,2);
-    end
-    for ii = 1:size(Ref,3)
-        Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
-    end
-
+%     if rem(id,2)==0
+%         id_aip=id-1;
+%     else
+%         id_aip=id;
+%     end
+%     load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
+%     AIP=imresize(AIP,resize_factor);
+%     mask=zeros(size(AIP));
+%     mask(AIP>aip_threshold)=1;
+%     
+%     if size(mask,1)>size(Ref,1)
+%         xx=size(Ref,1);
+%     else
+%         xx=size(mask,1);
+%     end
+%     if size(mask,2)>size(Ref,2)
+%         yy=size(Ref,2);
+%     else
+%         yy=size(mask,2);
+%     end
+%     for ii = 1:size(Ref,3)
+%         Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
+%     end
+% 
     save(strcat(datapath2,'volume/ref',num2str(nslice),'.mat'),'Ref','-v7.3');
 
    clear options;
