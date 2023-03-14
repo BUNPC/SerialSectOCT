@@ -1,4 +1,13 @@
 %% ----------------------------------------- %%
+% Note Mar 14 2023:
+%
+% Current version of code does FOV correction, grid correction &
+% MIP/AIP/Retardance/Orientation generation, surface finding & profiling, 
+% volume stitching
+%
+% Fitting is in Fitting_after_recon.m
+%
+%
 % Note Jan 28 2020:
 %
 % Current version of code does FOV correction, grid correction & MIP/AIP
@@ -35,19 +44,19 @@ addpath('/projectnb/npbssmic/s/Matlab_code/PostProcessing');
 addpath('/projectnb/npbssmic/s/Matlab_code/PSOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code');
-%% ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MANUAL ADJUSTMENT EACH TIME FOR A NEW SAMPLE!
+%% 
 % specify dataset directory
-OCTpath  = '/projectnb2/npbssmic/ns/BA4445_samples/I57_part1/';  % OCT data path.             ADJUST FOR EACH SAMPLE!!!
+OCTpath  = '/projectnb2/npbssmic/ns/BA4445_samples/I57_part2/';  % OCT data path.              ADJUST FOR EACH SAMPLE!!!
 P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/AD_10382_2P/';  % 2P data path.
 % leave unchanged if no 2P data is avalable                                                    ADJUST FOR EACH SAMPLE!!!
-nslice=40;   % total number of imaging slices.                                                 ADJUST FOR EACH SAMPLE!!!
+nslice=56;   % total number of imaging slices.                                                 ADJUST FOR EACH SAMPLE!!!
 stitch=1; % 1 means using OCT data to generate stitching coordinates, 
 % 0 means using 2P stitching coordinates.                                                      ADJUST FOR EACH SAMPLE!!!
 
 % if using OCT images to generate stitching coordinates, you need three slices that are separated in z for stitching (why three? three channels in RGB format.)
 % However, say, you have total of 100 slices, but you don't have enough space in SCC so you want to run 50 slices at a time, then the following slice numbers should be smaller than 50
 stitch_slice1=5;    % if stitch == 1, first slice for stitching                                ADJUST FOR EACH SAMPLE!!!
-stitch_slice2=9;   % if stitch == 1, second slice for stitching                               ADJUST FOR EACH SAMPLE!!!
+stitch_slice2=9;   % if stitch == 1, second slice for stitching                                ADJUST FOR EACH SAMPLE!!!
 stitch_slice3=15;   % if stitch == 1, third slice for stitching                                ADJUST FOR EACH SAMPLE!!!
 
 njobs=1; % number of parallel tasks per slice in SCC parallel processing, default to be 1, meaning each task handles one slice
@@ -80,9 +89,9 @@ mkdir(strcat(OCTpath,'dist_corrected'));
 mkdir(strcat(OCTpath,'dist_corrected/volume'));
 cd(OCTpath);
 
-filename0=dir(strcat('1-*AB.dat')); % count #tiles per slice                                  ADJUST FOR EACH SAMPLE!!!
+filename0=dir(strcat('40-*AB.dat')); % get file names                                          ADJUST FOR EACH SAMPLE!!!
 ntile=length(filename0);
-start_pixel=70; % start depth for calculating MIP, retardance, and volume reconstruction. 
+start_pixel=90; % start depth for calculating MIP, retardance, and volume reconstruction. 
 % Should be 10-20 pixels bellow tissue surface.                                                ADJUST FOR EACH SAMPLE!!!
 slice_thickness = 70; % imaging slice thickness in pixels. 
 % For U01 sample should be 70, for Ann Mckee samples should be 44.                             ADJUST FOR EACH SAMPLE!!!
@@ -94,12 +103,16 @@ aip_threshold_post_BaSiC=aip_threshold/4; % intensity threshold for AIP (after B
 id = str2num(id);   
 section=ceil(ntile/njobs); % total tiles per each paralle task, usually equal to total tiles per slice
 istart=1;%(id-1)*section+1; starting tile number for each parallel task
-istop=0;%section; % end time number for each parallel task
+istop=section; % end time number for each parallel task
 % create folder for AIPs and MIPs
 create_dir(nslice, OCTpath);  
 % function that finds tissue surface 
 if ~isfile(strcat(OCTpath,'surface.mat'))
-    Hui_sum_all(OCTpath,ntile, 11,300); % parameters: data path, ntile, slice#, Z pixels. slice# should be the one that was cut even.
+    if id==1
+        Hui_sum_all(OCTpath,ntile, 11,300); % parameters: data path, ntile, slice#, Z pixels. slice# should be the one that was cut even.
+    else
+        pause(7200)
+    end
 end
 cd(OCTpath);
 load(strcat(OCTpath,'surface.mat'));
@@ -133,10 +146,10 @@ for islice=id
              ori=amp(:,101:1200,2201:3300);
              ori=ori.*90;
              ori(ori>180)=ori(ori>180)-180;
-             % correct for tissue surface uneveness
+             % correct for tissue surface tilt
              cross = FOV_curvature_correction(cross, surface, size(cross,1), size(cross,2), size(cross,3));  
 %              cross=cross(:,51:1050,51:1050);
-            % correct in X and Y dimension
+            % correct distortion in X and Y dimension
              cross = Grid_correction(cross, grid_matrix, 1050, 51, 1050, 51, size(cross,1));  
              co = FOV_curvature_correction(co, surface, size(co,1), size(co,2), size(co,3)); 
 %              co=co(:,51:1050,51:1050);
@@ -167,7 +180,7 @@ for islice=id
          ori2D=Gen_ori_2D(ori,sur,40);
          
          
-         % saving corrected tiles to folder. Optional
+         % saving distortion-corrected tiles. Optional
          if(mean2(aip)>aip_threshold || std2(aip)>aip_threshold/4)
            name1=strcat(num2str(islice),'-',num2str(iFile),'-',num2str(size(cross,1)),'-',num2str(size(cross,2)),'-',num2str(size(cross,3)),'.dat'); % gen file name for reflectivity
            FILE_ref=strcat(corrected_path, 'cross-', name1);
@@ -186,6 +199,8 @@ for islice=id
            FID=fopen(FILE_ret,'w');
            fwrite(FID,(ori./180).*65535,'uint16');
            fclose(FID);
+           % fitting optical parameters. Now we do fitting in
+           % Fitting_after_recon.m
            % Optical_fitting_immune2surf(co, cross, s_seg, z_seg, datapath,threshold, mus_depth, bfg_depth, mean_surf)
 %            Optical_fitting_immune2surf(co, cross, islice, iFile, datapath,0.09, 130, 100, 60)
          else
@@ -211,13 +226,13 @@ for islice=id
 
         fprintf(strcat('Tile No. ',string(iFile),' is reconstructed.', datestr(now,'DD:HH:MM'),'\n'));
     end  
-    % log file confirming this slice has done distortion correction
-%     fid=fopen(strcat(OCTpath,'dd',num2str(id),'.txt'),'w');
-%     fclose(fid);
-    system(['chmod -R 777 ',OCTpath])
+    % log file confirming this slice has finished distortion correction
+    fid=fopen(strcat(OCTpath,'dd',num2str(id),'.txt'),'w');
+    fclose(fid);
+    system(['chmod -R 777 ',OCTpath]);
 
 %% Stitching
-    % pause untile the stitching slices are done distortion correction
+    % pause untile the stitching slices finish distortion correction
     if id==1 && stitch==1 && ~isfile(strcat(OCTpath,'aip/RGB/TileConfiguration.registered.txt'))
         while ~(isfile(strcat(OCTpath,'dd',num2str(stitch_slice1),'.txt')) && isfile(strcat(OCTpath,'dd',num2str(stitch_slice2),'.txt')) && isfile(strcat(OCTpath,'dd',num2str(stitch_slice3),'.txt')))
             pause(600);
@@ -246,9 +261,9 @@ for islice=id
     Surf_stitch('sur',P2path,OCTpath,disp,mosaic,pxlsize/10,islice,pattern,sys,stitch);                                            % stitch surface
     Ret_stitch('ret_aip', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                  % stitch retardance AIP
     
-    system(['chmod -R 777 ',OCTpath])
-%     Ori_stitch('ori2D', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                    % stitch orientation
-%     Gen_ori_RGB(OCTpath,islice, 0.015);
+    system(['chmod -R 777 ',OCTpath]);
+    Ori_stitch('ori2D', P2path,OCTpath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold_post_BaSiC);                    % stitch orientation
+    Gen_ori_RGB(OCTpath,islice, 0.015);
     % convert orientation to RGB using color wheel
     % this is for stitching volume
     BaSiC_shading_and_ref_stitch(islice,P2path,OCTpath, numX*numY, start_pixel, slice_thickness,stitch,aip_threshold_post_BaSiC);  % volume recon 
@@ -256,13 +271,15 @@ for islice=id
     fprintf(strcat('Slice No. ',num2str(islice),' is stitched.', datestr(now,'DD:HH:MM'),'\n'));
 
 end
+%% log file indicates this slice has done reconstruction
 fid=fopen(strcat(OCTpath,'aip/log',num2str(id),'.txt'),'w');
 fclose(fid);
 cd(strcat(OCTpath,'aip/'))
 logfiles=dir(strcat(OCTpath,'aip/log*.txt')); 
+% if all slices finish reconstruction, do stacking 
 if length(logfiles)==nslice
 %    delete log*.txt
    Concat_ref_vol(nslice,OCTpath);
 %    ref_mus(OCTpath, nslice, nslice*11, 50, 50); % volume intensity correction, comment the mus part if no fitting is generated
 end
-system(['chmod -R 777 ',OCTpath])
+system(['chmod -R 777 ',OCTpath]);

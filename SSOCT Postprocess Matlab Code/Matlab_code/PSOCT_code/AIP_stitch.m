@@ -159,19 +159,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
 
         aip=single(aip);
         tiffname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(this_tile),'_aip.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(aip,1);
-        tagstruct.ImageWidth      = size(aip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(aip);
-        t.close();
+        SaveTiff(aip,1,tiffname);
     end
     
     try
@@ -193,19 +181,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
 
             aip=single(aip);
             tiffname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(this_tile),'_aip.tif');
-            t = Tiff(tiffname,'w');
-            tagstruct.ImageLength     = size(aip,1);
-            tagstruct.ImageWidth      = size(aip,2);
-            tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-            tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-            tagstruct.BitsPerSample   = 32;
-            tagstruct.SamplesPerPixel = 1;
-            tagstruct.Compression     = Tiff.Compression.None;
-            tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-            tagstruct.Software        = 'MATLAB';
-            t.setTag(tagstruct);
-            t.write(aip);
-            t.close();
+            SaveTiff(aip,1,tiffname);
         end
     catch
     end
@@ -328,19 +304,5 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
 %          save_nii(nii,'aip_vol7.nii');
 %     MosaicFinal = uint16(65535*(mat2gray(MosaicFinal)));    
     tiffname=strcat(datapath,'aip/','aip',num2str(islice),'.tif');
-%     imwrite(MosaicFinal,tiffname,'Compression','none');
-    t = Tiff(tiffname,'w');
-    image=single(AIP);
-    tagstruct.ImageLength     = size(image,1);
-    tagstruct.ImageWidth      = size(image,2);
-    tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-    tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-    tagstruct.BitsPerSample   = 32;
-    tagstruct.SamplesPerPixel = 1;
-    tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-    tagstruct.Compression = Tiff.Compression.None;
-    tagstruct.Software        = 'MATLAB';
-    t.setTag(tagstruct);
-    t.write(image);
-    t.close();
-    end
+    SaveTiff(AIP,1,tiffname);
+end

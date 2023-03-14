@@ -137,19 +137,7 @@ load(strcat(datapath,'aip/vol',num2str(id),'/tile_flag.mat'));
 
         ori2D=single(ori2D);
         tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(ori2D,1);
-        tagstruct.ImageWidth      = size(ori2D,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(ori2D);
-        t.close();
+        SaveTiff(ori2D,1,tiffname);
     end
     
 %     try
@@ -169,19 +157,7 @@ load(strcat(datapath,'aip/vol',num2str(id),'/tile_flag.mat'));
 % 
 %             ori2D=single(ori2D);
 %             tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
-%             t = Tiff(tiffname,'w');
-%             tagstruct.ImageLength     = size(ori2D,1);
-%             tagstruct.ImageWidth      = size(ori2D,2);
-%             tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-%             tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-%             tagstruct.BitsPerSample   = 32;
-%             tagstruct.SamplesPerPixel = 1;
-%             tagstruct.Compression     = Tiff.Compression.None;
-%             tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-%             tagstruct.Software        = 'MATLAB';
-%             t.setTag(tagstruct);
-%             t.write(ori2D);
-%             t.close();
+%             SaveTiff(ori2D,1,tiffname);
 %         end
 %     catch
 %     end
@@ -236,29 +212,16 @@ load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 ori2D=ori2D.*mask;
-
-save(strcat(datapath,'orientation/',target,num2str(id),'.mat'),'ori2D');
+ori2D = single(ori2D); 
+save(strcat(datapath,'orientation/',target,num2str(id),'.mat'),'ori2D','-v7.3');
   
-Mosaic = single(Mosaic);   
+  
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
 % cd(filepath);
 tiffname=strcat(datapath,'orientation/',target,num2str(id),'.tif');
-t = Tiff(tiffname,'w');
-image=Mosaic;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+SaveTiff(ori2D,1,tiffname);
 %% generate orientation map in RGB
 % load('/projectnb2/npbssmic/s/Matlab_code/PSOCT_code/cmap.mat');
 % load(strcat(datapath,'retardance/ret_aip',num2str(id),'.mat'));

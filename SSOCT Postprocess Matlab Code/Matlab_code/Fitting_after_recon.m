@@ -1,6 +1,13 @@
-folder  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/CTE_7019/';
-P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/CTE_7019_2P/';   % 2P file path
+% fitting scattering and birefringence of brain tissue
+% run this after OCT_recon.m is finished
+
+folder = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_10T/NC_6047/';      % OCT file path                          ADJUST FOR EACH SAMPLE!!! 
+P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_10T/NC_6047_2P/';   % 2P file path                           ADJUST FOR EACH SAMPLE!!!
 datapath=strcat(folder,'dist_corrected/'); 
+nslice=22; % define total number of slices                                                                       ADJUST FOR EACH SAMPLE!!!
+stitch=0; % 1 means using OCT data to generate stitching coordinates, 
+% 0 means using 2P stitching coordinates.                                                                        ADJUST FOR EACH SAMPLE!!!
+ds_factor=4;     % downsampling factor, 4 means 4x4 pixel downsample, which is 12x12um pixel size                ADJUST FOR EACH SAMPLE!!!
 
 % add subfunctions for the script. Change directory if not running on BU SCC
 addpath('/projectnb/npbssmic/s/Matlab_code/fitting_code');
@@ -9,11 +16,7 @@ addpath('/projectnb/npbssmic/s/Matlab_code/PSOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code');
 
-% cd(datapath);
-ntile=108;
-nslice=18; % define total number of slices
-njobs=1;
-section=ceil(ntile/njobs);
+cd(datapath);
 create_dir(nslice, folder); 
 sys = 'PSOCT';
 % specify mosaic parameters, you can get it from Imagej stitching
@@ -21,20 +24,22 @@ xx=866;    % xx is the X displacement of two adjacent tile align in the X direct
 xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
 yy=866;    % yy is the Y displacement of two adjacent tile align in the Y direction
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
-numX=12;    % #tiles in X direction
-numY=9;    % #tiles in Y direction
+numX=11;    % #tiles in X direction                                                                             ADJUST FOR EACH SAMPLE!!!
+numY=8;    % #tiles in Y direction                                                                              ADJUST FOR EACH SAMPLE!!!
 Xoverlap=0.05;   % overlap in X direction
 Yoverlap=0.05;   % overlap in Y direction
 disp=[xx xy yy yx];
 mosaic=[numX numY Xoverlap Yoverlap];
 pattern = 'bidirectional';  % mosaic pattern, could be bidirectional or unidirectional
 pxlsize=[1000 1000];
+ntile=numX*numY;                                                                                                 
+njobs=1;
+section=ceil(ntile/njobs);
 
 % the $SGE-TASK-ID environment variable read in is CHARACTER, need to transfer to number
 id=str2num(id);
 istart=1;%(id-1)*section+1;
 istop=section;
-ds_factor=10;
 
 for islice=id%:nslice
     cd(datapath);
@@ -51,7 +56,6 @@ for islice=id%:nslice
             % load reflectivity data
             co = ReadDat_int16(name1, dim1)./65535*4; 
             name1=strcat(datapath,'cross-',num2str(islice),'-',num2str(iFile),'-',num2str(Zsize),'-',num2str(Xsize),'-',num2str(Ysize),'.dat'); % gen file name for reflectivity
-            % load reflectivity data
             cross = ReadDat_int16(name1, dim1)./65535*4; 
         else
             co=zeros(Zsize,Xsize,Ysize);
@@ -68,23 +72,21 @@ for islice=id%:nslice
 %         tmp=cross(1:end-20,:,:);
 %         cross(1:20,:,:)=cross(end-19:end,:,:);
 %         cross(21:end,:,:)=tmp;
-        %%
-%         Optical_fitting_immune2surf(co, cross, islice, iFile, folder, 0.05, 80, 80, ds_factor);
-        Optical_fitting_3p(co, cross, islice, iFile, folder, 0.046, 130, 110, ds_factor, 92)
-    end
-%     rewrite_aip_tiles(folder,islice,numX*numY);
 
-    Bfg_stitch('bfg', P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
-    BKG_stitch('BKG', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
-%     MIP_stitch('mip', P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);
-%     Ret_stitch('ret_aip', P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);  
-%     AIP_stitch(P2path,folder,disp,mosaic,pxlsize,islice,pattern,sys);  
-%     Mus_stitch('mus',P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);           % stitch mus
-%     Mub_stitch('mub', P2path,folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
-% % %     BaSiC_shading_and_ref_stitch(islice,P2path,folder, numX*numY, 60, 44); %8790:70, 7524:60, NC4: 60
-% %     R2_stitch('R2', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
-%     ZF_stitch('zf', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
-%     ZR_stitch('zr', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor);
+%       Optical_fitting_3p(co, cross, slice#, tile#, OCTpath, aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt)
+        Optical_fitting_finalized(co, cross, islice, iFile, folder,      0.035,       130,       100,     ds_factor, 68,    33);
+        % aip_threshold should use the same value in OCT_recon.m
+        % Find zf by evaluating the agarose tiles
+        % Find zf_tile when evaluating agar tile ???
+    end
+
+    Mus_stitch('mus', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);          
+    Mub_stitch('mub', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+    Bfg_stitch('bfg', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+    BKG_stitch('BKG', P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+    R2_stitch( 'R2',  P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+    ZF_stitch( 'zf',  P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
+    ZR_stitch( 'zr',  P2path, folder,disp,mosaic,pxlsize./ds_factor,islice,pattern,sys,ds_factor,stitch);
     message=strcat('slice No. ',string(islice),' is fitted and stitched.', datestr(now,'DD:HH:MM'),'\n');
     fprintf(message);
 end

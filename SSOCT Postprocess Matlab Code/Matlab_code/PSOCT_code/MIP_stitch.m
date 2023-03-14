@@ -133,19 +133,7 @@ end
 
         mip=single(mip);
         tiffname=strcat(datapath,'mip/vol',num2str(islice),'/',num2str(this_tile),'_mip.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(mip,1);
-        tagstruct.ImageWidth      = size(mip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(mip);
-        t.close();
+        SaveTiff(mip,1,tiffname);
 
     end
     
@@ -166,19 +154,7 @@ end
 
             mip=single(mip);
             tiffname=strcat(datapath,'mip/vol',num2str(islice),'/',num2str(this_tile),'_mip.tif');
-            t = Tiff(tiffname,'w');
-            tagstruct.ImageLength     = size(mip,1);
-            tagstruct.ImageWidth      = size(mip,2);
-            tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-            tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-            tagstruct.BitsPerSample   = 32;
-            tagstruct.SamplesPerPixel = 1;
-            tagstruct.Compression     = Tiff.Compression.None;
-            tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-            tagstruct.Software        = 'MATLAB';
-            t.setTag(tagstruct);
-            t.write(mip);
-            t.close();
+            SaveTiff(mip,1,tiffname);
         end
     catch
     end
@@ -210,10 +186,13 @@ if rem(id,2)==0
 else
     id_aip=id;
 end
+while ~isfile(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'))
+    pause(600);
+end
 load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
-MIP=MIP.*mask;
+MIP=single(MIP.*mask);
 
 if strcmp(sys,'Thorlabs')
     MIP=MIP';
@@ -227,17 +206,4 @@ save(strcat(datapath,'mip/',target,num2str(id),'.mat'),'MIP','-v7.3');
 %     save_nii(nii,'aip_day3.nii');
 % cd(filepath);
 tiffname=strcat(datapath,'mip/',target,num2str(id),'.tif');
-t = Tiff(tiffname,'w');
-image=single(MIP);
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+SaveTiff(MIP,1,tiffname);

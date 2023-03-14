@@ -12,8 +12,7 @@ mkdir(tmp_path);
 vol_path=strcat(datapath2,'volume/');
 mkdir(vol_path);
 cd(datapath2);
-%% cross pol correction
-% read tiles
+%% Read each tiles and downsample
 islice=id;
 filename0=dir(strcat(datapath2,'cross-',num2str(islice),'-*.dat'));
 name1=strsplit(filename0(1).name,'.');  
@@ -29,19 +28,21 @@ for i=1:ntiles
     if length(filename0)==1
         ifilePath=[datapath2,filename0(1).name];
         cross = single(ReadDat_int16(ifilePath, dim))./65535*4;
-        % Jiarui: added depth normalization to see if it can improve z
-        % profile
-%         cross=depth_corr(cross,0.003);
-        cross=cross(depth:depth+thickness-1,:,:);
+        cross=cross(depth:end,:,:);
         cross=imresize3(cross,resize_factor);
-
+        % added depth normalization
+        cross=depth_corr(cross,0.0035/resize_factor);
+        cross=cross(1:round(thickness*resize_factor),:,:);
+        
         filename0=dir(strcat('co-',num2str(islice),'-',num2str(i),'-*.dat'));
         ifilePath=[datapath2,filename0(1).name];
         co = single(ReadDat_int16(ifilePath, dim))./65535*4;
-        % added depth normalization
-%         co=depth_corr(co,0.003);
-        co=co(depth:depth+thickness-1,:,:);
+%         co=co(depth:depth+thickness-1,:,:);
+        co=co(depth:end,:,:);
         co=imresize3(co,resize_factor);
+        % added depth normalization
+        co=depth_corr(co,0.0035/resize_factor);
+        co=co(1:round(thickness*resize_factor),:,:);
         
         ref_tiles(i,:,:,:)=sqrt(co.^2+cross.^2);    
     else
@@ -49,7 +50,7 @@ for i=1:ntiles
     end
 end
 toc
-% BaSiC shading correction for each depth
+%% BaSiC shading correction for each depth
 for depth = 1:size(co,1)
     display(strcat('processing depth: ',num2str(depth)));
     for tile=1:ntiles
@@ -85,7 +86,7 @@ for depth = 1:size(co,1)
     end
 end
 
-%% vol stitch
+%% start vol stitch
 Xsize=1000;
 Ysize=1000;
 Xoverlap=0.15;
@@ -95,7 +96,7 @@ Yoverlap=0.15;
 addpath('/projectnb/npbssmic/s/Matlab_code/PSOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code/NIfTI_20140122');
-%% get FIJI stitching info
+%% get FIJI stitching coordinates
 % use following 3 lines if stitch using OCT coordinates
 if stitch==1
     coordpath = strcat(datapath,'aip/RGB/');
@@ -125,7 +126,7 @@ for ii=1:size(coord,2)
     Ycen(coord(1,ii))=round(coord(2,ii));
 end
 
-%% select tiles for sub-region volumetric stitching
+%% Generating blending mask
 Xcen=Xcen-min(Xcen);
 Ycen=Ycen-min(Ycen);
 
@@ -139,17 +140,14 @@ y = [0:stepy repmat(stepy,1,round((1-2*Yoverlap)*Ysize*resize_factor)) stepy-1:-
 [rampy,rampx]=meshgrid(y,x);
 ramp=rampx.*rampy;      % blending mask
 
-% blending & mosaicing
 cd(vol_path);
 
 for nslice=id
     Mosaic = zeros(round(max(Xcen*resize_factor))+round(Xsize/2*resize_factor) ,round(max(Ycen*resize_factor))+round(Ysize/2*resize_factor),round(thickness*resize_factor));
     Masque = zeros(size(Mosaic));
-
+    %% Fill in each tile to position
     for i=1:length(index)
         in = index(i);
-
-        % row and column start with +2 only for PSOCT0103
         row = round(Xcen(in)*resize_factor)-round(Xsize/2*resize_factor)+1:round(Xcen(in)*resize_factor)+round(Xsize/2*resize_factor);
         column = round(Ycen(in)*resize_factor)-round(Ysize/2*resize_factor)+1:round(Ycen(in)*resize_factor)+round(Ysize/2*resize_factor);  
         vol=squeeze(ref_tiles(in,:,:,:));
@@ -162,31 +160,34 @@ for nslice=id
     Ref=Mosaic./Masque;
     Ref(isnan(Ref(:)))=0;
     Ref=single(Ref);
+    %% remove agarose
+    if rem(id,2)==0
+        id_aip=id-1;
+    else
+        id_aip=id;
+    end
+    while ~isfile(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'))
+        pause(600);
+    end
+    load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
+    AIP=imresize(AIP,resize_factor);
+    mask=zeros(size(AIP));
+    mask(AIP>aip_threshold)=1;
     
-%     if rem(id,2)==0
-%         id_aip=id-1;
-%     else
-%         id_aip=id;
-%     end
-%     load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
-%     AIP=imresize(AIP,resize_factor);
-%     mask=zeros(size(AIP));
-%     mask(AIP>aip_threshold)=1;
-%     
-%     if size(mask,1)>size(Ref,1)
-%         xx=size(Ref,1);
-%     else
-%         xx=size(mask,1);
-%     end
-%     if size(mask,2)>size(Ref,2)
-%         yy=size(Ref,2);
-%     else
-%         yy=size(mask,2);
-%     end
-%     for ii = 1:size(Ref,3)
-%         Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
-%     end
-% 
+    if size(mask,1)>size(Ref,1)
+        xx=size(Ref,1);
+    else
+        xx=size(mask,1);
+    end
+    if size(mask,2)>size(Ref,2)
+        yy=size(Ref,2);
+    else
+        yy=size(mask,2);
+    end
+    for ii = 1:size(Ref,3)
+        Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
+    end
+    %% save data
     save(strcat(datapath2,'volume/ref',num2str(nslice),'.mat'),'Ref','-v7.3');
 
    clear options;

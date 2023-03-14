@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#$ -l h_rt=72:00:00
+#$ -l h_rt=48:00:00
 #$ -pe omp 4
 #$ -l mem_per_core=4G
 #$ -N OCT_recon

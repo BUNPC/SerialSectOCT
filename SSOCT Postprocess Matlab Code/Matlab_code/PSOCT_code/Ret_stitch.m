@@ -132,19 +132,7 @@ end
 
         ret_aip=single(ret_aip);
         tiffname=strcat(datapath,'retardance/vol',num2str(islice),'/',num2str(this_tile),'_ret.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(ret_aip,1);
-        tagstruct.ImageWidth      = size(ret_aip,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(ret_aip);
-        t.close();
+        SaveTiff(ret_aip,1,tiffname);
     end
     
     try
@@ -164,19 +152,7 @@ end
 
             ret_aip=single(ret_aip);
             tiffname=strcat(datapath,'retardance/vol',num2str(islice),'/',num2str(this_tile),'_ret.tif');
-            t = Tiff(tiffname,'w');
-            tagstruct.ImageLength     = size(ret_aip,1);
-            tagstruct.ImageWidth      = size(ret_aip,2);
-            tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-            tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-            tagstruct.BitsPerSample   = 32;
-            tagstruct.SamplesPerPixel = 1;
-            tagstruct.Compression     = Tiff.Compression.None;
-            tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-            tagstruct.Software        = 'MATLAB';
-            t.setTag(tagstruct);
-            t.write(ret_aip);
-            t.close();
+            SaveTiff(ret_aip,1,tiffname);
         end
     catch
     end
@@ -214,30 +190,21 @@ if rem(id,2)==0
 else
     id_aip=id;
 end
+
+while ~isfile(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'))
+    pause(600);
+end
 load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 ret_aip=ret_aip.*mask;
-
+ret_aip = single(ret_aip);  
 save(strcat(datapath,'retardance/',target,num2str(id),'.mat'),'ret_aip','-v7.3');
   
-ret_aip = single(ret_aip);   
+ 
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
 % cd(filepath);
 tiffname=strcat(datapath,'retardance/',target,num2str(id),'.tif');
-t = Tiff(tiffname,'w');
-image=ret_aip;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+SaveTiff(ret_aip,1,tiffname);

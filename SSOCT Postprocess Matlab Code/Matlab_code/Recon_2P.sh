@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
-#$ -l h_rt=48:00:00
-#$ -pe omp 4
+#$ -l h_rt=24:00:00
+#$ -pe omp 2
 #$ -N Recon_2P
 #$ -j y
 

@@ -1,27 +1,40 @@
-% specify mosaic parameters
-%% xx yy is positive for dataset acquired after sep 06
+%% specify data parameters
+P2path  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_7597_2P/'; %                                    ADJUST FOR EACH SAMPLE!!!
+nslice=24; % total number of slices                                                                         ADJUST FOR EACH SAMPLE!!!
+%% specify mosaic parameters
+% xx yy is positive for dataset acquired after sep 06
+%% for default 10% overlap
 xx=1280;    % xx is the X displacement of two adjacent tile align in the X direction
 % xx=1440;
 xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
 yy=1280;    % yy is the Y displacement of two adjacent tile align in the Y direction
 % yy=1440;
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
-numX=10;    % #tiles in X direction !!!!!!!!!
-numY=10;    % #tiles in Y direction !!!!!!!!!
+numX=10;    % #tiles in X direction !!!!!!!!!                                                                ADJUST FOR EACH SAMPLE!!!
+numY=10;    % #tiles in Y direction !!!!!!!!!                                                                ADJUST FOR EACH SAMPLE!!!
 Xoverlap=0.1;   % overlap in X direction
 Yoverlap=0.1;   % overlap in Y direction
+%% for 30% overlap only
+% xx=1150;    % xx is the X displacement of two adjacent tile align in the X direction
+% % xx=1440;
+% xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
+% yy=1180;    % yy is the Y displacement of two adjacent tile align in the Y direction
+% % yy=1440;
+% yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
+% numX=10;    % #tiles in X direction !!!!!!!!!                                                              ADJUST FOR EACH SAMPLE!!!
+% numY=10;    % #tiles in Y direction !!!!!!!!!                                                              ADJUST FOR EACH SAMPLE!!!
+% Xoverlap=0.1;   % overlap in X direction
+% Yoverlap=0.1;   % overlap in Y direction
+%%
 disp=[xx xy yy yx];
 mosaic=[numX numY Xoverlap Yoverlap];
 pattern = 'bidirectional';  % mosaic pattern, could be bidirectional or unidirectional
-% pick three depth planes for generating stitching coordinates, three
+%% pick three depth planes for generating stitching coordinates, three
 % planes should evenly distribute along volume depth, with no saturated tiles
-stitch_plane1=4;
-stitch_plane2=10;
-stitch_plane3=16;
+stitch_plane1=4;                                                                                           % ADJUST FOR EACH SAMPLE!!!
+stitch_plane2=10;                                                                                          % ADJUST FOR EACH SAMPLE!!!
+stitch_plane3=16;                                                                                          % ADJUST FOR EACH SAMPLE!!!
 
-% specify dataset directory
-datapath  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_7597_2P/'; %  !!!!!!!!! 
-nslice=24; % total number of slices !!!!!!!!!
 njobs=nslice; %number jobs in SCC parallel processing
 ntile=numX*numY; % total number of tiles per slice
 pxlsize=[1500 1500];
@@ -44,8 +57,8 @@ slice_job=nslice/njobs;
 istart=(id-1)*ntile*slice_job+1;
 istop=id*ntile*slice_job;
 
-create_dir(nslice, datapath); 
-cd(datapath)
+create_dir(nslice, P2path); 
+cd(P2path)
 filename0=dir(strcat('file*.tif')); 
 
 for iFile=istart:istop
@@ -70,52 +83,21 @@ for iFile=istart:istop
      
     % save tiles 
     channel1=single(channel1);
-    tiffname=strcat(datapath,'aip/vol',num2str(slice_index),'/','Channel1.tif');
-    if(tile_index==1)
-        t = Tiff(tiffname,'w');
-    else
-        t = Tiff(tiffname,'a');
-    end
-    tagstruct.ImageLength     = size(channel1,1);
-    tagstruct.ImageWidth      = size(channel1,2);
-    tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-    tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-    tagstruct.BitsPerSample   = 32;
-    tagstruct.SamplesPerPixel = 1;
-    tagstruct.Compression     = Tiff.Compression.None;
-    tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-    tagstruct.Software        = 'MATLAB';
-    t.setTag(tagstruct);
-    t.write(channel1);
-    t.close();
+    tiffname=strcat(P2path,'aip/vol',num2str(slice_index),'/','Channel1.tif');
+    SaveTiff(channel1,tile_index,tiffname);
 
     channel2=single(channel2);
-    tiffname=strcat(datapath,'aip/vol',num2str(slice_index),'/','Channel2.tif');
-    if(tile_index==1)
-        t = Tiff(tiffname,'w');
-    else
-        t = Tiff(tiffname,'a');
-    end
-    tagstruct.ImageLength     = size(channel2,1);
-    tagstruct.ImageWidth      = size(channel2,2);
-    tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-    tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-    tagstruct.BitsPerSample   = 32;
-    tagstruct.SamplesPerPixel = 1;
-    tagstruct.Compression     = Tiff.Compression.None;
-    tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-    tagstruct.Software        = 'MATLAB';
-    t.setTag(tagstruct);
-    t.write(channel2);
-    t.close();
+    tiffname=strcat(P2path,'aip/vol',num2str(slice_index),'/','Channel2.tif');
+    SaveTiff(channel2,tile_index,tiffname);
+    
 end   
 
 %% write macro script for BaSiC shading correction
 for islice=((id-1)*slice_job+1):id*slice_job
-    macropath=strcat(datapath,'aip/vol',num2str(islice),'/BaSiC.ijm');
-    cor_filename=strcat(datapath,'aip/vol',num2str(islice),'/','Channel1_cor.tif');
+    macropath=strcat(P2path,'aip/vol',num2str(islice),'/BaSiC.ijm');
+    cor_filename=strcat(P2path,'aip/vol',num2str(islice),'/','Channel1_cor.tif');
     fid_Macro = fopen(macropath, 'w');
-    filename=strcat(datapath,'aip/vol',num2str(islice),'/','Channel1.tif');
+    filename=strcat(P2path,'aip/vol',num2str(islice),'/','Channel1.tif');
     fprintf(fid_Macro,'open("%s");\n',filename);
     fprintf(fid_Macro,'run("BaSiC ","processing_stack=Channel1.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
     fprintf(fid_Macro,'selectWindow("Corrected:Channel1.tif");\n');
@@ -126,8 +108,8 @@ for islice=((id-1)*slice_job+1):id*slice_job
     fprintf(fid_Macro,'close();\n');
 
 
-    filename=strcat(datapath,'aip/vol',num2str(islice),'/','Channel2.tif');
-    cor_filename=strcat(datapath,'aip/vol',num2str(islice),'/','Channel2_cor.tif');
+    filename=strcat(P2path,'aip/vol',num2str(islice),'/','Channel2.tif');
+    cor_filename=strcat(P2path,'aip/vol',num2str(islice),'/','Channel2_cor.tif');
     fprintf(fid_Macro,'open("%s");\n',filename);
     fprintf(fid_Macro,'run("BaSiC ","processing_stack=Channel2.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
     fprintf(fid_Macro,'selectWindow("Corrected:Channel2.tif");\n');
@@ -147,67 +129,43 @@ end
 
 %% save shading corrected tiles
 for islice=((id-1)*slice_job+1):id*slice_job
-    cd(strcat(datapath,'aip/vol',num2str(islice)));
-    filename0=strcat(datapath,'aip/vol',num2str(islice),'/','Channel1_cor.tif');
+    cd(strcat(P2path,'aip/vol',num2str(islice)));
+    filename0=strcat(P2path,'aip/vol',num2str(islice),'/','Channel1_cor.tif');
     filename0=dir(filename0);
     for iFile=1:ntile
         channel1 = double(imread(filename0(1).name, iFile));
-        avgname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel1.mat');
+        avgname=strcat(P2path,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel1.mat');
         save(avgname,'channel1');  
 
         channel1=single(channel1);
-        tiffname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel1.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(channel1,1);
-        tagstruct.ImageWidth      = size(channel1,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(channel1);
-        t.close();
+        tiffname=strcat(P2path,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel1.tif');
+        SaveTiff(channel1,1,tiffname);
     end
     
-    filename0=strcat(datapath,'aip/vol',num2str(islice),'/','Channel2_cor.tif');
+    filename0=strcat(P2path,'aip/vol',num2str(islice),'/','Channel2_cor.tif');
     filename0=dir(filename0);
     for iFile=1:ntile
         channel2 = double(imread(filename0(1).name, iFile));%./shade1;
-        avgname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel2.mat');
+        avgname=strcat(P2path,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel2.mat');
         save(avgname,'channel2');  
 
         channel2=single(channel2);
-        tiffname=strcat(datapath,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel2.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(channel2,1);
-        tagstruct.ImageWidth      = size(channel2,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(channel2);
-        t.close();
+        tiffname=strcat(P2path,'aip/vol',num2str(islice),'/',num2str(iFile),'-channel2.tif');
+        SaveTiff(channel2,1,tiffname);
     end
 end  
 %% log task and the lastly finished task stitch volumes
-fid=fopen(strcat(datapath,'aip/log',num2str(id),'.txt'),'w');
+fid=fopen(strcat(P2path,'aip/log',num2str(id),'.txt'),'w');
 fclose(fid);
-cd(strcat(datapath,'aip/'))
-logfiles=dir(strcat(datapath,'aip/log*.txt')); 
+cd(strcat(P2path,'aip/'))
+logfiles=dir(strcat(P2path,'aip/log*.txt')); 
 if length(logfiles)==njobs
     delete log*.txt;
     % Stitching
     fprintf('stitching\n');
-    Gen_2P_coord(datapath,disp,mosaic,pxlsize,1,pattern, stitch_plane1, stitch_plane2, stitch_plane3);
+    Gen_2P_coord(P2path,disp,mosaic,pxlsize,1,pattern, stitch_plane1, stitch_plane2, stitch_plane3);
     for islice = 1:nslice
-        Stitch_2P(datapath,disp,mosaic,pxlsize,islice,pattern);         
+        Stitch_2P(P2path,disp,mosaic,pxlsize,islice,pattern);         
         fprintf(strcat('Slice No. ',num2str(islice),' is stitched.', datestr(now,'DD:HH:MM'),'\n'));
     end
 end
