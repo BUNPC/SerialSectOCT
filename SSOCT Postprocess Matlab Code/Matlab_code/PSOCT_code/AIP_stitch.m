@@ -146,6 +146,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     try
         system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
     catch
+        system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
         display("BaSiC shading correction failed")
     end
     % write uncorrected AIP.tif tiles
@@ -301,8 +302,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     %% save as nifti or tiff    
 %          nii=make_nii(MosaicFinal,[],[],64);
 %          cd('C:\Users\jryang\Downloads\');
-%          save_nii(nii,'aip_vol7.nii');
-%     MosaicFinal = uint16(65535*(mat2gray(MosaicFinal)));    
+%          save_nii(nii,'aip_vol7.nii');  
     tiffname=strcat(datapath,'aip/','aip',num2str(islice),'.tif');
     SaveTiff(AIP,1,tiffname);
 end

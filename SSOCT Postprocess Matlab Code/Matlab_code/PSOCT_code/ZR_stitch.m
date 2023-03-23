@@ -151,19 +151,7 @@ ramp=rampx.*rampy;      % blending mask
 
         zr=single(zr);
         tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_ZR.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(zr,1);
-        tagstruct.ImageWidth      = size(zr,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(zr);
-        t.close();
+        SaveTiff(zr,1,tiffname);
 
     end
 %     % write corrected MUS_cor.tif tiles
@@ -256,20 +244,5 @@ MosaicFinal = single(MosaicFinal);
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-% imwrite(MosaicFinal,tiffname,'Compression','none');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

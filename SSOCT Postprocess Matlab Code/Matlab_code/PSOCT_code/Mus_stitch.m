@@ -39,9 +39,6 @@ else
     coord = read_Fiji_coord(f,'Composite');
     coord(2:3,:)=coord(2:3,:).*2/3/ds;
 end
-%          coord(2:3,:)=coord(2:3,:).*2/3; %for samples after 09/17/21
-%     coord(2,:)=coord(2,:).*1.62/3; %for sample 8921 only
-%     coord(3,:)=coord(3,:).*1.82/3; %for sample 8921  only
 %% define coordinates for each tile
 Xcen=zeros(size(coord,2),1);
 Ycen=zeros(size(coord,2),1);
@@ -76,75 +73,26 @@ y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0].
 ramp=rampx.*rampy;      % blending mask
 
 %% flagg mus tiles
-% load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
-% % tile_flag(1:numX)=0;
-% % tile_flag(end-numX+1:end)=0;
-% % tile_flag(:)=0;
-% tile_flag(1:11)=0;
-% % tile_flag(14:21)=1;
-% % tile_flag(24:32)=1;
-% % tile_flag=ones(1,length(tile_flag)); %% when tile_flag doesn't work
-% filename0=dir('MUS.tif');
-% filename = strcat(filepath,'MUS_flagged.tif');
-% flagged=0;
-% for j=1:numX*numY
-%     if tile_flag(j)>0
-%         mus = single(imread(filename0(1).name, j));
-%         
-%         if flagged==0
-%             t = Tiff(filename,'w');
-%             flagged=1;
-%         else
-%             t = Tiff(filename,'a');
-%         end
-%         tagstruct.ImageLength     = size(mus,1);
-%         tagstruct.ImageWidth      = size(mus,2);
-%         tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-%         tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-%         tagstruct.BitsPerSample   = 32;
-%         tagstruct.SamplesPerPixel = 1;
-%         tagstruct.Compression     = Tiff.Compression.None;
-%         tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-%         tagstruct.Software        = 'MATLAB';
-%         t.setTag(tagstruct);
-%         t.write(mus);
-%         t.close();
-% 
-%     end   
-% end
-% % 
-% % %% BaSiC shading correction
-%     macropath=strcat(datapath,'fitting/vol',num2str(islice),'/BaSiC.ijm');
-%     cor_filename=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_cor.tif');
-%     fid_Macro = fopen(macropath, 'w');
-%     filename=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_flagged.tif');
-%     fprintf(fid_Macro,'open("%s");\n',filename);
-%     fprintf(fid_Macro,'run("BaSiC ","processing_stack=MUS_flagged.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
-%     fprintf(fid_Macro,'selectWindow("Corrected:MUS_flagged.tif");\n');
-%     fprintf(fid_Macro,'saveAs("Tiff","%s");\n',cor_filename);
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'run("Quit");\n');
-%     fclose(fid_Macro);
-%     try
-%        system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
-%     % %     system(['/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 -macro ',macropath]);
-%     catch
-%    end
-    %write uncorrected MUS.tif tiles
-    filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS.tif');
-    filename0=dir(filename0);
-    for iFile=1:numTile
-        this_tile=iFile;
-        mus = double(imread(filename0(1).name, iFile));
-        avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-        save(avgname,'mus');  
-
-        mus=single(mus);
-        tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mus.tif');
-        t = Tiff(tiffname,'w');
+tile_flag_name=strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat');
+if isfile(tile_flag_name)
+    load(tile_flag_name);
+else
+    display(['tile_flag file not found for slice: ',num2str(islice)]);
+    tile_flag=ones(1,numX*numY); %% when tile_flag doesn't work
+end
+filename0=dir('MUS.tif');
+filename = strcat(filepath,'MUS_flagged.tif');
+flagged=0;
+for j=1:numX*numY
+    if tile_flag(j)>0
+        mus = single(imread(filename0(1).name, j));
+        
+        if flagged==0
+            t = Tiff(filename,'w');
+            flagged=1;
+        else
+            t = Tiff(filename,'a');
+        end
         tagstruct.ImageLength     = size(mus,1);
         tagstruct.ImageWidth      = size(mus,2);
         tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
@@ -158,59 +106,77 @@ ramp=rampx.*rampy;      % blending mask
         t.write(mus);
         t.close();
 
+    end   
+end
+%% BaSiC shading correction
+macropath=strcat(datapath,'fitting/vol',num2str(islice),'/BaSiC.ijm');
+cor_filename=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_cor.tif');
+fid_Macro = fopen(macropath, 'w');
+filename=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_flagged.tif');
+fprintf(fid_Macro,'open("%s");\n',filename);
+fprintf(fid_Macro,'run("BaSiC ","processing_stack=MUS_flagged.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
+fprintf(fid_Macro,'selectWindow("Corrected:MUS_flagged.tif");\n');
+fprintf(fid_Macro,'saveAs("Tiff","%s");\n',cor_filename);
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'run("Quit");\n');
+fclose(fid_Macro);
+try
+   system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+catch
+    system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+    display(['BaSiC shading correction failed for mus for slice: ',num2str(islice)]);
+end
+%write uncorrected MUS.tif tiles
+filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS.tif');
+filename0=dir(filename0);
+for iFile=1:numTile
+    this_tile=iFile;
+    mus = double(imread(filename0(1).name, iFile));
+    avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+    save(avgname,'mus');  
+
+    mus=single(mus);
+    tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mus.tif');
+    SaveTiff(mus,1,tiffname);
+end
+
+try
+    % write corrected MUS_cor.tif tiles
+    filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_cor.tif');
+    filename0=dir(filename0);
+    for iFile=1:sum(tile_flag)
+        for tm=1:numX*numY
+            if sum(tile_flag(1:tm))==iFile
+                this_tile=tm;
+                break
+            end
+        end
+        mus = double(imread(filename0(1).name, iFile));
+        avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+        save(avgname,'mus');  
+
+        mus=single(mus);
+        tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mus.tif');
+        SaveTiff(mus,1,tiffname);
     end
-%     % shading correciton disabled
-%     try
-%         % write corrected MUS_cor.tif tiles
-%         filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','MUS_cor.tif');
-%         filename0=dir(filename0);
-%         for iFile=1:sum(tile_flag)
-%             for tm=1:numX*numY
-%                 if sum(tile_flag(1:tm))==iFile
-%                     this_tile=tm;
-%                     break
-%                 end
-%             end
-%             mus = double(imread(filename0(1).name, iFile));
-%             avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-%             save(avgname,'mus');  
-% 
-%             mus=single(mus);
-%             tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mus.tif');
-%             t = Tiff(tiffname,'w');
-%             tagstruct.ImageLength     = size(mus,1);
-%             tagstruct.ImageWidth      = size(mus,2);
-%             tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-%             tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-%             tagstruct.BitsPerSample   = 32;
-%             tagstruct.SamplesPerPixel = 1;
-%             tagstruct.Compression     = Tiff.Compression.None;
-%             tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-%             tagstruct.Software        = 'MATLAB';
-%             t.setTag(tagstruct);
-%             t.write(mus);
-%             t.close();
-%         end
-%     catch
-%    end
+catch
+    display(['writing shading corrected tiles for mus failed on slice number: ',num2str(islice)]);
+end
 %% blending & mosaicing
-% if(strcmp(datapath,'/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_8095/'))
-    mus_bg = single(imread(strcat('/projectnb2/npbssmic/ns/distortion_correction/','mus_bg.tif'), 1));
-    mus_bg=imresize(mus_bg,10/ds);
-% end
-
-
 Mosaic = zeros(round(max(Xcen)+Xsize) ,round(max(Ycen)+Ysize));
 Masque = zeros(size(Mosaic)); 
 
 for i=1:length(index)
-        in = index(i);
-        filename0=dir(strcat(num2str(in),'.mat'));
-%         filename0=dir(strcat('mus-1-',num2str(in),'.mat'));
+    in = index(i);
+    filename0=dir(strcat(num2str(in),'.mat'));
+    if isfile(filename0.name)
         load(filename0.name);
-%         if(strcmp(datapath,'/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_8095/'))
-            mus = mus+(1-mus_bg)./(mus+1).*20;
-%         end
+        if tile_flag(in)==0
+            mus=zeros(size(mus));
+        end
         row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);     
         column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
         Masque2 = zeros(size(Mosaic));
@@ -221,35 +187,20 @@ for i=1:length(index)
         elseif strcmp(sys,'Thorlabs')
             Mosaic(row,column)=Mosaic(row,column)+mus'.*Masque2(row,column);
         end
+    end
         
 end
 
 % process the blended image
 MosaicFinal=Mosaic./Masque;
 MosaicFinal(isnan(MosaicFinal))=0;
-% MosaicFinal(MosaicFinal>20)=0;
 if strcmp(sys,'Thorlabs')
     MosaicFinal=MosaicFinal';
 end
-save(strcat(datapath,'fitting/',result,num2str(islice),'.mat'),'MosaicFinal');
-  
-MosaicFinal = single(MosaicFinal);   
+MosaicFinal = single(MosaicFinal);  
+save(strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.mat'),'MosaicFinal');   
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

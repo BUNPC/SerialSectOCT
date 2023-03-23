@@ -1,10 +1,10 @@
 % fitting scattering and birefringence of brain tissue
 % run this after OCT_recon.m is finished
 
-folder = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_10T/NC_6047/';      % OCT file path                          ADJUST FOR EACH SAMPLE!!! 
-P2path = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_10T/NC_6047_2P/';   % 2P file path                           ADJUST FOR EACH SAMPLE!!!
+folder = '/projectnb2/npbssmic/ns/PSOCT_2PM_sample/';      % OCT file path                          ADJUST FOR EACH SAMPLE!!! 
+P2path = '/projectnb2/npbssmic/ns/PSOCT_2PM_sample/2PM/';   % 2P file path                           ADJUST FOR EACH SAMPLE!!!
 datapath=strcat(folder,'dist_corrected/'); 
-nslice=22; % define total number of slices                                                                       ADJUST FOR EACH SAMPLE!!!
+nslice=42; % define total number of slices                                                                       ADJUST FOR EACH SAMPLE!!!
 stitch=0; % 1 means using OCT data to generate stitching coordinates, 
 % 0 means using 2P stitching coordinates.                                                                        ADJUST FOR EACH SAMPLE!!!
 ds_factor=4;     % downsampling factor, 4 means 4x4 pixel downsample, which is 12x12um pixel size                ADJUST FOR EACH SAMPLE!!!
@@ -24,8 +24,8 @@ xx=866;    % xx is the X displacement of two adjacent tile align in the X direct
 xy=0;     % xy is the Y displacement of two adjacent tile align in the X direction, default to 0
 yy=866;    % yy is the Y displacement of two adjacent tile align in the Y direction
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
-numX=11;    % #tiles in X direction                                                                             ADJUST FOR EACH SAMPLE!!!
-numY=8;    % #tiles in Y direction                                                                              ADJUST FOR EACH SAMPLE!!!
+numX=18;    % #tiles in X direction                                                                             ADJUST FOR EACH SAMPLE!!!
+numY=15;    % #tiles in Y direction                                                                              ADJUST FOR EACH SAMPLE!!!
 Xoverlap=0.05;   % overlap in X direction
 Yoverlap=0.05;   % overlap in Y direction
 disp=[xx xy yy yx];
@@ -74,7 +74,7 @@ for islice=id%:nslice
 %         cross(21:end,:,:)=tmp;
 
 %       Optical_fitting_3p(co, cross, slice#, tile#, OCTpath, aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt)
-        Optical_fitting_finalized(co, cross, islice, iFile, folder,      0.035,       130,       100,     ds_factor, 68,    33);
+        Optical_fitting_finalized(co, cross, islice, iFile, folder,      0.05,       130,       100,     ds_factor, 20,    100);
         % aip_threshold should use the same value in OCT_recon.m
         % Find zf by evaluating the agarose tiles
         % Find zf_tile when evaluating agar tile ???

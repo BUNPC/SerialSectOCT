@@ -80,15 +80,19 @@ y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0].
 ramp=rampx.*rampy;      % blending mask
 
 %% flagg mub tiles
-load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
-% tile_flag=ones(1,length(tile_flag)); %% when tile_flag doesn't work
+tile_flag_name=strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat');
+if isfile(tile_flag_name)
+    load(tile_flag_name);
+else
+    display(['tile_flag file not found for slice: ',num2str(islice)]);
+    tile_flag=ones(1,numX*numY); %% when tile_flag doesn't work
+end
 filename0=dir('MUB.tif');
 filename = strcat(filepath,'MUB_flagged.tif');
 flagged=0;
 for j=1:numX*numY
     if tile_flag(j)>0
         mub = single(imread(filename0(1).name, j));
-%         if mean2(mub)>4
             if flagged==0
                 t = Tiff(filename,'w');
                 flagged=1;
@@ -107,10 +111,6 @@ for j=1:numX*numY
             t.setTag(tagstruct);
             t.write(mub);
             t.close();
-%         else
-%             tile_flag(j)=0;
-%         end
-
     end   
 end
 % 
@@ -130,11 +130,12 @@ end
     fprintf(fid_Macro,'run("Quit");\n');
     fclose(fid_Macro);
     
-   try
-       system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
-   % %     system(['/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 -macro ',macropath]);
-   catch
-   end
+try
+   system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+catch
+    system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+    display(['BaSiC shading correction failed for mub for slice: ',num2str(islice)]);
+end
     %write uncorrected MUB.tif tiles
     % load mub background
 %     mubBG = single(imread(strcat(datapath, 'mubBG.tif')));
@@ -150,19 +151,7 @@ end
 
         mub=single(mub);
         tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mub.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(mub,1);
-        tagstruct.ImageWidth      = size(mub,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(mub);
-        t.close();
+        SaveTiff(mub,1,tiffname);
     end
     
     try
@@ -182,19 +171,7 @@ end
 
             mub=single(mub);
             tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_mub.tif');
-            t = Tiff(tiffname,'w');
-            tagstruct.ImageLength     = size(mub,1);
-            tagstruct.ImageWidth      = size(mub,2);
-            tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-            tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-            tagstruct.BitsPerSample   = 32;
-            tagstruct.SamplesPerPixel = 1;
-            tagstruct.Compression     = Tiff.Compression.None;
-            tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-            tagstruct.Software        = 'MATLAB';
-            t.setTag(tagstruct);
-            t.write(mub);
-            t.close();
+            SaveTiff(mub,1,tiffname);
         end
     catch
     end
@@ -207,17 +184,22 @@ Masque = zeros(size(Mosaic));
 for i=1:length(index)
         in = index(i);
         filename0=dir(strcat(num2str(in),'.mat'));
-        load(filename0.name);
+        if isfile(filename0.name)
+            load(filename0.name);
+            if tile_flag(in)==0
+                mub=zeros(size(mub));
+            end
         
-        row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);       
-        column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
-        Masque2 = zeros(size(Mosaic));
-        Masque2(row,column)=ramp;
-        Masque(row,column)=Masque(row,column)+Masque2(row,column);
-        if strcmp(sys,'PSOCT')
-            Mosaic(row,column)=Mosaic(row,column)+mub.*Masque2(row,column);
-        elseif strcmp(sys,'Thorlabs')
-            Mosaic(row,column)=Mosaic(row,column)+mub'.*Masque2(row,column);
+            row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);       
+            column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
+            Masque2 = zeros(size(Mosaic));
+            Masque2(row,column)=ramp;
+            Masque(row,column)=Masque(row,column)+Masque2(row,column);
+            if strcmp(sys,'PSOCT')
+                Mosaic(row,column)=Mosaic(row,column)+mub.*Masque2(row,column);
+            elseif strcmp(sys,'Thorlabs')
+                Mosaic(row,column)=Mosaic(row,column)+mub'.*Masque2(row,column);
+            end
         end
         
 end
@@ -225,28 +207,13 @@ end
 % process the blended image
 MosaicFinal=Mosaic./Masque;
 MosaicFinal(isnan(MosaicFinal))=0;
-% MosaicFinal(MosaicFinal>20)=0;
 if strcmp(sys,'Thorlabs')
     MosaicFinal=MosaicFinal';
 end
-save(strcat(datapath,'fitting/','mub',num2str(islice),'.mat'),'MosaicFinal');
-MosaicFinal = single(MosaicFinal);   
+MosaicFinal = single(MosaicFinal);  
+save(strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.mat'),'MosaicFinal');   
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

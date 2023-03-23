@@ -55,9 +55,9 @@ stitch=1; % 1 means using OCT data to generate stitching coordinates,
 
 % if using OCT images to generate stitching coordinates, you need three slices that are separated in z for stitching (why three? three channels in RGB format.)
 % However, say, you have total of 100 slices, but you don't have enough space in SCC so you want to run 50 slices at a time, then the following slice numbers should be smaller than 50
-stitch_slice1=5;    % if stitch == 1, first slice for stitching                                ADJUST FOR EACH SAMPLE!!!
-stitch_slice2=9;   % if stitch == 1, second slice for stitching                                ADJUST FOR EACH SAMPLE!!!
-stitch_slice3=15;   % if stitch == 1, third slice for stitching                                ADJUST FOR EACH SAMPLE!!!
+stitch_slice1=9;    % if stitch == 1, first slice for stitching                                ADJUST FOR EACH SAMPLE!!!
+stitch_slice2=25;   % if stitch == 1, second slice for stitching                                ADJUST FOR EACH SAMPLE!!!
+stitch_slice3=39;   % if stitch == 1, third slice for stitching                                ADJUST FOR EACH SAMPLE!!!
 
 njobs=1; % number of parallel tasks per slice in SCC parallel processing, default to be 1, meaning each task handles one slice
 sys = 'PSOCT'; % specify OCT system name. default to be 'PSOCT
@@ -103,7 +103,7 @@ aip_threshold_post_BaSiC=aip_threshold/4; % intensity threshold for AIP (after B
 id = str2num(id);   
 section=ceil(ntile/njobs); % total tiles per each paralle task, usually equal to total tiles per slice
 istart=1;%(id-1)*section+1; starting tile number for each parallel task
-istop=section; % end time number for each parallel task
+istop=0;%section; % end time number for each parallel task                                     !!!!!!!!!!!!!! SET ISTOP=0 TO REDO STITCHING AFTER DISTORTION CORRECTION IS DONE
 % create folder for AIPs and MIPs
 create_dir(nslice, OCTpath);  
 % function that finds tissue surface 
@@ -272,14 +272,14 @@ for islice=id
 
 end
 %% log file indicates this slice has done reconstruction
-fid=fopen(strcat(OCTpath,'aip/log',num2str(id),'.txt'),'w');
+fid=fopen(strcat(OCTpath,'dist_corrected/volume/log',num2str(id),'.txt'),'w');
 fclose(fid);
-cd(strcat(OCTpath,'aip/'))
-logfiles=dir(strcat(OCTpath,'aip/log*.txt')); 
+cd(strcat(OCTpath,'dist_corrected/volume/'))
+logfiles=dir(strcat(OCTpath,'dist_corrected/volume/log*.txt')); 
 % if all slices finish reconstruction, do stacking 
 if length(logfiles)==nslice
 %    delete log*.txt
-   Concat_ref_vol(nslice,OCTpath);
+   Concat_ref_vol(nslice,OCTpath, aip_threshold_post_BaSiC);
 %    ref_mus(OCTpath, nslice, nslice*11, 50, 50); % volume intensity correction, comment the mus part if no fitting is generated
 end
 system(['chmod -R 777 ',OCTpath]);

@@ -50,12 +50,8 @@ else
     coord = read_Fiji_coord(f,'Composite');
     coord(2:3,:)=coord(2:3,:).*2/3/ds;
 end
-%          coord(2:3,:)=coord(2:3,:).*2/3; %for samples after 09/17/21
-%     coord(2,:)=coord(2,:).*1.62/3; %for sample 8921 only
-%     coord(3,:)=coord(3,:).*1.82/3; %for sample 8921  only
 
 %% define coordinates for each tile
-
 Xcen=zeros(size(coord,2),1);
 Ycen=zeros(size(coord,2),1);
 index=coord(1,:);
@@ -72,7 +68,6 @@ index=coord(1,:);
     end
 Xcen=Xcen-min(Xcen);
 Ycen=Ycen-min(Ycen);
-
 Xcen=Xcen+Xsize/2;
 Ycen=Ycen+Ysize/2;
 
@@ -88,84 +83,83 @@ y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0].
     end   
 ramp=rampx.*rampy;      % blending mask
 
-%% flagg bfg tiles
-%load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
-% tile_flag=ones(1,length(tile_flag)); %% when tile_flag doesn't work
-%filename0=dir('BFG.tif');
-%filename = strcat(filepath,'BFG_flagged.tif');
-%flagged=0;
-% for j=1:numX*numY
-% %     if tile_flag(j)>0
-%         bfg = single(imread(filename0(1).name, j));
-%         
-% %         if flagged==0
-% %             t = Tiff(filename,'w');
-% %             flagged=1;
-% %         else
-% %             t = Tiff(filename,'a');
-% %         end
-%         tagstruct.ImageLength     = size(bfg,1);
-%         tagstruct.ImageWidth      = size(bfg,2);
-%         tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-%         tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-%         tagstruct.BitsPerSample   = 32;
-%         tagstruct.SamplesPerPixel = 1;
-%         tagstruct.Compression     = Tiff.Compression.None;
-%         tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-%         tagstruct.Software        = 'MATLAB';
-%         t.setTag(tagstruct);
-%         t.write(bfg);
-%         t.close();
-% 
-%     %end   
-% end
+%% remove tiles with pure agarose
+try
+    load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
+catch
+    display(['tile_flag file not found for slice: ',num2str(islice)]);
+    tile_flag=ones(1,numX*numY); %% when tile_flag doesn't work
+end
+
+filename0=dir('BFG.tif');
+filename = strcat(filepath,'BFG_flagged.tif');
+flagged=0;
+for j=1:numX*numY
+    if tile_flag(j)>0
+        bfg = single(imread(filename0(1).name, j));
+        
+        if flagged==0
+            t = Tiff(filename,'w');
+            flagged=1;
+        else
+            t = Tiff(filename,'a');
+        end
+        tagstruct.ImageLength     = size(bfg,1);
+        tagstruct.ImageWidth      = size(bfg,2);
+        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
+        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
+        tagstruct.BitsPerSample   = 32;
+        tagstruct.SamplesPerPixel = 1;
+        tagstruct.Compression     = Tiff.Compression.None;
+        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
+        tagstruct.Software        = 'MATLAB';
+        t.setTag(tagstruct);
+        t.write(bfg);
+        t.close();
+    end   
+end
 
 %% BaSiC shading correction
-%     macropath=strcat(datapath,'fitting/vol',num2str(islice),'/BaSiC.ijm');
-%     cor_filename=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_cor.tif');
-%     fid_Macro = fopen(macropath, 'w');
-%     filename=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_flagged.tif');
-%     fprintf(fid_Macro,'open("%s");\n',filename);
-%     fprintf(fid_Macro,'run("BaSiC ","processing_stack=BFG_flagged.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
-%     fprintf(fid_Macro,'selectWindow("Corrected:BFG_flagged.tif");\n');
-%     fprintf(fid_Macro,'saveAs("Tiff","%s");\n',cor_filename);
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'close();\n');
-%     fprintf(fid_Macro,'run("Quit");\n');
-%     fclose(fid_Macro);
-    try
-     %   system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
-    %     system(['/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 -macro ',macropath]);
-    catch
-    end
-    %write uncorrected BFG.tif tiles
-    filename0=dir(strcat(datapath,'fitting/vol',num2str(islice),'/','BFG.tif'));
+macropath=strcat(datapath,'fitting/vol',num2str(islice),'/BaSiC.ijm');
+cor_filename=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_cor.tif');
+fid_Macro = fopen(macropath, 'w');
+filename=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_flagged.tif');
+fprintf(fid_Macro,'open("%s");\n',filename);
+fprintf(fid_Macro,'run("BaSiC ","processing_stack=BFG_flagged.tif flat-field=None dark-field=None shading_estimation=[Estimate shading profiles] shading_model=[Estimate both flat-field and dark-field] setting_regularisationparametes=Automatic temporal_drift=Ignore correction_options=[Compute shading and correct images] lambda_flat=0.50 lambda_dark=0.50");\n');
+fprintf(fid_Macro,'selectWindow("Corrected:BFG_flagged.tif");\n');
+fprintf(fid_Macro,'saveAs("Tiff","%s");\n',cor_filename);
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'close();\n');
+fprintf(fid_Macro,'run("Quit");\n');
+fclose(fid_Macro);
+try
+   system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+catch
+    system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+    display(['BaSiC shading correction failed in bfg slice number: ',num2str(islice)]);
+end
+    
+%write uncorrected BFG.tif tiles
+filename0=dir(strcat(datapath,'fitting/vol',num2str(islice),'/','BFG.tif'));
+for iFile=1:numTile
+    this_tile=iFile;
+    bfg = double(imread(filename0(1).name, iFile));
+    %%%%%%%%%%%%%%%%%%%
+    % add on background correction
+%         us=single(imread(strcat(datapath,'fitting_4x/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
+%         us=imresize(us,10/ds);
     if(strcmp(datapath,'/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_8095/'))
-        bfg_bg = single(imread(strcat(datapath,'bfg_bg.tif'), 1));
-            bfg_bg=imresize(bfg_bg,10/ds);
+        bfg=bfg+(1-bfg_bg)./(10+us).*0.005;
     end
 
-    
-    for iFile=1:numTile
-        this_tile=iFile;
-        bfg = double(imread(filename0(1).name, iFile));
-        
-        %%%%%%%%%%%%%%%%%%%
-        % add on background
-        us=single(imread(strcat(datapath,'fitting_4x/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
-%         us=imresize(us,10/ds);
-        if(strcmp(datapath,'/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_8095/'))
-            bfg=bfg+(1-bfg_bg)./(10+us).*0.005;
-        end
-        
 %         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_NC6047_br.mat');%NC6047
 %         bfg=bfg+bfg_bg.bg.*0.00006./(1+us./3); %NC6974,NC6839
 %         bfg=bfg+bfg_bg.bg.*0.000015.*(1+us./3); %NC8653
 %         bfg=bfg+bfg_bg.bg.*0.0001./(1+us./3); %NC6047
-        bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_NC6047_ul.mat');%NC6047
-        bfg=bfg+bfg_bg.bg.*0.000017.*(1+us./3); %NC6047
+%         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_NC6047_ul.mat');%NC6047
+%         bfg=bfg+bfg_bg.bg.*0.000017.*(1+us./3); %NC6047
 %         bfg_bg=load('/projectnb/npbssmic/ns/distortion_correction/bfg_bg_AD10382.mat');
 %         tmp=bfg_bg.bg;
 %         tmp=imresize(tmp,10/ds);
@@ -181,132 +175,71 @@ ramp=rampx.*rampy;      % blending mask
 %         bg=bfg_bg.bg; bg=imresize(bg,10/ds);
 %         bfg=bfg+bg.*0.0003./(1+us./5); %CTE7126
 
+    avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+    save(avgname,'bfg');  
+
+    bfg=single(bfg);
+    tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_bfg.tif');
+    SaveTiff(bfg,1,tiffname);
+end
+
+% write shading corrected tiles
+try
+    filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_cor.tif');
+    filename0=dir(filename0);
+    for iFile=1:sum(tile_flag)
+        for tm=1:numX*numY
+            if sum(tile_flag(1:tm))==iFile
+                this_tile=tm;
+                break
+            end
+        end
+
+        bfg = double(imread(filename0(1).name, iFile));
         avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
         save(avgname,'bfg');  
 
         bfg=single(bfg);
         tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_bfg.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(bfg,1);
-        tagstruct.ImageWidth      = size(bfg,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(bfg);
-        t.close();
-
-    end
-    
-%    try
-%         filename0=strcat(datapath,'fitting/vol',num2str(islice),'/','BFG_cor.tif');
-%         filename0=dir(filename0);
-%         for iFile=1:sum(tile_flag)
-%             for tm=1:numX*numY
-%                 if sum(tile_flag(1:tm))==iFile
-%                     this_tile=tm;
-%                     break
-%                 end
-%             end
-% 
-%             bfg = double(imread(filename0(1).name, iFile));
-%             avgname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-%             save(avgname,'bfg');  
-% 
-%             bfg=single(bfg);
-%             tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_bfg.tif');
-%             t = Tiff(tiffname,'w');
-%             tagstruct.ImageLength     = size(bfg,1);
-%             tagstruct.ImageWidth      = size(bfg,2);
-%             tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-%             tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-%             tagstruct.BitsPerSample   = 32;
-%             tagstruct.SamplesPerPixel = 1;
-%             tagstruct.Compression     = Tiff.Compression.None;
-%             tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-%             tagstruct.Software        = 'MATLAB';
-%             t.setTag(tagstruct);
-%             t.write(bfg);
-%             t.close();
-%        end
-%    catch
-%    end
+        SaveTiff(bfg,1,tiffname);
+   end
+catch
+   display(['writing shading corrected tiles for bfg failed on slice number: ',num2str(islice)]);
+end
 %% blending & mosaicing
 
 Mosaic = zeros(round(max(Xcen)+Xsize) ,round(max(Ycen)+Ysize));
-Masque = zeros(size(Mosaic));
-% 
-% cd(filename);    
+Masque = zeros(size(Mosaic));   
 
 for i=1:length(index)
-        
-        in = index(i);
-        
-        % load file and linear blend
-
-        filename0=dir(strcat(num2str(in),'.mat'));  %for retardance
-%         filename0=dir(strcat(target,'-',num2str(islice),'-',num2str(in),'.mat'));
+    in = index(i);
+    % load file and linear blend
+    filename0=dir(strcat(num2str(in),'.mat')); 
+    if isfile(filename0.name)
         load(filename0.name);
-        
-        row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);                                                 %changed by stephan
+        if tile_flag(in)==0
+            bfg=zeros(size(bfg));
+        end
+        row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);    
         column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
         Masque2 = zeros(size(Mosaic));
         Masque2(row,column)=ramp;
         Masque(row,column)=Masque(row,column)+Masque2(row,column);
         if strcmp(sys,'PSOCT')
-            
-            Mosaic(row,column)=Mosaic(row,column)+bfg.*Masque2(row,column); %#################################change us to ub if for mub stitch 
-        elseif strcmp(sys,'Thorlabs')
-            Mosaic(row,column)=Mosaic(row,column)+mub'.*Masque2(row,column);%#################################
+            Mosaic(row,column)=Mosaic(row,column)+bfg.*Masque2(row,column); 
         end
-        
+    end
 end
 
-% process the blended image
-
 MosaicFinal=Mosaic./Masque;
-% MosaicFinal=MosaicFinal-min(min(MosaicFinal));
 MosaicFinal(isnan(MosaicFinal))=0;
-% MosaicFinal(MosaicFinal>20)=0;
-    if strcmp(sys,'Thorlabs')
-        MosaicFinal=MosaicFinal';
-    end
-save(strcat(datapath,'fitting/',result,num2str(islice),'.mat'),'MosaicFinal');
-
-% plot in original scale
-% 
-% figure;
-% imshow(MosaicFinal,'XData', (1:size(MosaicFinal,2))*0.05, 'YData', (1:size(MosaicFinal,1))*0.05);
-% axis on;
-% xlabel('x (mm)')
-% ylabel('y (mm)')
-% title('Scattering coefficient (mm^-^1)')
-% colorbar;caxis([0 10]);
-
-% rescale and save as tiff
-% MosaicFinal = uint16(65535*(mat2gray(MosaicFinal)));      
-MosaicFinal = single(MosaicFinal);   
+if strcmp(sys,'Thorlabs')
+    MosaicFinal=MosaicFinal';
+end
+MosaicFinal = single(MosaicFinal);  
+save(strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.mat'),'MosaicFinal');   
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-% imwrite(MosaicFinal,tiffname,'Compression','none');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

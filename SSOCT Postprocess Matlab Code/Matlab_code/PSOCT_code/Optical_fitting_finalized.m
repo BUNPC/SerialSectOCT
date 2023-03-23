@@ -1,4 +1,4 @@
-function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt)
+function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt)
 % Fitting scattering and retardance of brain tissue
 % co: volume data for co pol
 % cross: volume data for cross pol
@@ -42,7 +42,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
     for i = 1:size(vol,2)
         for j = 1:size(vol,3)
             aline = vol(:,i,j);
-            aline = aline - mean(aline(10:20));
+            aline = aline - mean(aline(end-10:end-5));
             start_depth=sur(i,j)+2;
             fit_depth=min(length(aline)-5,start_depth+mus_depth-1);
             if max(aline) > 0.05
@@ -63,6 +63,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
         end           
     end
     
+    % figure; scatter(zdata,ydata);hold on;y=fun_pix(param(i,j,:),zdata);plot(zdata,y)
     musPrefit = single(1000.*squeeze(param(:,:,2)));     % unit:mm-1
     maskUsPre=zeros(size(musPrefit));
     maskUsPre(musPrefit>0.2)=1;
@@ -101,7 +102,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
     for i = 1:size(vol,2)
         for j = 1:size(vol,3)
             aline = vol(:,i,j);
-            aline = aline - mean(aline(10:20));
+            aline = aline - mean(aline(end-10:end-5));
             start_depth=sur(i,j)+2;                                                             % depth to start fitting, 2 pixel below surface
             fit_depth=min(length(aline)-5,start_depth+mus_depth-1);                             % total fitting depth in pixels
 
@@ -131,7 +132,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
                    R_2(i,j)=1-rn/var(ydata)/(length(ydata)-1);
                 catch
                     param(i,j,1:2)=[0 0 ];
-                    display('fitting mus failed')
+                    display(['fitting mus failed at',num2str(i),' ',num2str(j)])
                 end
             else
                 param(i,j,1:2) = [0 0 ];
@@ -189,7 +190,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
                     mus=imread(strcat(datapath,'fitting_4x/vol',num2str(s_seg),'/','MUS.tif'),z_seg);
                 end
                 mus_grey=3;
-                mus_ratio=4;
+                mus_ratio=2;
                 % 2 for NC6839,NC6974; 4 for NC6074,NC6839,NC21499
                 % 3 for AD20832, AD21354,AD21424, CTE8489, All CTE
                 fit_depth=round(bfg_depth-(mus(ceil(i/4*ds_factor),ceil(j/4*ds_factor))-mus_grey)*mus_ratio); % correct fit_depth according to mus
@@ -205,6 +206,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
                    param(i,j,:) = lsqcurvefit(fun_pix,[0.0002 0.05],zdata,ydata,lb,ub,opts);
                 catch
                     param(i,j,:)=[0 0];
+                    display(['fitting bfg failed at',num2str(i),' ',num2str(j)])
                 end
             else
                 param(i,j,:) = [0 0];
@@ -213,7 +215,7 @@ function Optical_fitting_3p(co, cross, s_seg, z_seg, datapath,aip_threshold, mus
     end
 
     %% visualization & save
-
+    % figure; scatter(zdata,ydata);hold on;y=fun_pix(param(i,j,:),zdata);plot(zdata,y)
     bfg = single(squeeze(param(:,:,1)));     % unit:mm-1
     tiffname=strcat(datapath,'fitting/vol',num2str(s_seg),'/','BFG.tif');
     SaveTiff(bfg,z_seg,tiffname);

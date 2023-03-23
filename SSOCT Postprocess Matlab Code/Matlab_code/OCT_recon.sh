@@ -7,5 +7,5 @@
 #$ -j y
 
 module load matlab/2020b
-matlab -nodisplay -singleCompThread -r "id='$SGE_TASK_ID'; OCT_recon; exit"
+matlab -nodisplay -singleCompThread -r "id='$SGE_TASK_ID'; OCT_recon_tmp; exit"
 

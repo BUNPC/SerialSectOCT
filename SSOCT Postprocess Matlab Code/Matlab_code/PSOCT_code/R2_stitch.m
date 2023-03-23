@@ -90,7 +90,7 @@ y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0].
 ramp=rampx.*rampy;      % blending mask
 
 %% flagg bfg tiles
-% % load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
+load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
 % tile_flag=ones(1,numX*numY);
 % tile_flag=ones(1,length(tile_flag)); %% when tile_flag doesn't work
 % filename0=dir('BFG.tif');
@@ -151,19 +151,7 @@ ramp=rampx.*rampy;      % blending mask
 
         R2=single(R2);
         tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_R2.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(R2,1);
-        tagstruct.ImageWidth      = size(R2,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(R2);
-        t.close();
+        SaveTiff(R2,1,tiffname);
 
     end
 %     % write corrected MUS_cor.tif tiles
@@ -256,20 +244,5 @@ MosaicFinal = single(MosaicFinal);
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-% imwrite(MosaicFinal,tiffname,'Compression','none');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

@@ -82,6 +82,7 @@ for depth = 1:size(co,1)
             ref_tiles(tile,depth,:,:)=squeeze(single(imread(cor_filename, tile)));
         end
     catch
+        system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
         disp("BaSiC shading correction failed")
     end
 end
@@ -161,44 +162,45 @@ for nslice=id
     Ref(isnan(Ref(:)))=0;
     Ref=single(Ref);
     %% remove agarose
-    if rem(id,2)==0
-        id_aip=id-1;
-    else
-        id_aip=id;
-    end
-    while ~isfile(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'))
-        pause(600);
-    end
-    load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
-    AIP=imresize(AIP,resize_factor);
-    mask=zeros(size(AIP));
-    mask(AIP>aip_threshold)=1;
-    
-    if size(mask,1)>size(Ref,1)
-        xx=size(Ref,1);
-    else
-        xx=size(mask,1);
-    end
-    if size(mask,2)>size(Ref,2)
-        yy=size(Ref,2);
-    else
-        yy=size(mask,2);
-    end
-    for ii = 1:size(Ref,3)
-        Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
-    end
+% %     if rem(id,2)==0
+% %         id_aip=id-1;
+% %     else
+% %         id_aip=id;
+% %     end
+%     id_aip=id;
+%     while ~isfile(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'))
+%         pause(600);
+%     end
+%     load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
+%     AIP=imresize(AIP,resize_factor);
+%     mask=zeros(size(AIP));
+%     mask(AIP>aip_threshold)=1;
+%     
+%     if size(mask,1)>size(Ref,1)
+%         xx=size(Ref,1);
+%     else
+%         xx=size(mask,1);
+%     end
+%     if size(mask,2)>size(Ref,2)
+%         yy=size(Ref,2);
+%     else
+%         yy=size(mask,2);
+%     end
+%     for ii = 1:size(Ref,3)
+%         Ref(1:xx,1:yy,ii)=Ref(1:xx,1:yy,ii).*mask(1:xx,1:yy);
+%     end
     %% save data
-    save(strcat(datapath2,'volume/ref',num2str(nslice),'.mat'),'Ref','-v7.3');
+    save(strcat(datapath2,'volume/ref_4ds',num2str(nslice),'.mat'),'Ref','-v7.3');
 
    clear options;
    options.big = true; % Use BigTIFF format
    options.overwrite = true;
-   saveastiff(single(Ref), strcat('Ref_BASIC',num2str(id),'.btf'), options);
+   saveastiff(single(Ref), strcat('Ref_BASIC_4ds',num2str(id),'.btf'), options);
    
    clear options;
    options.big = false; % Use BigTIFF format
    options.overwrite = true;
-   saveastiff(single(imresize3(Ref,0.4)), strcat('Ref_BASIC',num2str(id),'.tif'), options);
+   saveastiff(single(imresize3(Ref,0.4)), strcat('Ref_BASIC_10ds',num2str(id),'.tif'), options);
    
     info=strcat('Volumetric reconstruction of slice No.', num2str(nslice), ' is done.\n');
     fprintf(info);

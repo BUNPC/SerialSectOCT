@@ -122,23 +122,24 @@ load(strcat(datapath,'aip/vol',num2str(id),'/tile_flag.mat'));
 %     catch
 %         display("BaSiC shading correction failed")
 %     end
+
     % write uncorrected RET.tif tiles
 %     load(strcat('/projectnb/npbssmic/ns/distortion_correction/ori_bg.mat'))
-    filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI.tif');
-    filename0=dir(filename0);
-    for iFile=1:length(tile_flag)
-        this_tile=iFile;
-        ori2D = double(imread(filename0(1).name, iFile));
-%         us=single(imread(strcat(datapath,'fitting_10x_new/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
-%         us=imresize(us,10);
-%         ori2D=ori2D-ori_bg./(us+30)*15;
-        avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-        save(avgname,'ori2D');  
-
-        ori2D=single(ori2D);
-        tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
-        SaveTiff(ori2D,1,tiffname);
-    end
+%     filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI.tif');
+%     filename0=dir(filename0);
+%     for iFile=1:length(tile_flag)
+%         this_tile=iFile;
+%         ori2D = double(imread(filename0(1).name, iFile));
+% %         us=single(imread(strcat(datapath,'fitting_10x_new/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
+% %         us=imresize(us,10);
+% %         ori2D=ori2D-ori_bg./(us+30)*15;
+%         avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+%         save(avgname,'ori2D');  
+% 
+%         ori2D=single(ori2D);
+%         tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
+%         SaveTiff(ori2D,1,tiffname);
+%     end
     
 %     try
 %         %write corrected RET_cor.tif
@@ -192,10 +193,10 @@ for i=1:length(index)
 end
 
 Mosaic=Cycle_ori(Mosaic,Masque);
-Masque=squeeze(sum(Masque,1));
+Masque=squeeze(sum(Masque,1))+0.01;
 Mosaic=Mosaic./Masque;
 Mosaic(Mosaic<0)=Mosaic(Mosaic<0)+180;
-Mosaic(Mosaic>180)=180;
+Mosaic(Mosaic>180)=Mosaic(Mosaic>180)-180;
 
 
 Mosaic(isnan(Mosaic))=0;

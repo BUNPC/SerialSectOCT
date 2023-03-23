@@ -90,7 +90,7 @@ y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0].
 ramp=rampx.*rampy;      % blending mask
 
 %% flagg bfg tiles
-% % load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
+load(strcat(datapath,'aip/vol',num2str(islice),'/tile_flag.mat'));
 % tile_flag=ones(1,numX*numY);
 % tile_flag=ones(1,length(tile_flag)); %% when tile_flag doesn't work
 % filename0=dir('BFG.tif');
@@ -151,19 +151,7 @@ ramp=rampx.*rampy;      % blending mask
 
         bkg=single(bkg);
         tiffname=strcat(datapath,'fitting/vol',num2str(islice),'/',num2str(this_tile),'_bkg.tif');
-        t = Tiff(tiffname,'w');
-        tagstruct.ImageLength     = size(bkg,1);
-        tagstruct.ImageWidth      = size(bkg,2);
-        tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-        tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-        tagstruct.BitsPerSample   = 32;
-        tagstruct.SamplesPerPixel = 1;
-        tagstruct.Compression     = Tiff.Compression.None;
-        tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-        tagstruct.Software        = 'MATLAB';
-        t.setTag(tagstruct);
-        t.write(bkg);
-        t.close();
+        SaveTiff(bkg,1,tiffname);
 
     end
 %     % write corrected MUS_cor.tif tiles
@@ -207,69 +195,38 @@ Masque = zeros(size(Mosaic));
 
 for i=1:length(index)
         
-        in = index(i);
-        
-        % load file and linear blend
-
-        filename0=dir(strcat(num2str(in),'.mat'));  %for retardance
-%         filename0=dir(strcat(target,'-',num2str(islice),'-',num2str(in),'.mat'));
+    in = index(i);
+    filename0=dir(strcat(num2str(in),'.mat')); 
+    if isfile(filename0.name)
         load(filename0.name);
-        
+        if tile_flag(in)==0
+            bkg=zeros(size(bkg));
+        end
         row = round(Xcen(in)-Xsize/2+1:Xcen(in)+Xsize/2);                                                 %changed by stephan
         column = round(Ycen(in)-Ysize/2+1:Ycen(in)+Ysize/2);
         Masque2 = zeros(size(Mosaic));
         Masque2(row,column)=ramp;
         Masque(row,column)=Masque(row,column)+Masque2(row,column);
         if strcmp(sys,'PSOCT')
-            
             Mosaic(row,column)=Mosaic(row,column)+bkg.*Masque2(row,column); 
         elseif strcmp(sys,'Thorlabs')
             Mosaic(row,column)=Mosaic(row,column)+bkg'.*Masque2(row,column);%#################################
         end
-        
+    end
 end
 
 % process the blended image
 
 MosaicFinal=Mosaic./Masque;
-% MosaicFinal=MosaicFinal-min(min(MosaicFinal));
 MosaicFinal(isnan(MosaicFinal))=0;
-% MosaicFinal(MosaicFinal>20)=0;
-    if strcmp(sys,'Thorlabs')
-        MosaicFinal=MosaicFinal';
-    end
-% save(strcat(datapath,'fitting/',result,num2str(islice),'.mat'),'MosaicFinal');
-
-% plot in original scale
-% 
-% figure;
-% imshow(MosaicFinal,'XData', (1:size(MosaicFinal,2))*0.05, 'YData', (1:size(MosaicFinal,1))*0.05);
-% axis on;
-% xlabel('x (mm)')
-% ylabel('y (mm)')
-% title('Scattering coefficient (mm^-^1)')
-% colorbar;caxis([0 10]);
-
-% rescale and save as tiff
-% MosaicFinal = uint16(65535*(mat2gray(MosaicFinal)));      
+if strcmp(sys,'Thorlabs')
+    MosaicFinal=MosaicFinal';
+end
+    
 MosaicFinal = single(MosaicFinal);   
 %     nii=make_nii(MosaicFinal,[],[],64);
 %     cd('C:\Users\jryang\Downloads\');
 %     save_nii(nii,'aip_day3.nii');
-% cd(filepath);
-tiffname=strcat(datapath,'fitting/',result,num2str(islice),'.tif');
-% imwrite(MosaicFinal,tiffname,'Compression','none');
-t = Tiff(tiffname,'w');
-image=MosaicFinal;
-tagstruct.ImageLength     = size(image,1);
-tagstruct.ImageWidth      = size(image,2);
-tagstruct.SampleFormat    = Tiff.SampleFormat.IEEEFP;
-tagstruct.Photometric     = Tiff.Photometric.MinIsBlack;
-tagstruct.BitsPerSample   = 32;
-tagstruct.SamplesPerPixel = 1;
-tagstruct.PlanarConfiguration = Tiff.PlanarConfiguration.Chunky;
-tagstruct.Compression = Tiff.Compression.None;
-tagstruct.Software        = 'MATLAB';
-t.setTag(tagstruct);
-t.write(image);
-t.close();
+
+tiffname=strcat(datapath,'fitting/',result,num2str(islice),'_ds',num2str(ds),'x.tif');
+SaveTiff(MosaicFinal,1,tiffname);

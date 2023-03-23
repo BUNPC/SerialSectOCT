@@ -6,12 +6,12 @@ addpath('/projectnb/npbssmic/s/Matlab_code/ThorOCT_code');
 addpath('/projectnb/npbssmic/s/Matlab_code');
 %% ref volume correction
 cd(datapath);
-filename=dir(strcat(datapath,'dist_corrected/volume/ref.btf'));
+filename=dir(strcat(datapath,'dist_corrected/volume/ref-10ds.btf'));
 cd(strcat(datapath,'dist_corrected/volume/'));
 stack_norm=[];
 for i=1:Z
     imageData=single(imread(filename(1).name,i));
-    tmp=mean(imageData(imageData>0));
+    tmp=mean(imageData(imageData>0.1));
 %     tmp=single(convn(imageData, ones(kernel1,kernel1)./kernel1^2,'same')+0.0001);
 %     imageData(imageData<0.115)=0;
     stack_norm(:,:,i)=single(imageData./tmp);
@@ -21,7 +21,7 @@ cd(strcat(datapath,'dist_corrected/volume/'))
 options.big=true;
 options.overwrite=true;
 options.append = false;
-saveastiff(stack_norm, 'ref_norm.btf',options)
+saveastiff(stack_norm, 'ref_10ds_norm.btf',options)
 % %% for each slice multiply by mus
 % cd(strcat(datapath,'dist_corrected/volume/'))
 % filename=dir(strcat('ref_norm.btf'));
