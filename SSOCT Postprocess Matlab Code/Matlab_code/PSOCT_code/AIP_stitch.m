@@ -1,4 +1,4 @@
-function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold, aip_threshold_post_BaSiC)
+function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold, aip_threshold_post_BaSiC, highres)
 %%% ---------------------- %%%
 % function version of mosaicing & blending
 % input: displacement parameters: four elements array [xx xy yy yx]
@@ -100,6 +100,7 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     flagged=0;
     for j=1:numTile
         aip = single(imread(filename0(1).name, j));
+        aip(isnan(aip))=0;
         % threshold tunable for agarose blocks, you should do visual examination of aip.tif after finishing
         if mean2(aip)>aip_threshold || std2(aip)>aip_threshold/4     
             tile_flag(j)=1;
@@ -222,7 +223,11 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
         coordpath = strcat(P2path,'aip/RGB/');
         f=strcat(coordpath,'TileConfiguration.registered.txt');
         coord = read_Fiji_coord(f,'Composite');
-        coord(2:3,:)=coord(2:3,:).*2/3;
+        if highres==1
+            coord(2:3,:)=coord(2:3,:).*1.03/3;
+        else
+            coord(2:3,:)=coord(2:3,:).*2/3;
+        end
     end
 
     % define coordinates for each tile
@@ -249,8 +254,18 @@ function AIP_stitch(P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stit
     % tile range -199~+200
     stepx = Xoverlap*Xsize;
     x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx-1):-1:0]./stepx;
+    if length(x)<Xsize
+        for ii = length(x)+1:Xsize
+            x(ii)=1;
+        end
+    end
     stepy = Yoverlap*Ysize;
     y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0]./stepy;
+    if length(y)<Ysize
+        for ii = length(y)+1:Ysize
+            y(ii)=1;
+        end
+    end
     if strcmp(sys,'PSOCT')
         [rampy,rampx]=meshgrid(y, x);
     elseif strcmp(sys,'Thorlabs')

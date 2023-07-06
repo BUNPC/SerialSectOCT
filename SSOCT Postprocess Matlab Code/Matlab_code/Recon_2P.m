@@ -1,6 +1,6 @@
 %% specify data parameters
-P2path  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_20T/NC_7597_2P/'; %                                    ADJUST FOR EACH SAMPLE!!!
-nslice=24; % total number of slices                                                                         ADJUST FOR EACH SAMPLE!!!
+P2path  = '/projectnb2/npbssmic/ns/Ann_Mckee_samples_10T/NC_6974_2_2P/'; %                                    ADJUST FOR EACH SAMPLE!!!
+nslice=28; % total number of slices                                                                         ADJUST FOR EACH SAMPLE!!!
 %% specify mosaic parameters
 % xx yy is positive for dataset acquired after sep 06
 %% for default 10% overlap
@@ -11,7 +11,7 @@ yy=1280;    % yy is the Y displacement of two adjacent tile align in the Y direc
 % yy=1440;
 yx=0;      % xx is the X displacement of two adjacent tile align in the Y direction, default to 0
 numX=10;    % #tiles in X direction !!!!!!!!!                                                                ADJUST FOR EACH SAMPLE!!!
-numY=10;    % #tiles in Y direction !!!!!!!!!                                                                ADJUST FOR EACH SAMPLE!!!
+numY=7;    % #tiles in Y direction !!!!!!!!!                                                                ADJUST FOR EACH SAMPLE!!!
 Xoverlap=0.1;   % overlap in X direction
 Yoverlap=0.1;   % overlap in Y direction
 %% for 30% overlap only
@@ -31,9 +31,9 @@ mosaic=[numX numY Xoverlap Yoverlap];
 pattern = 'bidirectional';  % mosaic pattern, could be bidirectional or unidirectional
 %% pick three depth planes for generating stitching coordinates, three
 % planes should evenly distribute along volume depth, with no saturated tiles
-stitch_plane1=4;                                                                                           % ADJUST FOR EACH SAMPLE!!!
-stitch_plane2=10;                                                                                          % ADJUST FOR EACH SAMPLE!!!
-stitch_plane3=16;                                                                                          % ADJUST FOR EACH SAMPLE!!!
+stitch_plane1=1;                                                                                           % ADJUST FOR EACH SAMPLE!!!
+stitch_plane2=3;                                                                                          % ADJUST FOR EACH SAMPLE!!!
+stitch_plane3=5;                                                                                          % ADJUST FOR EACH SAMPLE!!!
 
 njobs=nslice; %number jobs in SCC parallel processing
 ntile=numX*numY; % total number of tiles per slice
@@ -124,6 +124,7 @@ for islice=((id-1)*slice_job+1):id*slice_job
         system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
     catch
         display("shading correction failed");
+        system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
     end
 end
 
@@ -164,7 +165,7 @@ if length(logfiles)==njobs
     % Stitching
     fprintf('stitching\n');
     Gen_2P_coord(P2path,disp,mosaic,pxlsize,1,pattern, stitch_plane1, stitch_plane2, stitch_plane3);
-    for islice = 1:nslice
+    for islice = 1:nslice %nslice
         Stitch_2P(P2path,disp,mosaic,pxlsize,islice,pattern);         
         fprintf(strcat('Slice No. ',num2str(islice),' is stitched.', datestr(now,'DD:HH:MM'),'\n'));
     end

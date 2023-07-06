@@ -1,4 +1,4 @@
-function Gen_OCT_coord(datapath,disp,mosaic,pxlsize,islice,pattern, plane1, plane2, plane3)
+function Gen_OCT_coord(datapath,disp,mosaic,pattern, plane1, plane2, plane3)
 %%% ---------------------- %%%
 % function version of mosaicing & blending
 % input: displacement parameters: four elements array [xx xy yy yx]

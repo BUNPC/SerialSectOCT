@@ -74,8 +74,18 @@ Ycen=Ycen+Ysize/2;
 % tile range -199~+200
 stepx = Xoverlap*Xsize;
 x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx-1):-1:0]./stepx;
+if length(x)<Xsize
+    for ii = length(x)+1:Xsize
+        x(ii)=1;
+    end
+end
 stepy = Yoverlap*Ysize;
 y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0]./stepy;
+if length(y)<Ysize
+    for ii = length(y)+1:Ysize
+        y(ii)=1;
+    end
+end
     if strcmp(sys,'PSOCT')
         [rampy,rampx]=meshgrid(y, x);
     elseif strcmp(sys,'Thorlabs')

@@ -1,4 +1,4 @@
-function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt)
+function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_threshold, mus_depth, bfg_depth, ds_factor, zf, zf_tilt_x, zf_tilt_y)
 % Fitting scattering and retardance of brain tissue
 % co: volume data for co pol
 % cross: volume data for cross pol
@@ -7,11 +7,12 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
 % datapath: datapath for original data
 % aip_threshold: intensity threshold to remove agarose, use same value as
 % in OCT_recon.m
-% mus_depth: number of pixels for fitting mus
-% bfg_depth: number of pixels for fitting birefringence
+% mus_depth: number of z pixels for fitting mus
+% bfg_depth: number of z pixels for fitting birefringence
 % ds_factor: downsample factor
-% zf: average depth of focus
-% zf_tilt: tilt of zf
+% zf: focus depth at center of FOV, i.e, x=middle, y=middle, starting from
+% top of volume
+% zf_tilt: zf difference along x axis of FOV
 
     cd(datapath);
     opts = optimset('Display','off','TolFun',1e-10);
@@ -20,10 +21,11 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
     ref=single(sqrt(co1.^2+cross1.^2));
     sur=surprofile2(ref,'PSOCT',1); % find surface, downsample=20
     Z_step=3;
+    ZR=70; % raileygh range set as 70um
 
-%     % sensitivity roll-off correction
-%     % w=2.2; % sensitivity roff-off constant, w=2.2 for 5x obj, w=2.22 for 10x obj
-%     % I=rolloff_corr(I,w);
+    % sensitivity roll-off correction
+    % w=2.2; % sensitivity roff-off constant, w=2.2 for 5x obj, w=2.22 for 10x obj
+    % I=rolloff_corr(I,w);
 
     aip=squeeze(mean(ref(1:110,:,:),1));
     mask=zeros(size(aip));
@@ -48,7 +50,7 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
             if max(aline) > 0.05
                 ydata = double(aline(start_depth:fit_depth)');
                 zdata = (2:length(ydata)+1)*Z_step;
-                fun_pix = @(p,zdata)double(sqrt(p(1).*exp(-2.*p(2).*(zdata)).*(1./(1+((zdata-((zf-sur(i,j))*Z_step+i*20/zf_tilt))./70).^2)))); 
+                fun_pix = @(p,zdata)double(sqrt(p(1).*exp(-2.*p(2).*(zdata)).*(1./(1+((zdata-((zf-sur(i,j))*Z_step+i*20/size(vol,2)*zf_tilt_x*Z_step))./ZR).^2)))); 
                 lb = [0.0001 0.0001 ];
                 ub=[20 0.03 ];
                 try
@@ -110,14 +112,22 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
                 ydata = double(aline(start_depth:fit_depth)');
                 zdata = (2:length(ydata)+1)*Z_step;
                 %% Correct zf according to multiple factors
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                % copy and replace line 3 and/or line 4 to choose your preferred zf curvature shape
+%                     +(abs(i*ds_factor-size(vol,2)/2)/size(vol,2)*2*zf_tilt_x*Z_step...     %%%%%% line 3: zf curvature across X, using V shape curvature
+%                     + abs(j*ds_factor-size(vol,3)/2)/size(vol,3)*2*zf_tilt_y*Z_step)...    %%%%%% line 4: zf curvature across Y, using V shape curvature
+%                     + (i*ds_factor/size(vol,2)*zf_tilt_x*Z_step...                         %%%%%% line 3: zf curvature across X, using linear curvature
+%                     + j*ds_factor/size(vol,3)*zf_tilt_y*Z_step)...                         %%%%%% line 4: zf curvature across Y, using linear curvature
                 param(i,j,3)=(...
-                    (zf-sur_smooth(i,j))*Z_step ...                                             % surface-unflatness caused zf shift
-                    - musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor)) ...                  % mus caused zf shift
-                    + i*ds_factor/zf_tilt...                                                    % zf tilt across FOV, assuming linear tilt
-                    /(musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor))/20+1)...             % mus caused zf tilt across FOV
-                    ); % NC6839
+                    (zf-sur_smooth(i,j))*Z_step ...                                        %%%%%% line 1: surface-unflatness caused zf shift
+                    - musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor)) ...             %%%%%% line 2: mus caused zf shift
+                    + (i*ds_factor/size(vol,2)*zf_tilt_x*Z_step...                         %%%%%% line 3: zf curvature across X, using linear curvature
+                    + j*ds_factor/size(vol,3)*zf_tilt_y*Z_step)...                         %%%%%% line 4: zf curvature across Y, using linear curvature
+                    /(musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor))/20+1)...        %%%%%% line 5: mus caused zf curvature shift
+                    ); 
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %% correct zr according to mus
-                param(i,j,4) = 70-(musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor)))/2;     % mus corrected zr
+                param(i,j,4) = ZR-(musPrefit(ceil(i/20*ds_factor),ceil(j/20*ds_factor)))/2;     % mus corrected zr
                 %% define fitting function
                 fun_pix = @(p,zdata)double(sqrt(...
                     p(1).*exp(-2.*p(2).*(zdata)).*...                                           % mub and mus variables
@@ -128,7 +138,10 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
                 lb = [0.0001 0.0001 ];
                 ub=[20 0.03 ];
                 try
-                   [param(i,j,1:2), rn] = lsqcurvefit(fun_pix,[0.1 0.006 ],zdata,ydata,lb,ub,opts);
+                      [param(i,j,1:2), rn] = lsqcurvefit(fun_pix,[0.1 0.006 ],zdata,ydata,lb,ub,opts);
+                   %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   % pause here, use line 153 to check the fitting quality
+                   % !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    R_2(i,j)=1-rn/var(ydata)/(length(ydata)-1);
                 catch
                     param(i,j,1:2)=[0 0 ];
@@ -139,6 +152,7 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
             end
         end           
     end
+    % figure; scatter(zdata,ydata);hold on;y=fun_pix(param(i,j,:),zdata);plot(zdata,y)
     %% visualization & save
     R_2=single(R_2);
     tiffname=strcat(datapath,'fitting/vol',num2str(s_seg),'/','R2.tif');
@@ -186,14 +200,12 @@ function Optical_fitting_finalized(co, cross, s_seg, z_seg, datapath,aip_thresho
             aline = vol(:,i,j);
             start_depth=sur(i,j)+5;
             if max(aline) > 0.001
-                if exist('mus','var')==0
-                    mus=imread(strcat(datapath,'fitting_4x/vol',num2str(s_seg),'/','MUS.tif'),z_seg);
+                mus_grey=3; % for unindex matched sample, for index matched, use ~0
+                mus_ratio=2.5; % for unindex matched sample, for index matched, use ~5
+                if ~exist('mus','var')
+                    mus=imread(strcat(datapath,'fitting/vol',num2str(s_seg),'/',num2str(z_seg),'_mus.tif'),1);
                 end
-                mus_grey=3;
-                mus_ratio=2;
-                % 2 for NC6839,NC6974; 4 for NC6074,NC6839,NC21499
-                % 3 for AD20832, AD21354,AD21424, CTE8489, All CTE
-                fit_depth=round(bfg_depth-(mus(ceil(i/4*ds_factor),ceil(j/4*ds_factor))-mus_grey)*mus_ratio); % correct fit_depth according to mus
+                fit_depth=round(bfg_depth-(mus(i,j)-mus_grey)*mus_ratio); % correct fit_depth according to mus
                 fit_depth=min(size(aline,1)-5,start_depth+fit_depth-1);
                 ydata = double(aline(start_depth:fit_depth)');
                 zdata = (5:(length(ydata)+4))*Z_step;

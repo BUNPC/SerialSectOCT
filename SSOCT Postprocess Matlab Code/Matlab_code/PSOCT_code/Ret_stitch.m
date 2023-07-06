@@ -1,4 +1,4 @@
-function Ret_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold)
+function Ret_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch, aip_threshold,highres)
 %% stitch the retardance using the coordinates from AIP stitch
 % add subfunctions for the script
 addpath('/projectnb/npbssmic/s/Matlab_code');
@@ -32,7 +32,11 @@ else
     coordpath = strcat(P2path,'aip/RGB/');
     f=strcat(coordpath,'TileConfiguration.registered.txt');
     coord = read_Fiji_coord(f,'Composite');
-    coord(2:3,:)=coord(2:3,:).*2/3;
+    if highres==1
+        coord(2:3,:)=coord(2:3,:).*1.03/3;
+    else
+        coord(2:3,:)=coord(2:3,:).*2/3;
+    end
 end
 %          coord(2:3,:)=coord(2:3,:).*2/3; %for samples after 09/17/21
 %     coord(2,:)=coord(2,:).*1.62/3; %for sample 8921 only
@@ -61,8 +65,18 @@ Ycen=Ycen+Ysize/2;
 
 stepx = Xoverlap*Xsize;
 x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx-1):-1:0]./stepx;
+if length(x)<Xsize
+    for ii = length(x)+1:Xsize
+        x(ii)=1;
+    end
+end
 stepy = Yoverlap*Ysize;
 y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0]./stepy;
+if length(y)<Ysize
+    for ii = length(y)+1:Ysize
+        y(ii)=1;
+    end
+end
 if strcmp(sys,'PSOCT')
     [rampy,rampx]=meshgrid(y, x);
 elseif strcmp(sys,'Thorlabs')
@@ -116,7 +130,7 @@ end
     fprintf(fid_Macro,'run("Quit");\n');
     fclose(fid_Macro);
     try
-        system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
+%         system(['xvfb-run -a ' '/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 --run ',macropath]);
     %     system(['/projectnb/npbssmic/ns/Fiji/Fiji.app/ImageJ-linux64 -macro ',macropath]);
     catch
         display("BaSiC shading correction failed")

@@ -44,6 +44,18 @@ function Exp_Fiji = read_Fiji_coord(filename,opt)
         kk = fgets(fid);
         img(:,ii)=sscanf(kk,['%d_ret.tif; ; ( %f, %f)']);
     end
+    elseif strcmp(opt,'BRM')
+    while ~feof(fid)
+        ii = ii +1;
+        kk = fgets(fid);
+        img(:,ii)=sscanf(kk,['ret_%d.tif; ; ( %f, %f)']);
+    end
+    elseif strcmp(opt,'RGB_norm')
+    while ~feof(fid)
+        ii = ii +1;
+        kk = fgets(fid);
+        img(:,ii)=sscanf(kk,['RGB_norm_%d.tif; ; ( %f, %f)']);
+    end
     elseif strcmp(opt,'Composite')
     while ~feof(fid)
         ii = ii +1;

@@ -220,10 +220,20 @@ Ycen=Ycen-min(Ycen);
 Xcen=Xcen+round(Xsize/2);
 Ycen=Ycen+round(Ysize/2);
 
-stepx = floor(Xoverlap*Xsize*resize_factor);
-x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize*resize_factor)) stepx-1:-1:0]./stepx;
-stepy = floor(Yoverlap*Ysize*resize_factor);
-y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize*resize_factor)) stepy-1:-1:0]./stepy;
+stepx = Xoverlap*Xsize;
+x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx-1):-1:0]./stepx;
+if length(x)<Xsize
+    for ii = length(x)+1:Xsize
+        x(ii)=1;
+    end
+end
+stepy = Yoverlap*Ysize;
+y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0]./stepy;
+if length(y)<Ysize
+    for ii = length(y)+1:Ysize
+        y(ii)=1;
+    end
+end
 [rampy,rampx]=meshgrid(y,x);
 ramp=rampx.*rampy;      % blending mask
 

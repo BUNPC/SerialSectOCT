@@ -7,7 +7,7 @@ function create_dir(nslice,datapath)
     else
         mkdir aip
     end
-    cd(strcat(datapath,'aip/'));
+    cd(strcat(datapath,'/aip/'));
     for i=1:nslice
         foldername=strcat('vol',num2str(i));
         if exist(foldername)

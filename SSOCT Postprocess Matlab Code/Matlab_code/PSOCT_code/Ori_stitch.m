@@ -1,4 +1,4 @@
-function Ori_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold)
+function Ori_stitch(target, P2path, datapath,disp,mosaic,pxlsize,islice,pattern,sys,stitch,aip_threshold,highres)
 %% stitch the retardance using the coordinates from AIP stitch
 % add subfunctions for the script
 addpath('/projectnb/npbssmic/s/Matlab_code');
@@ -32,7 +32,11 @@ else
     coordpath = strcat(P2path,'aip/RGB/');
     f=strcat(coordpath,'TileConfiguration.registered.txt');
     coord = read_Fiji_coord(f,'Composite');
-    coord(2:3,:)=coord(2:3,:).*2/3;
+    if highres==1
+        coord(2:3,:)=coord(2:3,:).*1.03/3;
+    else
+        coord(2:3,:)=coord(2:3,:).*2/3;
+    end
 end
 %          coord(2:3,:)=coord(2:3,:).*2/3; %for samples after 09/17/21
 %     coord(2,:)=coord(2,:).*1.62/3; %for sample 8921 only
@@ -61,9 +65,19 @@ Ycen=Ycen+Ysize/2;
 
 %% calculate ramp for individual tile, based on stitching coord
 stepx = Xoverlap*Xsize;
-x = [0.1:stepx repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx):-1:0.1]./stepx;
+x = [0:stepx-1 repmat(stepx,1,round((1-2*Xoverlap)*Xsize)) round(stepx-1):-1:0]./stepx;
+if length(x)<Xsize
+    for ii = length(x)+1:Xsize
+        x(ii)=1;
+    end
+end
 stepy = Yoverlap*Ysize;
-y = [0.1:stepy repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy):-1:0.1]./stepy;
+y = [0:stepy-1 repmat(stepy,1,round((1-2*Yoverlap)*Ysize)) round(stepy-1):-1:0]./stepy;
+if length(y)<Ysize
+    for ii = length(y)+1:Ysize
+        y(ii)=1;
+    end
+end
 if strcmp(sys,'PSOCT')
     [rampy,rampx]=meshgrid(y, x);
 elseif strcmp(sys,'Thorlabs')
@@ -125,43 +139,43 @@ load(strcat(datapath,'aip/vol',num2str(id),'/tile_flag.mat'));
 
     % write uncorrected RET.tif tiles
 %     load(strcat('/projectnb/npbssmic/ns/distortion_correction/ori_bg.mat'))
-%     filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI.tif');
-%     filename0=dir(filename0);
-%     for iFile=1:length(tile_flag)
-%         this_tile=iFile;
-%         ori2D = double(imread(filename0(1).name, iFile));
-% %         us=single(imread(strcat(datapath,'fitting_10x_new/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
-% %         us=imresize(us,10);
-% %         ori2D=ori2D-ori_bg./(us+30)*15;
-%         avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-%         save(avgname,'ori2D');  
-% 
-%         ori2D=single(ori2D);
-%         tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
-%         SaveTiff(ori2D,1,tiffname);
-%     end
+    filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI.tif');
+    filename0=dir(filename0);
+    for iFile=1:length(tile_flag)
+        this_tile=iFile;
+        ori2D = double(imread(filename0(1).name, iFile));
+%         us=single(imread(strcat(datapath,'fitting_10x_new/vol',num2str(islice),'/',num2str(iFile),'_mus.tif')));
+%         us=imresize(us,10);
+%         ori2D=ori2D-ori_bg./(us+30)*15;
+        avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+        save(avgname,'ori2D');  
+
+        ori2D=single(ori2D);
+        tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
+        SaveTiff(ori2D,1,tiffname);
+    end
     
-%     try
-%         %write corrected RET_cor.tif
-%         filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI_cor.tif');
-%         filename0=dir(filename0);
-%         for iFile=1:sum(tile_flag)
-%             for tm=1:numX*numY
-%                 if sum(tile_flag(1:tm))==iFile
-%                     this_tile=tm;
-%                     break
-%                 end
-%             end
-%             ori2D = double(imread(filename0(1).name, iFile));
-%             avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
-%             save(avgname,'ori2D');  
-% 
-%             ori2D=single(ori2D);
-%             tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
-%             SaveTiff(ori2D,1,tiffname);
-%         end
-%     catch
-%     end
+    try
+        %write corrected RET_cor.tif
+        filename0=strcat(datapath,'orientation/vol',num2str(islice),'/','ORI_cor.tif');
+        filename0=dir(filename0);
+        for iFile=1:sum(tile_flag)
+            for tm=1:numX*numY
+                if sum(tile_flag(1:tm))==iFile
+                    this_tile=tm;
+                    break
+                end
+            end
+            ori2D = double(imread(filename0(1).name, iFile));
+            avgname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'.mat');
+            save(avgname,'ori2D');  
+
+            ori2D=single(ori2D);
+            tiffname=strcat(datapath,'orientation/vol',num2str(islice),'/',num2str(this_tile),'_ori.tif');
+            SaveTiff(ori2D,1,tiffname);
+        end
+    catch
+    end
 %% blending & mosaicing
 Mosaic = zeros(4,round(max(Xcen)+Xsize) ,round(max(Ycen)+Ysize));
 Masque = single(zeros(size(Mosaic)));
@@ -187,7 +201,9 @@ for i=1:length(index)
             Masque(pos,row,column)=squeeze(Masque(pos,row,column))+single(tmp);
             ramp(mask==1)=0;
             tmp=ori2D;tmp(mask==0)=0;
-            Mosaic(pos,row,column)=squeeze(Mosaic(pos,row,column))+tmp;
+            mmask=zeros(size(tmp));
+            mmask(Mosaic(pos,row,column)<=0)=1;
+            Mosaic(pos,row,column)=squeeze(Mosaic(pos,row,column))+tmp.*mmask;
             ori2D(mask==1)=0;
         end
 end
@@ -195,9 +211,14 @@ end
 Mosaic=Cycle_ori(Mosaic,Masque);
 Masque=squeeze(sum(Masque,1))+0.01;
 Mosaic=Mosaic./Masque;
+
+% matching orientation of BRM
+% Mosaic=Mosaic-18;
+% Mosaic=Mosaic+30;+10+10
+% Mosaic=-Mosaic;
 Mosaic(Mosaic<0)=Mosaic(Mosaic<0)+180;
 Mosaic(Mosaic>180)=Mosaic(Mosaic>180)-180;
-
+% Mosaic=Mosaic+20;
 
 Mosaic(isnan(Mosaic))=0;
 if strcmp(sys,'Thorlabs')
@@ -209,11 +230,13 @@ if rem(id,2)==0
 else
     id_aip=id;
 end
+% id_aip=2;
 load(strcat(datapath,'aip/aip',num2str(id_aip),'.mat'));
 mask=zeros(size(AIP));
 mask(AIP>aip_threshold)=1;
 ori2D=ori2D.*mask;
 ori2D = single(ori2D); 
+% ori2D=ori2D-18;
 save(strcat(datapath,'orientation/',target,num2str(id),'.mat'),'ori2D','-v7.3');
   
   
@@ -223,27 +246,4 @@ save(strcat(datapath,'orientation/',target,num2str(id),'.mat'),'ori2D','-v7.3');
 % cd(filepath);
 tiffname=strcat(datapath,'orientation/',target,num2str(id),'.tif');
 SaveTiff(ori2D,1,tiffname);
-%% generate orientation map in RGB
-% load('/projectnb2/npbssmic/s/Matlab_code/PSOCT_code/cmap.mat');
-% load(strcat(datapath,'retardance/ret_aip',num2str(id),'.mat'));
-% load(strcat(datapath,'aip/aip',num2str(id),'.mat'));
-% phi_for_cwheel=phi_for_cwheel./pi*180;
-% abs_m=zeros(size(ret_aip));
-% abs_m((ret_aip)>10)=1;
-% abs_m(aip<0.07)=0;
-%     
-% phi = zeros(size(ret_aip,1),size(ret_aip,2),3);
-% phi_m = zeros(size(phi));
-% 
-% % Assign colors to phi map for sub-image
-% % Determine color of each pixel based on the orientation angle extracted
-% for i = 1:((length(phi_for_cwheel)-1)/2)+1 % Only need to compare with first half of phi vector since phi domain is [0, pi]
-%     mask = (Mosaic >= phi_for_cwheel(i) & Mosaic < phi_for_cwheel(i+1));
-%     for k = 1:3
-%         cmap_mat(:,:,k) = cmap(i,k)*ones(size(Mosaic,1),size(Mosaic,2));
-%     end
-%     phi = phi + cmap_mat.*mask;
-% end 
-% 
-% phi_m = phi.*abs_m; 
-% imwrite(phi_m, strcat(datapath,'orientation/ori', num2str(id),'.tif'));
+
